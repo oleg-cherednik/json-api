@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package ru.olegcherednik.json.api;
+package ru.olegcherednik.json.api.enumid;
 
 import java.util.Optional;
 
