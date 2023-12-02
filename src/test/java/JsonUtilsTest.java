@@ -109,8 +109,6 @@ public final class JsonUtilsTest {
 
         JsonHelper.useSettings(JsonSettings.builder()
 //                                           .zoneModifier(JsonSettings.ZONE_MODIFIER_USE_ORIGINAL)
-                                           .dateTimeFormatter(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
-                                                                               .withZone(ZoneOffset.UTC))
                                            .build());
         System.out.println(Json.writeValue(map));
         int a = 0;
