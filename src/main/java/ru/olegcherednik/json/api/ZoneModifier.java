@@ -13,6 +13,12 @@ import java.util.function.UnaryOperator;
  */
 public enum ZoneModifier implements UnaryOperator<ZoneId> {
 
+    USE_SYSTEM_DEFAULT {
+        @Override
+        public ZoneId apply(ZoneId zoneId) {
+            return ZoneId.systemDefault();
+        }
+    },
     USE_ORIGINAL {
         @Override
         public ZoneId apply(ZoneId zoneId) {

@@ -265,6 +265,12 @@ public final class Json {
         return PRETTY_PRINT_WRITE_DELEGATE;
     }
 
+    // ---------- settings ----------
+
+    public static JsonDecorator withSettings(JsonSettings settings) {
+        return new JsonDecorator();
+    }
+
     // ---------- convert ----------
 
     public static <V> Map<String, Object> convertToMap(V obj) {

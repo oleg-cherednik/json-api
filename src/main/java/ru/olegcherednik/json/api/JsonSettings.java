@@ -23,7 +23,7 @@ import java.util.function.UnaryOperator;
 @Builder
 public class JsonSettings {
 
-    public static final UnaryOperator<ZoneId> DEFAULT_ZONE_MODIFIER = ZoneModifier.USE_ORIGINAL;
+    public static final UnaryOperator<ZoneId> DEFAULT_ZONE_MODIFIER = ZoneModifier.USE_SYSTEM_DEFAULT;
 
     @Builder.Default
     private UnaryOperator<ZoneId> zoneModifier = DEFAULT_ZONE_MODIFIER;
