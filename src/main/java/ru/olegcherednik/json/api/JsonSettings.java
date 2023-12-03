@@ -3,6 +3,7 @@ package ru.olegcherednik.json.api;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -11,6 +12,7 @@ import java.time.OffsetTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.function.UnaryOperator;
 
 /**
@@ -26,6 +28,14 @@ public class JsonSettings {
     @Builder.Default
     private UnaryOperator<ZoneId> zoneModifier = DEFAULT_ZONE_MODIFIER;
 
+    /**
+     * This formatter is used for:
+     * <ul>
+     * <li>{@link Instant}</li>
+     * <li>{@link Date}</li>
+     * </ul>
+     */
+    private DateTimeFormatter instantFormatter;
     /**
      * This formatter is used for:
      * <ul>
