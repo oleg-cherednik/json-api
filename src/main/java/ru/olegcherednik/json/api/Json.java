@@ -269,7 +269,7 @@ public final class Json {
         return createWriter(null);
     }
 
-    public static JsonWriter createPrettyPrintWriter() {
+    public static JsonWriter createPrettyPrint() {
         return new JsonWriter(JsonHelper::getPrettyPrintJsonEngine);
     }
 
@@ -285,7 +285,7 @@ public final class Json {
         return new JsonWriter(() -> engine);
     }
 
-    public static JsonWriter createPrettyPrintWriter(JsonSettings settings) {
+    public static JsonWriter createPrettyPrint(JsonSettings settings) {
         JsonEngine engine = JsonHelper.createPrettyPrintJsonEngine(settings);
         return new JsonWriter(() -> engine);
     }
