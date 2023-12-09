@@ -255,7 +255,7 @@ public final class Json {
         return WRITER;
     }
 
-    public static JsonWriter prettyPrintWriter() {
+    public static JsonWriter prettyPrint() {
         return PRETTY_PRINT_WRITER;
     }
 

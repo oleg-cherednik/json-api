@@ -99,7 +99,7 @@ public final class JsonUtilsTest {
         String w3 = convertWriterToString(writer -> Json.writeValue(Arrays.asList(new Data(555, "victory"), new Data(666, "omen")), writer));
 
         // pretty print
-        System.out.println(Json.prettyPrintWriter().writeValue(s1));
+        System.out.println(Json.prettyPrint().writeValue(s1));
 
         Map<String, Object> map = new HashMap<>();
         map.put("now", ZonedDateTime.now().toInstant());
