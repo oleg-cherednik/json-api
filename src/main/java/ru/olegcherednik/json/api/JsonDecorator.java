@@ -6,21 +6,21 @@ package ru.olegcherednik.json.api;
  */
 public class JsonDecorator {
 
-    private JsonReadDecorator readDelegate;
-    private JsonWriteDecorator writeDelegate;
-    private JsonWriteDecorator prettyPrintWriteDelegate;
+    private JsonReader readDelegate;
+    private JsonWriter writeDelegate;
+    private JsonWriter prettyPrintWriteDelegate;
 
     // ---------- print ----------
 
-    public JsonReadDecorator read() {
+    public JsonReader read() {
         return readDelegate;
     }
 
-    public JsonWriteDecorator print() {
+    public JsonWriter print() {
         return writeDelegate;
     }
 
-    public JsonWriteDecorator prettyPrint() {
+    public JsonWriter prettyPrint() {
         return prettyPrintWriteDelegate;
     }
 

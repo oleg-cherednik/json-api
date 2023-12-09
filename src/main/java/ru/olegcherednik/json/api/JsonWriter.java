@@ -9,11 +9,13 @@ import java.util.Objects;
 import java.util.function.Supplier;
 
 /**
+ * This class represents all available writing methods for a {@link JsonEngine}.
+ *
  * @author Oleg Cherednik
  * @since 27.11.2023
  */
 @RequiredArgsConstructor
-public class JsonWriteDecorator {
+public class JsonWriter {
 
     protected final Supplier<JsonEngine> supplier;
     private final boolean autoCloseSource = false;

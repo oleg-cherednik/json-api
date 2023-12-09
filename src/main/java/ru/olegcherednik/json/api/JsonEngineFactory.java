@@ -9,10 +9,8 @@ public interface JsonEngineFactory {
     // this method should be defined in implementations
     // public static JsonEngineFactory getInstance()
 
-    JsonEngine createJsonEngine();
+    JsonEngine createJsonEngine(JsonSettings settings);
 
-    JsonEngine createJsonEnginePrettyPrint();
-
-    void useSettings(JsonSettings jsonSettings);
+    JsonEngine createPrettyPrintJsonEngine(JsonSettings settings);
 
 }

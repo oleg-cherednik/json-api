@@ -19,16 +19,17 @@
 
 package ru.olegcherednik.json.api;
 
+import java.util.Optional;
+
 /**
  * @author Oleg Cherednik
  * @since 19.11.2014
  */
 public final class JsonHelper {
 
-    public static final JsonEngineFactory JSON_ENGINE_FACTORY = JsonEngineFactoryProvider.findJsonEngineFactory();
-
-    private static JsonEngine jsonEngine = JSON_ENGINE_FACTORY.createJsonEngine();
-    private static JsonEngine prettyPrintJsonEngine = JSON_ENGINE_FACTORY.createJsonEnginePrettyPrint();
+    private static final JsonEngineFactory JSON_ENGINE_FACTORY = JsonEngineFactoryProvider.findJsonEngineFactory();
+    private static JsonEngine jsonEngine = createJsonEngine(JsonSettings.DEFAULT);
+    private static JsonEngine prettyPrintJsonEngine = createPrettyPrintJsonEngine(JsonSettings.DEFAULT);
 
     public static synchronized JsonEngine getJsonEngine() {
         return jsonEngine;
@@ -38,38 +39,19 @@ public final class JsonHelper {
         return prettyPrintJsonEngine;
     }
 
-    //    public static ObjectMapper createMapper(Supplier<ObjectMapper> mapperSupplier) {
-//        return mapperSupplier.get();
-//    }
-
-//    public static ObjectMapper createPrettyPrintMapper(Supplier<ObjectMapper> mapperSupplier) {
-//        return mapperSupplier.get().enable(SerializationFeature.INDENT_OUTPUT);
-//    }
-
-//    public static JsonDecorator createPrettyPrintMapperDecorator(Supplier<ObjectMapper> mapperSupplier) {
-//        return new JsonDecorator(createPrettyPrintMapper(mapperSupplier));
-//    }
-
-//    public static JsonDecorator createMapperDecorator(Supplier<ObjectMapper> mapperSupplier) {
-//        return new JsonDecorator(createMapper(mapperSupplier));
-//    }
-
-    public static synchronized void useSettings(JsonSettings jsonSettings) {
-        JSON_ENGINE_FACTORY.useSettings(jsonSettings);
-        jsonEngine = JSON_ENGINE_FACTORY.createJsonEngine();
-        prettyPrintJsonEngine = JSON_ENGINE_FACTORY.createJsonEnginePrettyPrint();
+    public static synchronized void setDefaultSettings(JsonSettings jsonSettings) {
+        jsonEngine = JSON_ENGINE_FACTORY.createJsonEngine(jsonSettings);
+        prettyPrintJsonEngine = JSON_ENGINE_FACTORY.createPrettyPrintJsonEngine(jsonSettings);
     }
 
-//    public static synchronized void setMapperBuilder(Supplier<JsonEngine>jsonEngineSupplier) {
-//        jsonEngineSupplier = Optional.ofNullable(jsonEngineSupplier).orElse(defaultJsonEngineBuilderDEFAULT_BUILDER);
-//
-//        if (jsonEngineSupplier == jsonEngineBuilder)
-//            return;
-//
-//        jsonEngineBuilder = jsonEngineSupplier;
-//        jsonEngine = createJsonEngine();
-//        prettyPrintJsonEngine = createPrettyPrintJsonEngine();
-////    }
-//
-//    }
+    public static JsonEngine createJsonEngine(JsonSettings jsonSettings) {
+        return JSON_ENGINE_FACTORY.createJsonEngine(Optional.ofNullable(jsonSettings)
+                                                            .orElse(JsonSettings.DEFAULT));
+    }
+
+    public static JsonEngine createPrettyPrintJsonEngine(JsonSettings jsonSettings) {
+        return JSON_ENGINE_FACTORY.createPrettyPrintJsonEngine(Optional.ofNullable(jsonSettings)
+                                                                       .orElse(JsonSettings.DEFAULT));
+    }
+
 }

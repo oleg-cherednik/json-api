@@ -36,11 +36,13 @@ import java.util.Set;
 import java.util.function.Supplier;
 
 /**
+ * This class represents all available reading methods for a {@link JsonEngine}.
+ *
  * @author Oleg Cherednik
  * @since 02.01.2021
  */
 @RequiredArgsConstructor
-public class JsonReadDecorator {
+public class JsonReader {
 
     protected final Supplier<JsonEngine> supplier;
     private final boolean autoCloseSource = false;

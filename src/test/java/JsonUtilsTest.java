@@ -12,9 +12,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.StringWriter;
 import java.io.Writer;
-import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -101,15 +99,15 @@ public final class JsonUtilsTest {
         String w3 = convertWriterToString(writer -> Json.writeValue(Arrays.asList(new Data(555, "victory"), new Data(666, "omen")), writer));
 
         // pretty print
-        System.out.println(Json.prettyPrint().writeValue(s1));
+        System.out.println(Json.prettyPrintWriter().writeValue(s1));
 
         Map<String, Object> map = new HashMap<>();
         map.put("now", ZonedDateTime.now().toInstant());
         System.out.println(Json.writeValue(map));
 
-        JsonHelper.useSettings(JsonSettings.builder()
+        JsonHelper.setDefaultSettings(JsonSettings.builder()
 //                                           .zoneModifier(JsonSettings.ZONE_MODIFIER_USE_ORIGINAL)
-                                           .build());
+                                                  .build());
         System.out.println(Json.writeValue(map));
         int a = 0;
         a++;

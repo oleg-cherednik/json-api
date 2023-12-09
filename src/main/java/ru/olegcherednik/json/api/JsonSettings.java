@@ -23,7 +23,13 @@ import java.util.function.UnaryOperator;
 @Builder
 public class JsonSettings {
 
-    public static final UnaryOperator<ZoneId> DEFAULT_ZONE_MODIFIER = ZoneModifier.USE_SYSTEM_DEFAULT;
+    public static final JsonSettings DEFAULT;
+    public static final UnaryOperator<ZoneId> DEFAULT_ZONE_MODIFIER;
+
+    static {
+        DEFAULT_ZONE_MODIFIER = ZoneModifier.USE_SYSTEM_DEFAULT;
+        DEFAULT = builder().build();
+    }
 
     @Builder.Default
     private UnaryOperator<ZoneId> zoneModifier = DEFAULT_ZONE_MODIFIER;
@@ -72,4 +78,5 @@ public class JsonSettings {
      * </ul>
      */
     private DateTimeFormatter offsetDateTimeFormatter;
+
 }
