@@ -3,6 +3,8 @@ package ru.olegcherednik.json.api;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -25,6 +27,8 @@ public class JsonSettings {
 
     public static final JsonSettings DEFAULT;
     public static final UnaryOperator<ZoneId> DEFAULT_ZONE_MODIFIER;
+
+    public static final DateFormat DF_DATE;
     public static final DateTimeFormatter DF_INSTANT;
     public static final DateTimeFormatter DF_LOCAL_DATE;
     public static final DateTimeFormatter DF_LOCAL_TIME;
@@ -34,7 +38,9 @@ public class JsonSettings {
 
     static {
         DEFAULT_ZONE_MODIFIER = ZoneModifier.USE_SYSTEM_DEFAULT;
-        DF_INSTANT = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSSXXX").withZone(ZoneId.systemDefault());
+
+        DF_DATE = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+        DF_INSTANT = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSSXXX");
         DF_LOCAL_DATE = DateTimeFormatter.ISO_LOCAL_DATE;
         DF_LOCAL_TIME = DateTimeFormatter.ISO_LOCAL_TIME;
         DF_LOCAL_DATE_TIME = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
@@ -46,6 +52,15 @@ public class JsonSettings {
     @Builder.Default
     private UnaryOperator<ZoneId> zoneModifier = DEFAULT_ZONE_MODIFIER;
 
+    /**
+     * This formatter is used for:
+     * <ul>
+     * <li>{@link Instant}</li>
+     * <li>{@link Date}</li>
+     * </ul>
+     */
+    @Builder.Default
+    private DateFormat dateFormatter = DF_DATE;
     /**
      * This formatter is used for:
      * <ul>
