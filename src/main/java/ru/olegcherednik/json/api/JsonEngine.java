@@ -58,4 +58,8 @@ public interface JsonEngine {
 
     <V> void writeValue(V obj, Writer writer) throws IOException;
 
+    // ---------- convert ----------
+
+    <V> Map<String, Object> convertToMap(V obj);
+
 }

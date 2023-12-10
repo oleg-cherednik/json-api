@@ -52,54 +52,22 @@ public class JsonSettings {
     @Builder.Default
     private UnaryOperator<ZoneId> zoneModifier = DEFAULT_ZONE_MODIFIER;
 
-    /**
-     * This formatter is used for:
-     * <ul>
-     * <li>{@link Instant}</li>
-     * <li>{@link Date}</li>
-     * </ul>
-     */
+    /** This formatter is used for {@link Date}. */
     @Builder.Default
     private DateFormat dateFormatter = DF_DATE;
-    /**
-     * This formatter is used for:
-     * <ul>
-     * <li>{@link Instant}</li>
-     * <li>{@link Date}</li>
-     * </ul>
-     */
+    /** This formatter is used for {@link Instant}. */
     @Builder.Default
     private DateTimeFormatter instantFormatter = DF_INSTANT;
-    /**
-     * This formatter is used for:
-     * <ul>
-     * <li>{@link LocalDate}</li>
-     * </ul>
-     */
+    /** This formatter is used for {@link LocalDate}. */
     @Builder.Default
     private DateTimeFormatter localDateFormatter = DF_LOCAL_DATE;
-    /**
-     * This formatter is used for:
-     * <ul>
-     * <li>{@link LocalTime}</li>
-     * </ul>
-     */
+    /** This formatter is used for {@link LocalTime}. */
     @Builder.Default
     private DateTimeFormatter localTimeFormatter = DF_LOCAL_TIME;
-    /**
-     * This formatter is used for:
-     * <ul>
-     * <li>{@link LocalDateTime}</li>
-     * </ul>
-     */
+    /** This formatter is used for {@link LocalDateTime}. */
     @Builder.Default
     private DateTimeFormatter localDateTimeFormatter = DF_LOCAL_DATE_TIME;
-    /**
-     * This formatter is used for:
-     * <ul>
-     * <li>{@link OffsetTime}</li>
-     * </ul>
-     */
+    /** This formatter is used for {@link OffsetTime}. */
     @Builder.Default
     private DateTimeFormatter offsetTimeFormatter = DF_OFFSET_TIME;
     /**

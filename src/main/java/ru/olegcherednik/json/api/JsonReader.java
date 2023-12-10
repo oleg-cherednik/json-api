@@ -386,13 +386,9 @@ public class JsonReader {
 
     // @NotNull
     public <V> Map<String, Object> convertToMap(V obj) {
-//        if (obj == null)
-        return Collections.emptyMap();
-
-//        return withRuntimeException(() -> {
-//            ObjectMapper mapper = supplier.get();
-//            return (Map<String, Object>) mapper.convertValue(obj, Map.class);
-//        });
+        if (obj == null)
+            return Collections.emptyMap();
+        return supplier.get().convertToMap(obj);
     }
 
     // ---------- misc ----------
