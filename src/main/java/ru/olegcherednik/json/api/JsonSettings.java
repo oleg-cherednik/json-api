@@ -27,6 +27,7 @@ public class JsonSettings {
 
     public static final JsonSettings DEFAULT;
     public static final UnaryOperator<ZoneId> DEFAULT_ZONE_MODIFIER;
+    public static final ZoneId SYSTEM_DEFAULT_ZONE_ID = ZoneId.systemDefault();
 
     public static final DateFormat DF_DATE;
     public static final DateTimeFormatter DF_INSTANT;

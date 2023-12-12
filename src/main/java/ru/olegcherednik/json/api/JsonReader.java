@@ -22,6 +22,7 @@ package ru.olegcherednik.json.api;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -45,7 +46,6 @@ import java.util.function.Supplier;
 public class JsonReader {
 
     protected final Supplier<JsonEngine> supplier;
-    private final boolean autoCloseSource = false;
 
     // ---------- read String----------
 
@@ -394,7 +394,22 @@ public class JsonReader {
     // ---------- misc ----------
 
     private static Reader utf8Reader(InputStream in) {
-        return new InputStreamReader(in, StandardCharsets.UTF_8);
+        return new InputStreamReader(in, StandardCharsets.UTF_8) {
+            @Override
+            public boolean markSupported() {
+                return in.markSupported();
+            }
+
+            @Override
+            public void mark(int readAheadLimit) throws IOException {
+                in.mark(readAheadLimit);
+            }
+
+            @Override
+            public void reset() throws IOException {
+                in.reset();
+            }
+        };
     }
 
     private static Reader utf8Reader(ByteBuffer buf) {
@@ -420,12 +435,7 @@ public class JsonReader {
 
     protected <V> V apply(Reader reader, ReadTask<V> task) {
         try {
-            V res = task.read(supplier.get());
-
-            if (autoCloseSource)
-                reader.close();
-
-            return res;
+            return task.read(supplier.get());
         } catch (Exception e) {
             throw new JsonException(e);
         }

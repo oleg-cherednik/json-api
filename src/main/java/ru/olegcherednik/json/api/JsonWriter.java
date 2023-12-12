@@ -18,7 +18,6 @@ import java.util.function.Supplier;
 public class JsonWriter {
 
     protected final Supplier<JsonEngine> supplier;
-    private final boolean autoCloseSource = false;
 
     public <V> String writeValue(V obj) {
         if (obj == null)
@@ -53,10 +52,6 @@ public class JsonWriter {
     protected void apply(Writer writer, WriteTask task) {
         try {
             task.write(supplier.get());
-            writer.flush();
-
-            if (autoCloseSource)
-                writer.close();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

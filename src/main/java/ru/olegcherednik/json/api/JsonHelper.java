@@ -19,12 +19,17 @@
 
 package ru.olegcherednik.json.api;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+
 import java.util.Optional;
 
 /**
  * @author Oleg Cherednik
  * @since 19.11.2014
  */
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class JsonHelper {
 
     private static final JsonEngineFactory JSON_ENGINE_FACTORY = JsonEngineFactoryProvider.findJsonEngineFactory();
@@ -39,18 +44,18 @@ public final class JsonHelper {
         return prettyPrintJsonEngine;
     }
 
-    public static synchronized void setDefaultSettings(JsonSettings jsonSettings) {
-        jsonEngine = JSON_ENGINE_FACTORY.createJsonEngine(jsonSettings);
-        prettyPrintJsonEngine = JSON_ENGINE_FACTORY.createPrettyPrintJsonEngine(jsonSettings);
+    public static synchronized void setDefaultSettings(JsonSettings settings) {
+        jsonEngine = JSON_ENGINE_FACTORY.createJsonEngine(settings);
+        prettyPrintJsonEngine = JSON_ENGINE_FACTORY.createPrettyPrintJsonEngine(settings);
     }
 
-    public static JsonEngine createJsonEngine(JsonSettings jsonSettings) {
-        return JSON_ENGINE_FACTORY.createJsonEngine(Optional.ofNullable(jsonSettings)
+    public static JsonEngine createJsonEngine(JsonSettings settings) {
+        return JSON_ENGINE_FACTORY.createJsonEngine(Optional.ofNullable(settings)
                                                             .orElse(JsonSettings.DEFAULT));
     }
 
-    public static JsonEngine createPrettyPrintJsonEngine(JsonSettings jsonSettings) {
-        return JSON_ENGINE_FACTORY.createPrettyPrintJsonEngine(Optional.ofNullable(jsonSettings)
+    public static JsonEngine createPrettyPrintJsonEngine(JsonSettings settings) {
+        return JSON_ENGINE_FACTORY.createPrettyPrintJsonEngine(Optional.ofNullable(settings)
                                                                        .orElse(JsonSettings.DEFAULT));
     }
 
