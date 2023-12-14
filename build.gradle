@@ -23,7 +23,7 @@ repositories {
     mavenCentral()
 }
 
-group 'ru.oleg-cherednik.json-api'
+group 'ru.oleg-cherednik.json'
 version '666'
 
 sourceCompatibility = JavaVersion.VERSION_1_8
