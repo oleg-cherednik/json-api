@@ -1,7 +1,9 @@
 package ru.olegcherednik.json.api;
 
 import lombok.RequiredArgsConstructor;
+import org.apache.logging.log4j.core.util.IOUtils;
 
+import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
@@ -54,6 +56,12 @@ public class JsonWriter {
             task.write(supplier.get());
         } catch (Exception e) {
             throw new RuntimeException(e);
+        }
+
+        try {
+            writer.flush();
+        } catch (IOException ignored) {
+            // ingored
         }
     }
 
