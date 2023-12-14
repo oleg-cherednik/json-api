@@ -20,8 +20,11 @@
 package ru.olegcherednik.json.api;
 
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.Synchronized;
 
 import java.util.Optional;
 
@@ -33,16 +36,14 @@ import java.util.Optional;
 public final class JsonHelper {
 
     private static final JsonEngineFactory JSON_ENGINE_FACTORY = JsonEngineFactoryProvider.findJsonEngineFactory();
+
+    @Getter(onMethod_ = { @Synchronized })
+    @Setter(onMethod_ = { @Synchronized })
     private static JsonEngine jsonEngine = createJsonEngine(JsonSettings.DEFAULT);
+
+    @Getter(onMethod_ = { @Synchronized })
+    @Setter(onMethod_ = { @Synchronized })
     private static JsonEngine prettyPrintJsonEngine = createPrettyPrintJsonEngine(JsonSettings.DEFAULT);
-
-    public static synchronized JsonEngine getJsonEngine() {
-        return jsonEngine;
-    }
-
-    public static synchronized JsonEngine getPrettyPrintJsonEngine() {
-        return prettyPrintJsonEngine;
-    }
 
     public static synchronized void setDefaultSettings(JsonSettings settings) {
         jsonEngine = JSON_ENGINE_FACTORY.createJsonEngine(settings);
