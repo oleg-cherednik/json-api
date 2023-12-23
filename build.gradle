@@ -58,7 +58,7 @@ pmd {
 dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.30'
 
-    implementation 'org.apache.commons:commons-lang3:3.14.0'
+    compileOnlyApi 'org.apache.commons:commons-lang3:3.14.0'
 
     testImplementation 'com.google.code.gson:gson:2.10.1'
 
