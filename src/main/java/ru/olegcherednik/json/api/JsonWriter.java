@@ -1,7 +1,6 @@
 package ru.olegcherednik.json.api;
 
 import lombok.RequiredArgsConstructor;
-import org.apache.logging.log4j.core.util.IOUtils;
 
 import java.io.IOException;
 import java.io.OutputStream;

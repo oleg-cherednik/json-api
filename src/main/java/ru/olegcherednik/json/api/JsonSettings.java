@@ -57,27 +57,29 @@ public class JsonSettings {
 
     /** This formatter is used for {@link Date}. */
     @Builder.Default
-    private DateFormat dateFormatter = DF_DATE;
+    private final DateFormat dateFormatter = DF_DATE;
     /** This formatter is used for {@link Instant}. */
     @Builder.Default
-    private DateTimeFormatter instantFormatter = DF_INSTANT;
+    private final DateTimeFormatter instantFormatter = DF_INSTANT;
     /** This formatter is used for {@link LocalDate}. */
     @Builder.Default
-    private DateTimeFormatter localDateFormatter = DF_LOCAL_DATE;
+    private final DateTimeFormatter localDateFormatter = DF_LOCAL_DATE;
     /** This formatter is used for {@link LocalTime}. */
     @Builder.Default
-    private DateTimeFormatter localTimeFormatter = DF_LOCAL_TIME;
+    private final DateTimeFormatter localTimeFormatter = DF_LOCAL_TIME;
     /** This formatter is used for {@link LocalDateTime}. */
     @Builder.Default
-    private DateTimeFormatter localDateTimeFormatter = DF_LOCAL_DATE_TIME;
+    private final DateTimeFormatter localDateTimeFormatter = DF_LOCAL_DATE_TIME;
     /** This formatter is used for {@link OffsetTime}. */
     @Builder.Default
-    private DateTimeFormatter offsetTimeFormatter = DF_OFFSET_TIME;
+    private final DateTimeFormatter offsetTimeFormatter = DF_OFFSET_TIME;
     /** This formatter is used for {@link OffsetDateTime}. */
     @Builder.Default
-    private DateTimeFormatter offsetDateTimeFormatter = DF_OFFSET_DATE_TIME;
+    private final DateTimeFormatter offsetDateTimeFormatter = DF_OFFSET_DATE_TIME;
     /** This formatter is used for {@link ZonedDateTime}. */
     @Builder.Default
-    private DateTimeFormatter zonedDateTimeFormatter = DF_ZONED_DATE_TIME;
+    private final DateTimeFormatter zonedDateTimeFormatter = DF_ZONED_DATE_TIME;
+
+    private final boolean serializeNull;
 
 }
