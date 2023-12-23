@@ -36,6 +36,7 @@ public class JsonSettings {
     public static final DateTimeFormatter DF_LOCAL_DATE_TIME;
     public static final DateTimeFormatter DF_OFFSET_TIME;
     public static final DateTimeFormatter DF_OFFSET_DATE_TIME;
+    public static final DateTimeFormatter DF_ZONED_DATE_TIME;
 
     static {
         DEFAULT_ZONE_MODIFIER = ZoneModifier.USE_SYSTEM_DEFAULT;
@@ -47,6 +48,7 @@ public class JsonSettings {
         DF_LOCAL_DATE_TIME = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
         DF_OFFSET_TIME = DateTimeFormatter.ISO_OFFSET_TIME;
         DF_OFFSET_DATE_TIME = DateTimeFormatter.ISO_OFFSET_DATE_TIME;
+        DF_ZONED_DATE_TIME = DateTimeFormatter.ISO_ZONED_DATE_TIME;
         DEFAULT = builder().build();
     }
 
@@ -71,14 +73,11 @@ public class JsonSettings {
     /** This formatter is used for {@link OffsetTime}. */
     @Builder.Default
     private DateTimeFormatter offsetTimeFormatter = DF_OFFSET_TIME;
-    /**
-     * This formatter is used for:
-     * <ul>
-     * <li>{@link OffsetDateTime}</li>
-     * <li>{@link ZonedDateTime}</li>
-     * </ul>
-     */
+    /** This formatter is used for {@link OffsetDateTime}. */
     @Builder.Default
     private DateTimeFormatter offsetDateTimeFormatter = DF_OFFSET_DATE_TIME;
+    /** This formatter is used for {@link ZonedDateTime}. */
+    @Builder.Default
+    private DateTimeFormatter zonedDateTimeFormatter = DF_ZONED_DATE_TIME;
 
 }
