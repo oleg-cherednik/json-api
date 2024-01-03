@@ -17,30 +17,13 @@
  * under the License.
  */
 
-package ru.olegcherednik.json.api;
+package ru.olegcherednik.json.api.iterator;
+
+import java.util.Iterator;
 
 /**
  * @author Oleg Cherednik
- * @since 04.12.2023
+ * @since 03.01.2024
  */
-public class JsonDecorator {
-
-    private JsonReader readDelegate;
-    private JsonWriter writeDelegate;
-    private JsonWriter prettyPrintWriteDelegate;
-
-    // ---------- print ----------
-
-    public JsonReader read() {
-        return readDelegate;
-    }
-
-    public JsonWriter print() {
-        return writeDelegate;
-    }
-
-    public JsonWriter prettyPrint() {
-        return prettyPrintWriteDelegate;
-    }
-
+public interface AutoCloseableIterator<E> extends Iterator<E>, AutoCloseable {
 }

@@ -21,6 +21,7 @@ package ru.olegcherednik.json.api;
 
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
+import ru.olegcherednik.json.api.iterator.AutoCloseableIterator;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -157,13 +158,13 @@ public class JsonReader {
 
     public Iterator<Object> readListLazy(ByteBuffer buf) {
         if (buf == null)
-            return null;
+            return Collections.emptyIterator();
         return readListLazy(utf8Reader(buf));
     }
 
     public <V> Iterator<V> readListLazy(ByteBuffer buf, Class<V> valueClass) {
         if (buf == null)
-            return null;
+            return Collections.emptyIterator();
 
         requireNotNullValueClass(valueClass);
         return readListLazy(utf8Reader(buf), valueClass);
@@ -178,7 +179,7 @@ public class JsonReader {
 
     public Iterator<Map<String, Object>> readListOfMapLazy(ByteBuffer buf) {
         if (buf == null)
-            return null;
+            return Collections.emptyIterator();
         return readListOfMapLazy(utf8Reader(buf));
     }
 
@@ -253,11 +254,11 @@ public class JsonReader {
         return readListOfMap(utf8Reader(in));
     }
 
-    public Iterator<Object> readListLazy(InputStream in) {
+    public AutoCloseableIterator<Object> readListLazy(InputStream in) {
         return readListLazy(in, Object.class);
     }
 
-    public <V> Iterator<V> readListLazy(InputStream in, Class<V> valueClass) {
+    public <V> AutoCloseableIterator<V> readListLazy(InputStream in, Class<V> valueClass) {
         if (in == null)
             return null;
 
@@ -265,7 +266,7 @@ public class JsonReader {
         return readListLazy(utf8Reader(in), valueClass);
     }
 
-    public Iterator<Map<String, Object>> readListOfMapLazy(InputStream in) {
+    public AutoCloseableIterator<Map<String, Object>> readListOfMapLazy(InputStream in) {
         if (in == null)
             return null;
         return readListOfMapLazy(utf8Reader(in));
@@ -339,11 +340,11 @@ public class JsonReader {
         return apply(reader, jsonEngine -> jsonEngine.readListOfMap(reader));
     }
 
-    public Iterator<Object> readListLazy(Reader reader) {
+    public AutoCloseableIterator<Object> readListLazy(Reader reader) {
         return readListLazy(reader, Object.class);
     }
 
-    public <V> Iterator<V> readListLazy(Reader reader, Class<V> valueClass) {
+    public <V> AutoCloseableIterator<V> readListLazy(Reader reader, Class<V> valueClass) {
         if (reader == null)
             return null;
 
@@ -351,7 +352,7 @@ public class JsonReader {
         return apply(reader, jsonEngine -> jsonEngine.readListLazy(reader, valueClass));
     }
 
-    public Iterator<Map<String, Object>> readListOfMapLazy(Reader reader) {
+    public AutoCloseableIterator<Map<String, Object>> readListOfMapLazy(Reader reader) {
         if (reader == null)
             return null;
         return apply(reader, jsonEngine -> jsonEngine.readListOfMapLazy(reader));
@@ -393,6 +394,7 @@ public class JsonReader {
 
     // ---------- misc ----------
 
+    @SuppressWarnings("NewMethodNamingConvention")
     private static Reader utf8Reader(InputStream in) {
         return new InputStreamReader(in, StandardCharsets.UTF_8) {
             @Override
@@ -412,6 +414,7 @@ public class JsonReader {
         };
     }
 
+    @SuppressWarnings("NewMethodNamingConvention")
     private static Reader utf8Reader(ByteBuffer buf) {
         return utf8Reader(new ByteBufferInputStream(buf));
     }

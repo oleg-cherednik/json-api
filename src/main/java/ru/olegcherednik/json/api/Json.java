@@ -21,6 +21,7 @@ package ru.olegcherednik.json.api;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import ru.olegcherednik.json.api.iterator.AutoCloseableIterator;
 
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -157,15 +158,15 @@ public final class Json {
         return reader().readListOfMap(in);
     }
 
-    public static Iterator<Object> readListLazy(InputStream in) {
+    public static AutoCloseableIterator<Object> readListLazy(InputStream in) {
         return reader().readListLazy(in);
     }
 
-    public static <V> Iterator<V> readListLazy(InputStream in, Class<V> valueClass) {
+    public static <V> AutoCloseableIterator<V> readListLazy(InputStream in, Class<V> valueClass) {
         return reader().readListLazy(in, valueClass);
     }
 
-    public static Iterator<Map<String, Object>> readListOfMapLazy(InputStream in) {
+    public static AutoCloseableIterator<Map<String, Object>> readListOfMapLazy(InputStream in) {
         return reader().readListOfMapLazy(in);
     }
 
@@ -207,15 +208,15 @@ public final class Json {
         return reader().readListOfMap(reader);
     }
 
-    public static Iterator<Object> readListLazy(Reader reader) {
+    public static AutoCloseableIterator<Object> readListLazy(Reader reader) {
         return reader().readListLazy(reader);
     }
 
-    public static <V> Iterator<V> readListLazy(Reader reader, Class<V> valueClass) {
+    public static <V> AutoCloseableIterator<V> readListLazy(Reader reader, Class<V> valueClass) {
         return reader().readListLazy(reader, valueClass);
     }
 
-    public static Iterator<Map<String, Object>> readListOfMapLazy(Reader reader) {
+    public static AutoCloseableIterator<Map<String, Object>> readListOfMapLazy(Reader reader) {
         return reader().readListOfMapLazy(reader);
     }
 
