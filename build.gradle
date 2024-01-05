@@ -24,7 +24,7 @@ repositories {
 }
 
 group 'ru.oleg-cherednik.json'
-version '666'
+version '3.0'
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
@@ -80,6 +80,10 @@ jacocoTestReport {
         xml.required = true
         html.required = true
     }
+}
+
+javadoc {
+    options.addBooleanOption('Xdoclint:-missing', true)
 }
 
 check.dependsOn jacocoTestReport
