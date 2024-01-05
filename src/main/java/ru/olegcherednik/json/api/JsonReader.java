@@ -20,8 +20,6 @@
 package ru.olegcherednik.json.api;
 
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang3.StringUtils;
-import ru.olegcherednik.json.api.iterator.AutoCloseableIterator;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -43,6 +41,7 @@ import java.util.function.Supplier;
  * @author Oleg Cherednik
  * @since 02.01.2021
  */
+@SuppressWarnings("PMD.ExcessivePublicCount")
 @RequiredArgsConstructor
 public class JsonReader {
 
@@ -51,7 +50,7 @@ public class JsonReader {
     // ---------- read String----------
 
     public <V> V readValue(String json, Class<V> valueClass) {
-        if (StringUtils.isBlank(json))
+        if (isBlank(json))
             return null;
 
         requireNotNullValueClass(valueClass);
@@ -421,7 +420,7 @@ public class JsonReader {
 
     @SuppressWarnings("PMD.AvoidReassigningParameters")
     private static boolean isNullOrEmpty(String json) {
-        if (StringUtils.isBlank(json))
+        if (isBlank(json))
             return true;
 
         json = json.trim();
@@ -450,6 +449,15 @@ public class JsonReader {
 
     private static <V> void requireNotNullValueClass(Class<V> valueClass) {
         Objects.requireNonNull(valueClass, "'valueClass' should not be null");
+    }
+
+    private static boolean isBlank(String str) {
+        if (str != null)
+            for (int i = 0; i < str.length(); i++)
+                if (!Character.isWhitespace(str.charAt(i)))
+                    return false;
+
+        return true;
     }
 
     public interface ReadTask<V> {

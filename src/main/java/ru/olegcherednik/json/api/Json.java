@@ -21,7 +21,6 @@ package ru.olegcherednik.json.api;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
-import ru.olegcherednik.json.api.iterator.AutoCloseableIterator;
 
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -37,12 +36,13 @@ import java.util.Set;
  * @author Oleg Cherednik
  * @since 19.11.2014
  */
+@SuppressWarnings("PMD.ExcessivePublicCount")
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class Json {
 
-    private static final JsonReader READER = new JsonReader(JsonHelper::getJsonEngine);
-    private static final JsonWriter WRITER = new JsonWriter(JsonHelper::getJsonEngine);
-    private static final JsonWriter PRETTY_PRINT_WRITER = new JsonWriter(JsonHelper::getPrettyPrintJsonEngine);
+    private static final JsonReader JSON_READER = new JsonReader(JsonHelper::getJsonEngine);
+    private static final JsonWriter JSON_WRITER = new JsonWriter(JsonHelper::getJsonEngine);
+    private static final JsonWriter PRETTY_PRINT_JSON_WRITER = new JsonWriter(JsonHelper::getPrettyPrintJsonEngine);
 
     // ---------- read String ----------
 
@@ -249,15 +249,15 @@ public final class Json {
     // ---------- print ----------
 
     public static JsonReader reader() {
-        return READER;
+        return JSON_READER;
     }
 
     public static JsonWriter writer() {
-        return WRITER;
+        return JSON_WRITER;
     }
 
     public static JsonWriter prettyPrint() {
-        return PRETTY_PRINT_WRITER;
+        return PRETTY_PRINT_JSON_WRITER;
     }
 
     // ---------- decorators ----------

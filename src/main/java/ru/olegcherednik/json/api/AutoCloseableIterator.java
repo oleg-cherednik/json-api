@@ -17,11 +17,12 @@
  * under the License.
  */
 
-package ru.olegcherednik.json.api.iterator;
+package ru.olegcherednik.json.api;
 
 import java.util.Iterator;
 
 /**
+ * @param <E> Type of the value object
  * @author Oleg Cherednik
  * @since 03.01.2024
  */

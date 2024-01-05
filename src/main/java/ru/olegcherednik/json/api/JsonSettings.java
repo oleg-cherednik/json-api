@@ -34,7 +34,7 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.util.function.UnaryOperator;
+import java.util.Locale;
 
 /**
  * @author Oleg Cherednik
@@ -57,7 +57,7 @@ public class JsonSettings {
     public static final DateTimeFormatter DF_ZONED_DATE_TIME;
 
     static {
-        DF_DATE = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+        DF_DATE = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", Locale.getDefault());
         DF_INSTANT = DateTimeFormatter.ISO_INSTANT;
         DF_LOCAL_DATE = DateTimeFormatter.ISO_LOCAL_DATE;
         DF_LOCAL_TIME = DateTimeFormatter.ISO_LOCAL_TIME;
@@ -68,33 +68,54 @@ public class JsonSettings {
         DEFAULT = builder().build();
     }
 
+    /**
+     * Optional specification of {@link ZoneId} for {@code offsetTimeFormatter}, {@code offsetDateTimeFormatter} and
+     * {@code zonedDateTimeFormatter}. In case formatter already contains zone, then it will be overwritten.
+     */
     private ZoneId zoneId;
-
-    /** This formatter is used for {@link Date}. */
+    /**
+     * Formatter is used for {@link Date}.
+     */
     @Builder.Default
     private final DateFormat dateFormatter = DF_DATE;
-    /** This formatter is used for {@link Instant}. */
+    /**
+     * Formatter is used for {@link Instant}.
+     */
     @Builder.Default
     private final DateTimeFormatter instantFormatter = DF_INSTANT;
-    /** This formatter is used for {@link LocalDate}. */
+    /**
+     * Formatter is used for {@link LocalDate}.
+     */
     @Builder.Default
     private final DateTimeFormatter localDateFormatter = DF_LOCAL_DATE;
-    /** This formatter is used for {@link LocalTime}. */
+    /**
+     * Formatter is used for {@link LocalTime}.
+     */
     @Builder.Default
     private final DateTimeFormatter localTimeFormatter = DF_LOCAL_TIME;
-    /** This formatter is used for {@link LocalDateTime}. */
+    /**
+     * Formatter is used for {@link LocalDateTime}.
+     */
     @Builder.Default
     private final DateTimeFormatter localDateTimeFormatter = DF_LOCAL_DATE_TIME;
-    /** This formatter is used for {@link OffsetTime}. */
+    /**
+     * Formatter is used for {@link OffsetTime}.
+     */
     @Builder.Default
     private final DateTimeFormatter offsetTimeFormatter = DF_OFFSET_TIME;
-    /** This formatter is used for {@link OffsetDateTime}. */
+    /**
+     * Formatter is used for {@link OffsetDateTime}.
+     */
     @Builder.Default
     private final DateTimeFormatter offsetDateTimeFormatter = DF_OFFSET_DATE_TIME;
-    /** This formatter is used for {@link ZonedDateTime}. */
+    /**
+     * Formatter is used for {@link ZonedDateTime}.
+     */
     @Builder.Default
     private final DateTimeFormatter zonedDateTimeFormatter = DF_ZONED_DATE_TIME;
-
+    /**
+     * If {@literal true}, then <tt>null</tt> values will be serialized as well.
+     */
     private final boolean serializeNull;
 
 }

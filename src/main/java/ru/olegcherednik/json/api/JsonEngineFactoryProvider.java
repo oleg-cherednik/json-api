@@ -38,10 +38,12 @@ import java.util.stream.Collectors;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class JsonEngineFactoryProvider {
 
+    private static final int ONE = 1;
+
     public static JsonEngineFactory findJsonEngineFactory() {
         Set<String> files = findJsonEngineFactoryFiles();
 
-        if (files.size() > 1) {
+        if (files.size() > ONE) {
             log.error("Class path contains multiple {}", JsonEngineFactory.class.getSimpleName());
 
             for (String file : files)
@@ -75,7 +77,7 @@ public final class JsonEngineFactoryProvider {
     }
 
     private static Enumeration<URL> getJsonEngineFactoryPaths(String name) throws IOException {
-        ClassLoader classLoader = JsonEngineFactory.class.getClassLoader();
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         return classLoader == null ? ClassLoader.getSystemResources(name) : classLoader.getResources(name);
     }
 

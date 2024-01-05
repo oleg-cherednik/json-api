@@ -56,23 +56,22 @@ pmd {
 }
 
 dependencies {
-    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+    annotationProcessor "org.projectlombok:lombok:${property('lombok.version')}"
 
-    implementation 'org.apache.commons:commons-lang3:3.14.0'
     implementation 'org.slf4j:slf4j-api:2.0.9'
 
-    testImplementation 'com.google.code.gson:gson:2.10.1'
+    testAnnotationProcessor "org.projectlombok:lombok:${property('lombok.version')}"
 
     testImplementation('org.testng:testng:7.5.1') {
         exclude group: 'junit', module: 'junit'
         exclude group: 'org.apache.ant', module: 'ant'
     }
 
+    testImplementation "com.google.code.gson:gson:${property('gson.version')}"
+    testImplementation 'org.assertj:assertj-core:3.24.2'
+    testImplementation 'org.mockito:mockito-core:4.11.0'
     testImplementation 'commons-io:commons-io:2.15.0'
     testImplementation 'org.apache.commons:commons-collections4:4.4'
-
-
-    testAnnotationProcessor 'org.projectlombok:lombok:1.18.14'
 }
 
 jacocoTestReport {

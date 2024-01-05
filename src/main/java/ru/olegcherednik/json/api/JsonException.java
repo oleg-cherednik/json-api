@@ -25,6 +25,8 @@ package ru.olegcherednik.json.api;
  */
 public class JsonException extends RuntimeException {
 
+    private static final long serialVersionUID = 5839078668810901489L;
+
     public JsonException(String format, Object... args) {
         super(String.format(format, args));
     }

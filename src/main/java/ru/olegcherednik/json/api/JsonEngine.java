@@ -19,8 +19,6 @@
 
 package ru.olegcherednik.json.api;
 
-import ru.olegcherednik.json.api.iterator.AutoCloseableIterator;
-
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
