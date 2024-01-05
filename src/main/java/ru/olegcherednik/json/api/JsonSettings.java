@@ -41,7 +41,7 @@ import java.util.Locale;
  * @since 27.11.2023
  */
 @Getter
-@Builder
+@Builder(toBuilder = true)
 public class JsonSettings {
 
     public static final JsonSettings DEFAULT;

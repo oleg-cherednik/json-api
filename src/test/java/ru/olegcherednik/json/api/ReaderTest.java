@@ -142,7 +142,8 @@ public class ReaderTest {
     }
 
     public void shouldRetrieveIteratorOfDeserializedObjectsWhenReadValueLazyList() throws Exception {
-        try (AutoCloseableIterator<Book> it = Json.readListLazy(getResourceBooks(), Book.class)) {
+        try (AutoCloseableIterator<Book> it = Json.createReader(JsonSettings.DEFAULT)
+                                                  .readListLazy(getResourceBooks(), Book.class)) {
             assertThat(it.hasNext()).isTrue();
 
             Book actual1 = it.next();
@@ -212,7 +213,8 @@ public class ReaderTest {
         Map<String, Book> expected = MapUtils.of("one", Book.THINKING_IN_JAVA,
                                                  "two", Book.READY_FOR_A_VICTORY);
 
-        Map<String, Book> actual = Json.readMap(getResourceAsReader("/books_dict_string_key.json"), Book.class);
+        Map<String, Book> actual = Json.createReader(JsonSettings.DEFAULT)
+                                       .readMap(getResourceAsReader("/books_dict_string_key.json"), Book.class);
         assertThat(actual).isNotNull();
         assertThat(actual).isEqualTo(expected);
     }
@@ -221,7 +223,8 @@ public class ReaderTest {
         Map<Integer, Book> expected = MapUtils.of(1, Book.THINKING_IN_JAVA,
                                                   2, Book.READY_FOR_A_VICTORY);
 
-        Map<Integer, Book> actual = Json.readMap(getResourceAsReader("/books_dict_int_key.json"),
+        Map<Integer, Book> actual = Json.createReader(JsonSettings.DEFAULT)
+                                        .readMap(getResourceAsReader("/books_dict_int_key.json"),
                                                  Integer.class, Book.class);
         assertThat(actual).isNotNull();
         assertThat(actual).isEqualTo(expected);
@@ -252,7 +255,7 @@ public class ReaderTest {
     @SuppressWarnings("PMD.CloseResource")
     public void shouldCloseReaderWhenFinishParse() throws IOException {
         Reader in = getResourceAsReader("/book.json");
-        Book actual = Json.readValue(in, Book.class);
+        Book actual = Json.createReader(JsonSettings.DEFAULT).readValue(in, Book.class);
         assertThat(actual).isEqualTo(Book.THINKING_IN_JAVA);
         assertThatThrownBy(in::read).isExactlyInstanceOf(IOException.class).hasMessage("Stream closed");
     }

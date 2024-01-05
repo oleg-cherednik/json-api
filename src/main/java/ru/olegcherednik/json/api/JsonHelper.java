@@ -22,7 +22,6 @@ package ru.olegcherednik.json.api;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.Synchronized;
 
 import java.util.Optional;
@@ -37,26 +36,27 @@ public final class JsonHelper {
     private static final JsonEngineFactory JSON_ENGINE_FACTORY = JsonEngineFactoryProvider.findJsonEngineFactory();
 
     @Getter(onMethod_ = { @Synchronized })
-    @Setter(onMethod_ = { @Synchronized })
     private static JsonEngine jsonEngine = createJsonEngine(JsonSettings.DEFAULT);
-
     @Getter(onMethod_ = { @Synchronized })
-    @Setter(onMethod_ = { @Synchronized })
     private static JsonEngine prettyPrintJsonEngine = createPrettyPrintJsonEngine(JsonSettings.DEFAULT);
+    private static JsonSettings defaultSettings = JsonSettings.DEFAULT;
+
+    public static synchronized void reset() {
+        setDefaultSettings(JsonSettings.DEFAULT);
+    }
 
     public static synchronized void setDefaultSettings(JsonSettings settings) {
-        jsonEngine = JSON_ENGINE_FACTORY.createJsonEngine(settings);
-        prettyPrintJsonEngine = JSON_ENGINE_FACTORY.createPrettyPrintJsonEngine(settings);
+        defaultSettings = settings;
+        jsonEngine = JSON_ENGINE_FACTORY.createJsonEngine(defaultSettings);
+        prettyPrintJsonEngine = JSON_ENGINE_FACTORY.createPrettyPrintJsonEngine(defaultSettings);
     }
 
     public static JsonEngine createJsonEngine(JsonSettings settings) {
-        return JSON_ENGINE_FACTORY.createJsonEngine(Optional.ofNullable(settings)
-                                                            .orElse(JsonSettings.DEFAULT));
+        return JSON_ENGINE_FACTORY.createJsonEngine(Optional.ofNullable(settings).orElse(defaultSettings));
     }
 
     public static JsonEngine createPrettyPrintJsonEngine(JsonSettings settings) {
-        return JSON_ENGINE_FACTORY.createPrettyPrintJsonEngine(Optional.ofNullable(settings)
-                                                                       .orElse(JsonSettings.DEFAULT));
+        return JSON_ENGINE_FACTORY.createPrettyPrintJsonEngine(Optional.ofNullable(settings).orElse(defaultSettings));
     }
 
 }

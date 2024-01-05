@@ -141,7 +141,7 @@ public class StringReadTest {
                                                  "two", Book.READY_FOR_A_VICTORY);
 
         String json = ResourceData.getResourceAsString("/books_dict_string_key.json");
-        Map<String, Book> actual = Json.readMap(json, Book.class);
+        Map<String, Book> actual = Json.createReader(JsonSettings.DEFAULT).readMap(json, Book.class);
         assertThat(actual).isNotNull();
         assertThat(actual).isEqualTo(expected);
     }
@@ -151,7 +151,7 @@ public class StringReadTest {
                                                   2, Book.READY_FOR_A_VICTORY);
 
         String json = ResourceData.getResourceAsString("/books_dict_int_key.json");
-        Map<Integer, Book> actual = Json.readMap(json, Integer.class, Book.class);
+        Map<Integer, Book> actual = Json.createReader(JsonSettings.DEFAULT).readMap(json, Integer.class, Book.class);
         assertThat(actual).isNotNull();
         assertThat(actual).isEqualTo(expected);
     }

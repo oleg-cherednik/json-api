@@ -44,7 +44,7 @@ public class JsonWriterTest {
         assertThatThrownBy(() -> jsonWriter.writeValue("one")).isExactlyInstanceOf(JsonException.class);
     }
 
-    @SuppressWarnings({ "unchecked", "resource" })
+    @SuppressWarnings({ "unchecked", "resource", "PMD.CloseResource" })
     public void shouldThrowJsonExceptionWhenWriteValueToWriterWithException() {
         Supplier<JsonEngine> supplier = mock(Supplier.class);
         when(supplier.get()).thenThrow(RuntimeException.class);
