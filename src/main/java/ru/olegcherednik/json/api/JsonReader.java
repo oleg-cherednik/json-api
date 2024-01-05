@@ -45,6 +45,11 @@ import java.util.function.Supplier;
 @RequiredArgsConstructor
 public class JsonReader {
 
+    protected static final char FIND_OPEN_BRACKET = '<';
+    protected static final char FIND_CLOSE_BRACKET = '>';
+    protected static final char OPEN_CURLY_BRACKET = '{';
+    protected static final char OPEN_SQUARE_BRACKET = '[';
+
     protected final Supplier<JsonEngine> supplier;
 
     // ---------- read String----------
@@ -394,7 +399,7 @@ public class JsonReader {
     // ---------- misc ----------
 
     @SuppressWarnings("NewMethodNamingConvention")
-    private static Reader utf8Reader(InputStream in) {
+    protected static Reader utf8Reader(InputStream in) {
         return new InputStreamReader(in, StandardCharsets.UTF_8) {
             @Override
             public boolean markSupported() {
@@ -413,20 +418,6 @@ public class JsonReader {
         };
     }
 
-    @SuppressWarnings("NewMethodNamingConvention")
-    private static Reader utf8Reader(ByteBuffer buf) {
-        return utf8Reader(new ByteBufferInputStream(buf));
-    }
-
-    @SuppressWarnings("PMD.AvoidReassigningParameters")
-    private static boolean isNullOrEmpty(String json) {
-        if (isBlank(json))
-            return true;
-
-        json = json.trim();
-        return "{}".equals(json) || "[]".equals(json);
-    }
-
     protected <V> V apply(ReadTask<V> task) {
         try {
             return task.read(supplier.get());
@@ -443,15 +434,50 @@ public class JsonReader {
         }
     }
 
-    private static <K> void requireNotNullKeyClass(Class<K> keyClass) {
+    protected static <K> void requireNotNullKeyClass(Class<K> keyClass) {
         Objects.requireNonNull(keyClass, "'keyClass' should not be null");
     }
 
-    private static <V> void requireNotNullValueClass(Class<V> valueClass) {
+    protected static <V> void requireNotNullValueClass(Class<V> valueClass) {
         Objects.requireNonNull(valueClass, "'valueClass' should not be null");
     }
 
-    private static boolean isBlank(String str) {
+    @SuppressWarnings("NewMethodNamingConvention")
+    protected static Reader utf8Reader(ByteBuffer buf) {
+        return utf8Reader(new ByteBufferInputStream(buf));
+    }
+
+    @SuppressWarnings("PMD.AvoidReassigningParameters")
+    protected static boolean isNullOrEmpty(String json) {
+        if (json == null || json.isEmpty())
+            return true;
+
+        char expected = FIND_OPEN_BRACKET;
+
+        for (int i = 0; i < json.length(); i++) {
+            char ch = json.charAt(i);
+
+            if (Character.isWhitespace(ch))
+                continue;
+            if (expected == FIND_CLOSE_BRACKET)
+                return false;
+            if (expected == FIND_OPEN_BRACKET) {
+                if (ch == OPEN_CURLY_BRACKET)
+                    expected = '}';
+                else if (ch == OPEN_SQUARE_BRACKET)
+                    expected = ']';
+                else
+                    return false;
+            } else if (expected == ch)
+                expected = FIND_CLOSE_BRACKET;
+            else
+                return false;
+        }
+
+        return expected == '>';
+    }
+
+    protected static boolean isBlank(String str) {
         if (str != null)
             for (int i = 0; i < str.length(); i++)
                 if (!Character.isWhitespace(str.charAt(i)))

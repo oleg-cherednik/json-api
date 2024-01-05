@@ -79,15 +79,15 @@ public class JsonWriter {
         try {
             writer.flush();
         } catch (IOException ignored) {
-            // ingored
+            // ignored
         }
     }
 
-    private static void requireNotNull(OutputStream out) {
+    protected static void requireNotNull(OutputStream out) {
         Objects.requireNonNull(out, "'out' should not be null");
     }
 
-    private static void requireNotNull(Writer writer) {
+    protected static void requireNotNull(Writer writer) {
         Objects.requireNonNull(writer, "'writer' should not be null");
     }
 
