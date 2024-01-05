@@ -23,8 +23,8 @@ repositories {
     mavenCentral()
 }
 
-group 'ru.oleg-cherednik.json'
-version '3.0'
+group = 'ru.oleg-cherednik.json'
+version = '3.0'
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
@@ -39,11 +39,18 @@ configurations {
 }
 
 checkstyle {
+    toolVersion = '10.10.0'
     configFile = "${projectDir}/misc/checkstyle/checkstyle.xml" as File
+    ignoreFailures = true
+    maxWarnings = 0
+    maxErrors = 0
 }
 
 pmd {
+    toolVersion = '6.21.0'
+    consoleOutput = true
     rulesMinimumPriority = 5
+    ignoreFailures = true
     ruleSets = [
             "${projectDir}/misc/pmd/bestpractices.xml",
             "${projectDir}/misc/pmd/codestyle.xml",
@@ -53,6 +60,27 @@ pmd {
             "${projectDir}/misc/pmd/performance.xml",
             "${projectDir}/misc/pmd/security.xml"
     ]
+}
+
+checkstyleMain {
+    enabled = true
+    source = 'src/main/java'
+}
+
+checkstyleTest {
+    enabled = true
+    source = 'src/test/java'
+}
+
+pmdMain {
+    enabled = true
+    source = 'src/main/java'
+}
+
+pmdTest {
+    dependsOn('jar')
+    enabled = true
+    source = 'src/test/java'
 }
 
 dependencies {
@@ -67,6 +95,7 @@ dependencies {
         exclude group: 'org.apache.ant', module: 'ant'
     }
 
+    testImplementation 'ru.oleg-cherednik.json:json-gson-impl:3.0'
     testImplementation "com.google.code.gson:gson:${property('gson.version')}"
     testImplementation 'org.assertj:assertj-core:3.24.2'
     testImplementation 'org.mockito:mockito-core:4.11.0'
@@ -88,6 +117,7 @@ javadoc {
 check.dependsOn jacocoTestReport
 
 test {
+    dependsOn('jar')
     useTestNG()
 }
 
@@ -119,7 +149,7 @@ publishing {
                         "    builder or static method set.\n" +
                         "  "
 
-                url = 'https://github.com/oleg-cherednik/jackson-utils'
+                url = 'https://github.com/oleg-cherednik/json-api'
                 inceptionYear = '2020'
 
                 licenses {
@@ -139,9 +169,9 @@ publishing {
                 }
 
                 scm {
-                    url = 'https://github.com/oleg-cherednik/jackson-utils'
-                    connection = 'scm:https://github.com/oleg-cherednik/jackson-utils.git'
-                    developerConnection = 'scm:git@github.com:oleg-cherednik/jackson-utils.git'
+                    url = 'https://github.com/oleg-cherednik/json-api'
+                    connection = 'scm:https://github.com/oleg-cherednik/json-api.git'
+                    developerConnection = 'scm:git@github.com:oleg-cherednik/json-api.git'
                 }
             }
         }

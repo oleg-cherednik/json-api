@@ -19,28 +19,27 @@
 
 package ru.olegcherednik.json.api;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * @author Oleg Cherednik
- * @since 04.12.2023
+ * @since 22.12.2020
  */
-public class JsonDecorator {
+@SuppressWarnings("PMD.ShortMethodName")
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public final class ListUtils {
 
-    private JsonReader readDelegate;
-    private JsonWriter writeDelegate;
-    private JsonWriter prettyPrintWriteDelegate;
-
-    // ---------- print ----------
-
-    public JsonReader read() {
-        return readDelegate;
-    }
-
-    public JsonWriter print() {
-        return writeDelegate;
-    }
-
-    public JsonWriter prettyPrint() {
-        return prettyPrintWriteDelegate;
+    @SafeVarargs
+    public static <T> List<T> of(T... elements) {
+        if (elements == null || elements.length == 0)
+            return Collections.emptyList();
+        return Collections.unmodifiableList(Arrays.stream(elements).collect(Collectors.toList()));
     }
 
 }

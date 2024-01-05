@@ -17,17 +17,28 @@
  * under the License.
  */
 
-package ru.olegcherednik.json.jacksonutils.serializers;
+package ru.olegcherednik.json.api;
 
-import ru.olegcherednik.json.api.JsonSettings;
+import org.testng.annotations.Test;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.ByteBuffer;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Oleg Cherednik
- * @since 04.12.2023
+ * @since 05.01.2024
  */
-public class Foo {
-    public static void main(String... args) {
-        JsonSettings settings = JsonSettings.builder().build();
-//        Json.withSettings(settings).print().writeValue(Map.of());
+@Test
+public class ByteBufferInputStreamTest {
+
+    public void shouldRetrieveEofWhenNotRemainingBytes() throws IOException {
+        try (InputStream in = new ByteBufferInputStream(ByteBuffer.wrap(new byte[] { 1, 2 }))) {
+            assertThat(in.read()).isEqualTo(1);
+            assertThat(in.read()).isEqualTo(2);
+            assertThat(in.read()).isEqualTo(-1);
+        }
     }
 }

@@ -17,22 +17,34 @@
  * under the License.
  */
 
+package ru.olegcherednik.json.api.data;
+
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import ru.olegcherednik.json.api.ListUtils;
 
 import java.time.ZonedDateTime;
 import java.util.List;
 
 /**
  * @author Oleg Cherednik
- * @since 26.02.2022
+ * @since 08.01.2021
  */
-@SuppressWarnings("unused")
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
 public class Book {
+
+    public static final Book THINKING_IN_JAVA = new Book("Thinking in Java",
+                                                         ZonedDateTime.parse("2017-07-23T13:57:14.225Z"),
+                                                         1998,
+                                                         ListUtils.of("Bruce Eckel"));
+    public static final Book READY_FOR_A_VICTORY = new Book("Ready for a victory",
+                                                            ZonedDateTime.parse("2020-07-23T13:57:14.225Z"),
+                                                            2020,
+                                                            ListUtils.of("Oleg Cherednik"));
+
 
     private String title;
     private ZonedDateTime date;

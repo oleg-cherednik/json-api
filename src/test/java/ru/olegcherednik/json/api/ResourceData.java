@@ -17,47 +17,31 @@
  * under the License.
  */
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+package ru.olegcherednik.json.api;
 
-import java.util.Scanner;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+import org.apache.commons.io.IOUtils;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 
 /**
  * @author Oleg Cherednik
- * @since 07.01.2021
+ * @since 04.11.2023
  */
-@SuppressWarnings("unused")
-@NoArgsConstructor
-@EqualsAndHashCode
-@ToString
-public class Data {
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public final class ResourceData {
 
-    @Getter
-    @Setter
-    private int intVal;
-    @Getter
-    @Setter
-    private String strVal;
-    private String nullVal;
-
-    public Data(int intVal, String strVal) {
-        this.intVal = intVal;
-        this.strVal = strVal;
+    public static InputStream getResourceAsInputStream(String name) throws IOException {
+        return ResourceData.class.getResourceAsStream(name);
     }
 
-    public String getUnknownValue() {
-        return intVal + '_' + strVal;
-    }
-
-    public void setUnknownValue(String str) {
-        try (Scanner scan = new Scanner(str)) {
-            scan.useDelimiter("_");
-            intVal = scan.nextInt();
-            strVal = scan.next();
+    public static String getResourceAsString(String name) throws IOException {
+        try (InputStream in = getResourceAsInputStream(name)) {
+            return IOUtils.toString(Objects.requireNonNull(in), StandardCharsets.UTF_8);
         }
     }
-
 }

@@ -65,7 +65,7 @@ public class JsonWriter {
         try {
             return task.write(supplier.get());
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new JsonException(e);
         }
     }
 
@@ -73,7 +73,7 @@ public class JsonWriter {
         try {
             task.write(supplier.get());
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new JsonException(e);
         }
 
         try {
