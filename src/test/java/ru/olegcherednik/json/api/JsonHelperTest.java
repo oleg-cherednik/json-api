@@ -32,7 +32,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @author Oleg Cherednik
  * @since 05.01.2024
  */
-//@Test
+@Test
 public class JsonHelperTest {
 
     private static final ZonedDateTime ZONED_DATE_TIME = ZonedDateTime.parse("2017-07-23T13:57:14.225Z");

@@ -26,8 +26,12 @@ import lombok.NoArgsConstructor;
 import ru.olegcherednik.json.api.JsonEngine;
 import ru.olegcherednik.json.api.JsonEngineFactory;
 import ru.olegcherednik.json.api.JsonSettings;
+import ru.olegcherednik.json.impl.adapters.ZonedDateTimeTypeAdapter;
 import ru.olegcherednik.json.impl.factories.EnumIdTypeAdapterFactory;
 import ru.olegcherednik.json.impl.factories.IteratorTypeAdapterFactory;
+
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * @author Oleg Cherednik
@@ -48,9 +52,15 @@ public final class StaticJsonEngineFactory implements JsonEngineFactory {
 
     @Override
     public JsonEngine createJsonEngine(JsonSettings settings) {
+        DateTimeFormatter df = settings.getZonedDateTimeFormatter();
+
+        if (settings.getZoneId() != null)
+            df = df.withZone(settings.getZoneId());
+
         Gson gson = new GsonBuilder()
                 .registerTypeAdapterFactory(EnumIdTypeAdapterFactory.INSTANCE)
                 .registerTypeAdapterFactory(IteratorTypeAdapterFactory.INSTANCE)
+                .registerTypeAdapter(ZonedDateTime.class, new ZonedDateTimeTypeAdapter(df).nullSafe())
                 .create();
         return new GsonEngine(gson);
     }
