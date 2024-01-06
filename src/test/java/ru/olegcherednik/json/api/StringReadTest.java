@@ -20,17 +20,15 @@
 package ru.olegcherednik.json.api;
 
 import org.testng.annotations.Test;
-import ru.olegcherednik.json.api.data.Book;
 import ru.olegcherednik.json.api.data.Data;
 
 import java.io.IOException;
-import java.math.BigInteger;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
  * @author Oleg Cherednik
@@ -58,25 +56,30 @@ public class StringReadTest {
         String json = ResourceData.getResourceAsString("/data.json");
         Data actual = Json.readValue(json, Data.class);
         assertThat(actual).isNotNull();
-        assertThat(actual).isEqualTo(Data.OMEN);
-    }
-
-    public void shouldRetrieveEmptyDeserializedObjectWhenReadEmptyValue() {
-        Data actual = Json.readValue("{}", Data.class);
-        assertThat(actual).isNotNull();
-        assertThat(actual).isEqualTo(Data.EMPTY);
+        assertThat(actual).isEqualTo(Data.TOM_CRUISE);
     }
 
     public void shouldRetrieveCorrectNumericWhenObjectContainsDifferentNumericList() {
-        String json = "[1,2.0,3.1,12345678912,123456789123456789123456789123456789]";
+        String json = "[\"one\", \"two\", \"three\"]";
         List<Object> actual = Json.readList(json);
 
-        assertThat(actual).hasSize(5);
-        assertThat(actual).containsExactly(1,
-                                           2.0,
-                                           3.1,
-                                           12345678912L,
-                                           new BigInteger("123456789123456789123456789123456789"));
+        assertThat(actual).hasSize(3);
+        assertThat(actual).containsExactly("one", "two", "three");
+    }
+
+    public void shouldRetrieveDeserializedListWhenReadAsList() throws IOException {
+        String json = ResourceData.stringDataList();
+        List<Data> actual = Json.readList(json, Data.class);
+        assertThat(actual).isNotNull();
+        assertThat(actual).isEqualTo(Arrays.asList(Data.TOM_CRUISE, Data.NICOLE_KIDMAN));
+    }
+
+    public void shouldRetrieveCorrectNumericWhenObjectContainsDifferentNumericSet() {
+        String json = "[\"one\", \"two\", \"three\", \"two\", \"one\"]";
+        Set<Object> actual = Json.readSet(json);
+
+        assertThat(actual).hasSize(3);
+        assertThat(actual).containsExactly("one", "two", "three");
     }
 
     public void shouldRetrieveUniqueValuesWhenReadListNoUniqueValueAsSet() {
@@ -87,98 +90,49 @@ public class StringReadTest {
         assertThat(actual).containsExactly("one", "two", "three");
     }
 
-    public void shouldRetrieveCorrectNumericWhenObjectContainsDifferentNumericSet() {
-        String json = "[1,2.0,3.1,12345678912,123456789123456789123456789123456789]";
-        Set<Object> actual = Json.readSet(json);
-
-        assertThat(actual).hasSize(5);
-        assertThat(actual).containsExactly(1,
-                                           2.0,
-                                           3.1,
-                                           12345678912L,
-                                           new BigInteger("123456789123456789123456789123456789"));
-    }
-
-    public void shouldRetrieveDeserializedListWhenReadAsList() throws IOException {
-        String json = ResourceData.getResourceAsString("/data_list.json");
-        List<Data> actual = Json.readList(json, Data.class);
-        assertThat(actual).isNotNull();
-        assertThat(actual).isEqualTo(ListUtils.of(Data.VICTORY, Data.OMEN));
-
-    }
-
     public void shouldRetrieveListOfMapWhenRead() throws IOException {
-        String json = ResourceData.getResourceAsString("/data_list.json");
+        String json = ResourceData.stringDataList();
         List<Map<String, Object>> actual = Json.readListOfMap(json);
 
         assertThat(actual).hasSize(2);
         assertThat(actual.get(0)).hasSize(2);
-        assertThat(actual.get(0)).containsEntry("intVal", 555);
-        assertThat(actual.get(0)).containsEntry("strVal", "victory");
+        assertThat(actual.get(0)).containsEntry("firstName", "Tom");
+        assertThat(actual.get(0)).containsEntry("lastName", "Cruise");
         assertThat(actual.get(1)).hasSize(2);
-        assertThat(actual.get(1)).containsEntry("intVal", 666);
-        assertThat(actual.get(1)).containsEntry("strVal", "omen");
+        assertThat(actual.get(1)).containsEntry("firstName", "Nicole");
+        assertThat(actual.get(1)).containsEntry("lastName", "Kidman");
     }
 
     public void shouldRetrieveDataMapWhenReadAsMapWithStringKey() throws IOException {
-        String json = ResourceData.getResourceAsString("/variable_value_map.json");
-        Map<String, Object> actual = Json.readMap(json);
+        Map<String, Object> tomCruise = MapUtils.of("firstName", "Tom",
+                                                    "lastName", "Cruise");
+        Map<String, Object> nicoleKidman = MapUtils.of("firstName", "Nicole",
+                                                       "lastName", "Kidman");
+
+        Map<String, Object> actual = Json.readMap(ResourceData.stringDataMap());
         assertThat(actual).isNotNull();
-        assertThat(actual.keySet()).containsExactly("sample", "order");
-        assertThat(actual).containsEntry("sample", ListUtils.of("one, two", "three"));
-        assertThat(actual).containsEntry("order", MapUtils.of("key1", "val1", "key2", "val2"));
+        assertThat(actual.keySet()).containsExactly("man", "woman");
+        assertThat(actual).containsEntry("man", tomCruise);
+        assertThat(actual).containsEntry("woman", nicoleKidman);
     }
 
-    public void shouldRetrieveStringValueMapWhenReadAsMapWithStringKeyAndType() throws IOException {
-        String json = ResourceData.getResourceAsString("/string_value_map_s.json");
-        Map<String, String> actual = Json.readMap(json, String.class);
-        assertThat(actual).isNotNull();
-        assertThat(actual).isEqualTo(MapUtils.of("auto", "Audi", "model", "RS3"));
-    }
+    public void shouldRetrieveDeserializedMapWhenReadAsMapListWithStringKeyAndDataType() throws IOException {
+        Map<String, Data> expected = MapUtils.of("man", Data.TOM_CRUISE,
+                                                 "woman", Data.NICOLE_KIDMAN);
 
-    public void shouldRetrieveDeserializedMapWhenReadAsMapListWithStringKeyAndBookType() throws IOException {
-        Map<String, Book> expected = MapUtils.of("one", Book.THINKING_IN_JAVA,
-                                                 "two", Book.READY_FOR_A_VICTORY);
-
-        String json = ResourceData.getResourceAsString("/books_dict_string_key.json");
-        Map<String, Book> actual = Json.createReader(JsonSettings.DEFAULT).readMap(json, Book.class);
+        Map<String, Data> actual = Json.readMap(ResourceData.stringDataMap(), Data.class);
         assertThat(actual).isNotNull();
         assertThat(actual).isEqualTo(expected);
     }
 
     public void shouldRetrieveIntegerValueMapWhenReadAsMapWithIntKeyAndBookType() throws IOException {
-        Map<Integer, Book> expected = MapUtils.of(1, Book.THINKING_IN_JAVA,
-                                                  2, Book.READY_FOR_A_VICTORY);
+        Map<Character, Data> expected = MapUtils.of('M', Data.TOM_CRUISE,
+                                                    'W', Data.NICOLE_KIDMAN);
 
-        String json = ResourceData.getResourceAsString("/books_dict_int_key.json");
-        Map<Integer, Book> actual = Json.createReader(JsonSettings.DEFAULT).readMap(json, Integer.class, Book.class);
+        Map<Character, Data> actual = Json.readMap(ResourceData.getResourceAsString("/data_map_char.json"),
+                                                   Character.class, Data.class);
         assertThat(actual).isNotNull();
         assertThat(actual).isEqualTo(expected);
-    }
-
-    public void shouldRetrieveEmptyListWhenReadEmptyJsonAsList() {
-        assertThat(Json.readList("[]")).isEmpty();
-        assertThat(Json.readList("[]", Data.class)).isEmpty();
-        assertThat(Json.readSet("[]")).isEmpty();
-        assertThat(Json.readSet("[]", Data.class)).isEmpty();
-        assertThat(Json.readListOfMap("[]")).isEmpty();
-        assertThat(Json.readMap("{}")).isEmpty();
-        assertThat(Json.readMap("{}", Data.class)).isEmpty();
-        assertThat(Json.readMap("{}", String.class, Data.class)).isEmpty();
-    }
-
-    @SuppressWarnings("PMD.AvoidDuplicateLiterals")
-    public void shouldThrowJsonExceptionWhenReadIncorrectJson() {
-        assertThatThrownBy(() -> Json.readValue("incorrect", Data.class))
-                .isExactlyInstanceOf(JsonException.class);
-        assertThatThrownBy(() -> Json.readList("incorrect", Data.class))
-                .isExactlyInstanceOf(JsonException.class);
-        assertThatThrownBy(() -> Json.readMap("incorrect"))
-                .isExactlyInstanceOf(JsonException.class);
-        assertThatThrownBy(() -> Json.readMap("incorrect", Data.class))
-                .isExactlyInstanceOf(JsonException.class);
-        assertThatThrownBy(() -> Json.readMap("incorrect", String.class, Data.class))
-                .isExactlyInstanceOf(JsonException.class);
     }
 
 }

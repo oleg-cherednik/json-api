@@ -1,9 +1,9 @@
 {
-    "man": {
+    "M": {
         "firstName": "Tom",
         "lastName": "Cruise"
     },
-    "woman": {
+    "W": {
         "firstName": "Nicole",
         "lastName": "Kidman"
     }

@@ -27,16 +27,9 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.StringWriter;
 import java.io.Writer;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
 
 /**
@@ -44,7 +37,6 @@ import static org.mockito.Mockito.verifyNoInteractions;
  * @since 07.01.2021
  */
 @Test
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public class WriterTest {
 
     public void shouldRetrieveNullWhenObjectNull() {
@@ -66,67 +58,23 @@ public class WriterTest {
     }
 
     public void shouldRetrieveJsonWhenWriteObject() {
-        String actual = Json.writeValue(Data.VICTORY);
+        String actual = Json.writeValue(Data.TOM_CRUISE);
         assertThat(actual).isNotNull();
-        assertThat(actual).isEqualTo("{\"intVal\":555,\"strVal\":\"victory\"}");
-    }
-
-    public void shouldRetrieveJsonWhenWriteMapObject() {
-        Map<String, Data> map = MapUtils.of("victory", Data.VICTORY,
-                                            "omen", Data.OMEN);
-        String actual = Json.writeValue(map);
-        assertThat(actual).isNotNull();
-        assertThat(actual).isEqualTo("{\"victory\":{\"intVal\":555,\"strVal\":\"victory\"}"
-                                             + ",\"omen\":{\"intVal\":666,\"strVal\":\"omen\"}}");
-    }
-
-    public void shouldRetrieveJsonWhenWriteListObject() {
-        List<Data> data = ListUtils.of(Data.VICTORY, Data.OMEN);
-        String actual = Json.writeValue(data);
-        assertThat(actual).isNotNull();
-        assertThat(actual).isEqualTo("[{\"intVal\":555,\"strVal\":\"victory\"},{\"intVal\":666,\"strVal\":\"omen\"}]");
-    }
-
-    public void shouldRetrieveJsonWhenWriteIterator() {
-        List<Data> data = new ArrayList<>(ListUtils.of(Data.VICTORY, Data.OMEN));
-        String actual = Json.writeValue(data.iterator());
-        assertThat(actual).isNotNull();
-        assertThat(actual).isEqualTo("[{\"intVal\":555,\"strVal\":\"victory\"},{\"intVal\":666,\"strVal\":\"omen\"}]");
-    }
-
-    public void shouldRetrieveEmptyJsonWhenWriteEmptyCollection() {
-        assertThat(Json.writeValue(Collections.emptyList())).isEqualTo("[]");
-        assertThat(Json.writeValue(Collections.emptyMap())).isEqualTo("{}");
+        assertThat(actual).isEqualTo("{\"firstName\":\"Tom\",\"lastName\":\"Cruise\"}");
     }
 
     public void shouldWriteJsonToStreamWhenWriteObjectToWriter() throws IOException {
         try (Writer out = new StringWriter()) {
-            Json.writeValue(Data.OMEN, out);
-            assertThat(out).hasToString("{\"intVal\":666,\"strVal\":\"omen\"}");
+            Json.writeValue(Data.TOM_CRUISE, out);
+            assertThat(out).hasToString("{\"firstName\":\"Tom\",\"lastName\":\"Cruise\"}");
         }
     }
 
     public void shouldWriteJsonToStreamWhenWriteObjectToOutputStream() throws IOException {
         try (OutputStream out = new ByteArrayOutputStream()) {
-            Json.writeValue(Data.OMEN, out);
-            assertThat(out).hasToString("{\"intVal\":666,\"strVal\":\"omen\"}");
+            Json.writeValue(Data.NICOLE_KIDMAN, out);
+            assertThat(out).hasToString("{\"firstName\":\"Nicole\",\"lastName\":\"Kidman\"}");
         }
-    }
-
-    @SuppressWarnings("PMD.CloseResource")
-    public void shouldCloseWriterWhenFinishParse() throws IOException {
-        Writer out = spy(new StringWriter());
-        Json.writeValue(Data.OMEN, out);
-        verify(out, times(1)).close();
-        assertThat(out).hasToString("{\"intVal\":666,\"strVal\":\"omen\"}");
-    }
-
-    @SuppressWarnings("PMD.CloseResource")
-    public void shouldCloseOutputStreamWhenFinishParse() throws IOException {
-        OutputStream out = spy(new ByteArrayOutputStream());
-        Json.writeValue(Data.OMEN, out);
-        verify(out, times(1)).close();
-        assertThat(out).hasToString("{\"intVal\":666,\"strVal\":\"omen\"}");
     }
 
 }

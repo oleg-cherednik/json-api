@@ -17,29 +17,26 @@
  * under the License.
  */
 
-package ru.olegcherednik.json.api;
+package ru.olegcherednik.json.impl.types;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
+import com.google.gson.TypeAdapter;
+import com.google.gson.stream.JsonReader;
+import ru.olegcherednik.json.api.AutoCloseableIterator;
 
 /**
+ * @param <V> Type of the value object
  * @author Oleg Cherednik
- * @since 22.12.2020
+ * @since 05.01.2024
  */
-@SuppressWarnings("PMD.ShortMethodName")
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
-public final class ListUtils {
+public class JsonReaderAutoCloseableIterator<V> extends JsonReaderIterator<V> implements AutoCloseableIterator<V> {
 
-    @SafeVarargs
-    public static <T> List<T> of(T... elements) {
-        if (elements == null || elements.length == 0)
-            return Collections.emptyList();
-        return Collections.unmodifiableList(Arrays.stream(elements).collect(Collectors.toList()));
+    public JsonReaderAutoCloseableIterator(JsonReader in, TypeAdapter<V> typeAdapter) {
+        super(in, typeAdapter);
+    }
+
+    @Override
+    public void close() throws Exception {
+        in.close();
     }
 
 }

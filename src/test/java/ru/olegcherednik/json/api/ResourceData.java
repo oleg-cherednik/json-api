@@ -25,6 +25,9 @@ import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
@@ -35,8 +38,14 @@ import java.util.Objects;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ResourceData {
 
-    public static InputStream getResourceAsInputStream(String name) throws IOException {
-        return ResourceData.class.getResourceAsStream(name);
+    // ---------- String ----------
+
+    public static String stringDataList() throws IOException {
+        return getResourceAsString("/data_list.json");
+    }
+
+    public static String stringDataMap() throws IOException {
+        return getResourceAsString("/data_map.json");
     }
 
     public static String getResourceAsString(String name) throws IOException {
@@ -44,4 +53,63 @@ public final class ResourceData {
             return IOUtils.toString(Objects.requireNonNull(in), StandardCharsets.UTF_8);
         }
     }
+
+    // ---------- InputStream ----------
+
+    public static InputStream inputStreamDataList() throws IOException {
+        return getResourceAsInputStream("/data_list.json");
+    }
+
+    public static InputStream inputStreamDataSet() throws IOException {
+        return getResourceAsInputStream("/data_set.json");
+    }
+
+    public static InputStream inputStreamDataMap() throws IOException {
+        return getResourceAsInputStream("/data_map.json");
+    }
+
+    public static InputStream getResourceAsInputStream(String name) throws IOException {
+        return ResourceData.class.getResourceAsStream(name);
+    }
+
+    // ---------- Reader ----------
+
+    public static Reader readerDataList() throws IOException {
+        return getResourceAsReader("/data_list.json");
+    }
+
+    public static Reader readerDataSet() throws IOException {
+        return getResourceAsReader("/data_set.json");
+    }
+
+    public static Reader readerDataMap() throws IOException {
+        return getResourceAsReader("/data_map.json");
+    }
+
+    public static Reader getResourceAsReader(String name) throws IOException {
+        InputStream in = Objects.requireNonNull(ReaderTest.class.getResourceAsStream(name));
+        return new InputStreamReader(in);
+    }
+
+    // ---------- ByteBuffer ----------
+
+    public static ByteBuffer byteBufferDataList() throws IOException {
+        return getResourceAsByteBuffer("/data_list.json");
+    }
+
+    public static ByteBuffer byteBufferDataSet() throws IOException {
+        return getResourceAsByteBuffer("/data_set.json");
+    }
+
+    public static ByteBuffer byteBufferDataMap() throws IOException {
+        return getResourceAsByteBuffer("/data_map.json");
+    }
+
+    public static ByteBuffer getResourceAsByteBuffer(String name) throws IOException {
+        try (InputStream in = Objects.requireNonNull(ByteBufferTest.class.getResourceAsStream(name))) {
+            return ByteBuffer.wrap(IOUtils.toByteArray(in));
+        }
+    }
+
+
 }

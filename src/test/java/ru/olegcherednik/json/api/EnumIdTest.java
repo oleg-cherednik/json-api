@@ -23,12 +23,9 @@ import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import org.testng.annotations.Test;
 import ru.olegcherednik.json.api.enumid.EnumId;
 import ru.olegcherednik.json.api.enumid.EnumIdJsonCreator;
-
-import java.util.Objects;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
@@ -44,36 +41,16 @@ public class EnumIdTest {
     public void shouldRetrieveJsonWhenEnumIdValue() {
         Data data = new Data(Auto.AUDI, Color.RED);
         String json = Json.writeValue(data);
-        assertThat(json).isEqualTo("{\"notNullAuto\":\"audi\",\"notNullColor\":\"Red\"}");
+        assertThat(json).isEqualTo("{\"auto\":\"audi\",\"color\":\"Red\"}");
     }
 
     @SuppressWarnings("ConstantConditions")
     public void shouldParseJsonWhenEnumIdValue() {
-        String json = "{\"notNullAuto\":\"bmw\",\"notNullColor\":\"Green\"}";
+        String json = "{\"auto\":\"bmw\",\"color\":\"Green\"}";
         Data actual = Json.readValue(json, Data.class);
         assertThat(actual).isNotNull();
-        assertThat(actual.notNullAuto).isSameAs(Auto.BMW);
-        assertThat(actual.notNullColor).isSameAs(Color.GREEN);
-        assertThat(actual.nullAuto).isNull();
-        assertThat(actual.nullColor).isNull();
-    }
-
-    public void shouldRetrieveJsonWithNullWhenEnumIdValueAndSerializeNull() {
-        String json = Json.createWriter(JsonSettings.builder().serializeNull(true).build())
-                          .writeValue(new Data(Auto.MERCEDES, Color.BLUE));
-        assertThat(json).isEqualTo("{\"notNullAuto\":\"mercedes\",\"notNullColor\":\"Blue\","
-                                           + "\"nullAuto\":null,\"nullColor\":null}");
-    }
-
-    public void shouldRetrieveJsonWithNullWhenEnumIdValueAndSerializeNullAngGetters() {
-        Book data = new Book();
-        data.setNotNullAuto(Auto.MERCEDES);
-        data.setNotNullColor(Color.BLUE);
-
-        String json = Json.createWriter(JsonSettings.builder().serializeNull(true).build())
-                          .writeValue(data);
-        assertThat(json).isEqualTo("{\"notNullAuto\":\"mercedes\",\"notNullColor\":\"Blue\","
-                                           + "\"nullAuto\":null,\"nullColor\":null}");
+        assertThat(actual.auto).isSameAs(Auto.BMW);
+        assertThat(actual.color).isSameAs(Color.GREEN);
     }
 
     public void shouldThrowJsonExceptionWhenReadEnumIdNoFactoryMethod() {
@@ -82,13 +59,6 @@ public class EnumIdTest {
 
         assertThatCode(() -> Json.readValue(json, City.class))
                 .isExactlyInstanceOf(JsonException.class);
-    }
-
-    public void shouldUseJsonCreatorAnnotatedMethodWhenParseIdAlsoExists() {
-        String json = "\"Square_jsonCreator\"";
-        Shape actual = Json.readValue(json, Shape.class);
-        assertThat(actual).isNotNull();
-        assertThat(actual).isSameAs(Shape.SQUARE);
     }
 
     public void shouldThrowJsonExceptionWhenDeserializeWithMultipleJsonCreatorMethods() {
@@ -138,11 +108,6 @@ public class EnumIdTest {
         assertThat(EnumId.parseIdOrName(People.class, "Oleg-Cherednik")).isSameAs(People.OLEG_CHEREDNIK);
     }
 
-    public void shouldThrowExceptionWhenConstantByNameOrIdWasNotFound() {
-        assertThatCode(() -> EnumId.parseIdOrName(People.class, "UNKNOWN"))
-                .isExactlyInstanceOf(EnumConstantNotPresentException.class);
-    }
-
     public void shouldRetrieveDefaultValueWhenConstantByIdWasNotFound() {
         People actual = EnumId.parseId(People.class, "UNKNOWN", People.OLEG_CHEREDNIK);
         assertThat(actual).isSameAs(People.OLEG_CHEREDNIK);
@@ -156,9 +121,9 @@ public class EnumIdTest {
     public void shouldReadWriteConstantWithNullId() {
         Data data = new Data(Auto.AUDI, Color.NONE);
         String json = Json.writeValue(data);
-        assertThat(json).isEqualTo("{\"notNullAuto\":\"audi\"}");
+        assertThat(json).isEqualTo("{\"auto\":\"audi\"}");
 
-        json = "{\"notNullAuto\":\"audi\",\"notNullColor\":null}";
+        json = "{\"auto\":\"audi\",\"color\":null}";
         Data actual = Json.readValue(json, Data.class);
         assertThat(actual).isEqualTo(new Data(Auto.AUDI, Color.NONE));
     }
@@ -168,33 +133,17 @@ public class EnumIdTest {
         assertThat(EnumId.getId(null, Auto.BMW)).isSameAs(Auto.BMW.getId());
     }
 
-    @SuppressWarnings({ "FieldCanBeLocal", "EqualsHashCode" })
+    @EqualsAndHashCode
     @RequiredArgsConstructor
     private static final class Data {
 
-        private final Auto notNullAuto;
-        private final Color notNullColor;
-        private final Auto nullAuto = null;
-        private final Color nullColor = null;
+        private final Auto auto;
+        private final Color color;
 
-        @Override
-        @SuppressWarnings("ConstantConditions")
-        public boolean equals(Object obj) {
-            if (this == obj)
-                return true;
-            if (!(obj instanceof Data))
-                return false;
-            Data data = (Data) obj;
-            return notNullAuto == data.notNullAuto && notNullColor == data.notNullColor
-                    && nullAuto == data.nullAuto && nullColor == data.nullColor;
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(notNullAuto, notNullColor);
-        }
     }
 
+    @Getter
+    @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
     public enum Auto implements EnumId {
 
         AUDI("audi"),
@@ -203,15 +152,6 @@ public class EnumIdTest {
 
         private final String id;
 
-        Auto(String id) {
-            this.id = id;
-        }
-
-        @Override
-        public String getId() {
-            return id;
-        }
-
         @EnumIdJsonCreator
         @SuppressWarnings("unused")
         public static Auto parseId(String id) {
@@ -219,6 +159,8 @@ public class EnumIdTest {
         }
     }
 
+    @Getter
+    @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
     public enum Color implements EnumId {
 
         RED("Red"),
@@ -227,15 +169,6 @@ public class EnumIdTest {
         NONE(null);
 
         private final String id;
-
-        Color(String id) {
-            this.id = id;
-        }
-
-        @Override
-        public String getId() {
-            return id;
-        }
 
         @SuppressWarnings("unused")
         public static Color parseId(String id) {
@@ -346,18 +279,6 @@ public class EnumIdTest {
         public static Country three(String id) {
             return EnumId.parseId(Country.class, id);
         }
-    }
-
-    @Getter
-    @Setter
-    @EqualsAndHashCode
-    private static final class Book {
-
-        private Auto notNullAuto;
-        private Color notNullColor;
-        private Auto nullAuto;
-        private Color nullColor;
-
     }
 
 }

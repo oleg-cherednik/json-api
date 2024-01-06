@@ -9,7 +9,7 @@
 
     <rule ref="category/java/errorprone.xml">
         <exclude name="DataflowAnomalyAnalysis"/>
-<!--        <exclude name="BeanMembersShouldSerialize"/>-->
+        <exclude name="BeanMembersShouldSerialize"/>
         <exclude name="NullAssignment"/>
         <exclude name="TestClassWithoutTestCases"/>
     </rule>

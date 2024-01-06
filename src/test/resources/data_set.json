@@ -1,10 +1,14 @@
-{
-    "man": {
+[
+    {
         "firstName": "Tom",
         "lastName": "Cruise"
     },
-    "woman": {
+    {
         "firstName": "Nicole",
         "lastName": "Kidman"
+    },
+    {
+        "firstName": "Tom",
+        "lastName": "Cruise"
     }
-}
+]

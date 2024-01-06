@@ -23,45 +23,28 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.Scanner;
+import lombok.ToString;
 
 /**
  * @author Oleg Cherednik
  * @since 07.01.2021
  */
-@SuppressWarnings("unused")
+@Getter
+@Setter
 @NoArgsConstructor
 @EqualsAndHashCode
+@ToString
 public class Data {
 
-    public static final Data EMPTY = new Data();
-    public static final Data VICTORY = new Data(555, "victory");
-    public static final Data OMEN = new Data(666, "omen");
+    public static final Data TOM_CRUISE = new Data("Tom", "Cruise");
+    public static final Data NICOLE_KIDMAN = new Data("Nicole", "Kidman");
 
-    @Getter
-    @Setter
-    private int intVal;
-    @Getter
-    @Setter
-    private String strVal;
-    private String nullVal;
+    private String firstName;
+    private String lastName;
 
-    public Data(int intVal, String strVal) {
-        this.intVal = intVal;
-        this.strVal = strVal;
-    }
-
-    public String getUnknownValue() {
-        return intVal + '_' + strVal;
-    }
-
-    public void setUnknownValue(String str) {
-        try (Scanner scan = new Scanner(str)) {
-            scan.useDelimiter("_");
-            intVal = scan.nextInt();
-            strVal = scan.next();
-        }
+    public Data(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
 }

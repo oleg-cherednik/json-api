@@ -17,30 +17,39 @@
  * under the License.
  */
 
-package ru.olegcherednik.json.api;
+package ru.olegcherednik.json.impl.types;
 
-import org.testng.annotations.Test;
-import ru.olegcherednik.json.api.data.Data;
+import lombok.RequiredArgsConstructor;
 
-import java.util.Map;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.LinkedHashMap;
 
 /**
+ * @param <K> Type of the key object
+ * @param <V> Type of the value object
  * @author Oleg Cherednik
- * @since 10.04.2022
+ * @since 09.01.2021
  */
-@Test
-public class ConvertTest {
+@RequiredArgsConstructor
+public class LinkedHashMapParameterizedType<K, V> implements ParameterizedType {
 
-    public void shouldRetrieveEmptyCollectionWhenObjectNull() {
-        assertThat(Json.convertToMap(null)).isEmpty();
+    protected final Class<K> keyClass;
+    protected final Class<V> valueClass;
+
+    @Override
+    public Type[] getActualTypeArguments() {
+        return new Type[] { keyClass, valueClass };
     }
 
-    public void shouldRetrieveMapWhenConvertToMap() {
-        Map<String, Object> actual = Json.convertToMap(Data.TOM_CRUISE);
-        assertThat(actual).isNotNull();
-        assertThat(actual).isEqualTo(MapUtils.of("firstName", "Tom", "lastName", "Cruise"));
+    @Override
+    public Type getRawType() {
+        return LinkedHashMap.class;
+    }
+
+    @Override
+    public Type getOwnerType() {
+        return null;
     }
 
 }
