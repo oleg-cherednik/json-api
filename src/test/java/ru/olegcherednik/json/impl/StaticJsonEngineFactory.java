@@ -43,9 +43,13 @@ public final class StaticJsonEngineFactory implements JsonEngineFactory {
 
     private static final StaticJsonEngineFactory INSTANCE = new StaticJsonEngineFactory();
 
-    @SuppressWarnings("unused")
+
     public static StaticJsonEngineFactory getInstance() {
         return INSTANCE;
+    }
+
+    public static String getMainClass() {
+        return "com.google.gson.Gson";
     }
 
     // ---------- JsonEngineFactory ----------

@@ -83,7 +83,7 @@ public final class EnumIdSupport {
         };
     }
 
-    private static List<Method> getJsonCreatorMethods(final Class<?> rawType) {
+    private static List<Method> getJsonCreatorMethods(Class<?> rawType) {
         List<Method> res = new ArrayList<>();
         Class<?> type = rawType;
 

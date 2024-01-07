@@ -38,29 +38,47 @@ import java.util.stream.Collectors;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class JsonEngineFactoryProvider {
 
-    private static final int ONE = 1;
-
     public static JsonEngineFactory findJsonEngineFactory() {
+        try {
+            requireExactlyOneJsonImpl();
+
+            Class<? extends JsonEngineFactory> cls = loadJsonEngineFactoryClass();
+            requireMainClassExist(cls);
+            return getInstance(cls);
+        } catch (JsonException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new JsonException(e);
+        }
+    }
+
+    private static void requireExactlyOneJsonImpl() {
         Set<String> files = findJsonEngineFactoryFiles();
 
-        if (files.size() > ONE) {
-            log.error("Class path contains multiple {}", JsonEngineFactory.class.getSimpleName());
+        if (files.size() == 1)
+            return;
 
-            for (String file : files)
-                log.error("JsonUtils: Found {} in [{}]", JsonEngineFactory.class.getSimpleName(), file);
+        log.error("[json-api]: Class path contains multiple {}", JsonEngineFactory.class.getSimpleName());
 
-            throw new RuntimeException(String.format("Class path contains multiple %s",
-                                                     JsonEngineFactory.class.getSimpleName()));
-        }
+        for (String file : files)
+            log.error("[json-api]: found {} in [{}]", JsonEngineFactory.class.getSimpleName(), file);
 
-        try {
-            Class<? extends JsonEngineFactory> cls =
-                    Class.forName("ru.olegcherednik.json.impl.StaticJsonEngineFactory")
-                         .asSubclass(JsonEngineFactory.class);
-            return (JsonEngineFactory) cls.getMethod("getInstance").invoke(null);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        throw new JsonException(String.format("Class path contains multiple %s",
+                                              JsonEngineFactory.class.getSimpleName()));
+    }
+
+    private static Class<? extends JsonEngineFactory> loadJsonEngineFactoryClass() throws ClassNotFoundException {
+        return Class.forName("ru.olegcherednik.json.impl.StaticJsonEngineFactory")
+                    .asSubclass(JsonEngineFactory.class);
+    }
+
+    private static JsonEngineFactory getInstance(Class<? extends JsonEngineFactory> cls) throws Exception {
+        return (JsonEngineFactory) cls.getMethod("getInstance").invoke(null);
+    }
+
+    private static void requireMainClassExist(Class<? extends JsonEngineFactory> cls) throws Exception {
+        String mainClass = (String) cls.getMethod("getMainClass").invoke(null);
+        Class.forName(mainClass);
     }
 
     private static Set<String> findJsonEngineFactoryFiles() {
@@ -71,7 +89,7 @@ public final class JsonEngineFactoryProvider {
                               .map(URL::getFile)
                               .collect(Collectors.toSet());
         } catch (IOException e) {
-            log.error("Error getting resources from path", e);
+            log.error("[json-api]: error getting resources from path", e);
             return Collections.emptySet();
         }
     }

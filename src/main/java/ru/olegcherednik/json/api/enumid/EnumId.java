@@ -70,6 +70,11 @@ public interface EnumId {
         return Optional.ofNullable(res).orElseGet(() -> parseName(cls, idOrName));
     }
 
+    static <T extends Enum<?> & EnumId> T parseIdOrName(Class<T> cls, String idOrName, T def) {
+        T res = parseId(cls.getEnumConstants(), idOrName, null);
+        return Optional.ofNullable(res).orElseGet(() -> parseName(cls, idOrName, def));
+    }
+
     static <T extends Enum<?> & EnumId> T parseId(Class<T> cls, String id) {
         T res = parseId(cls.getEnumConstants(), id, null);
         return Optional.ofNullable(res).orElseThrow(() -> new EnumConstantNotPresentException(cls, id));
