@@ -1,3 +1,6 @@
+import com.github.jk1.license.filter.LicenseBundleNormalizer
+import com.github.jk1.license.render.InventoryHtmlReportRenderer
+
 buildscript {
     repositories {
         mavenLocal()
@@ -16,6 +19,7 @@ plugins {
     id 'signing'
     id 'maven-publish'
     id 'io.github.gradle-nexus.publish-plugin' version '1.0.0'
+    id 'com.github.jk1.dependency-license-report' version '2.5'
 }
 
 repositories {
@@ -124,6 +128,15 @@ license {
     header rootProject.file('APACHE.txt')
     include '**/*.java'
 }
+
+licenseReport {
+    configurations = ['compileClasspath', 'runtimeClasspath', 'testCompileClasspath', 'testRuntimeClasspath']
+    renderers = [new InventoryHtmlReportRenderer()]
+    allowedLicensesFile = new File("$projectDir/misc/license/allowed-licenses.json")
+    filters = [new LicenseBundleNormalizer(bundlePath: "$projectDir/misc/license/license-normalizer-bundle.json")]
+}
+
+build.finalizedBy(checkLicense)
 
 signing {
     sign publishing.publications
