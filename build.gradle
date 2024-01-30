@@ -45,7 +45,7 @@ configurations {
 checkstyle {
     toolVersion = '10.10.0'
     configFile = "${projectDir}/misc/checkstyle/checkstyle.xml" as File
-    ignoreFailures = true
+    ignoreFailures = false
     maxWarnings = 0
     maxErrors = 0
 }
@@ -54,7 +54,7 @@ pmd {
     toolVersion = '6.21.0'
     consoleOutput = true
     rulesMinimumPriority = 5
-    ignoreFailures = true
+    ignoreFailures = false
     ruleSets = [
             "${projectDir}/misc/pmd/bestpractices.xml",
             "${projectDir}/misc/pmd/codestyle.xml",
@@ -117,7 +117,9 @@ javadoc {
     options.addBooleanOption('Xdoclint:-missing', true)
 }
 
-check.dependsOn jacocoTestReport
+check.finalizedBy(checkLicense)
+check.finalizedBy(generateLicenseReport)
+check.finalizedBy(jacocoTestReport)
 
 test {
     dependsOn('jar')
@@ -135,8 +137,6 @@ licenseReport {
     allowedLicensesFile = new File("$projectDir/misc/license/allowed-licenses.json")
     filters = [new LicenseBundleNormalizer(bundlePath: "$projectDir/misc/license/license-normalizer-bundle.json")]
 }
-
-build.finalizedBy(checkLicense)
 
 signing {
     sign publishing.publications

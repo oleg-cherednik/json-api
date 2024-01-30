@@ -52,6 +52,7 @@ public final class JsonEngineFactoryProvider {
         }
     }
 
+    @SuppressWarnings("PMD.AvoidLiteralsInIfCondition")
     private static void requireExactlyOneJsonImpl() {
         Set<String> files = findJsonEngineFactoryFiles();
 

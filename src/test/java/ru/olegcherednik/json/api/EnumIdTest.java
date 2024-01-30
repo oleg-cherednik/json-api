@@ -108,6 +108,26 @@ public class EnumIdTest {
         assertThat(EnumId.parseIdOrName(People.class, "Oleg-Cherednik")).isSameAs(People.OLEG_CHEREDNIK);
     }
 
+    public void shouldThrowExceptionWhenConstantByIdOrNameWasNotFound() {
+        assertThatCode(() -> EnumId.parseIdOrName(People.class, "UNKNOWN"))
+                .isExactlyInstanceOf(EnumConstantNotPresentException.class);
+    }
+
+    public void shouldRetrieveFoundConstantWhenFindByIdOrNameWithDefault() {
+        assertThat(EnumId.parseIdOrName(People.class, "OLEG_CHEREDNIK", People.JOHN_DOE))
+                .isSameAs(People.OLEG_CHEREDNIK);
+        assertThat(EnumId.parseIdOrName(People.class, "Oleg_Cherednik", People.JOHN_DOE))
+                .isSameAs(People.OLEG_CHEREDNIK);
+        assertThat(EnumId.parseIdOrName(People.class, "oleg-cherednik", People.JOHN_DOE))
+                .isSameAs(People.OLEG_CHEREDNIK);
+        assertThat(EnumId.parseIdOrName(People.class, "Oleg-Cherednik", People.JOHN_DOE))
+                .isSameAs(People.OLEG_CHEREDNIK);
+    }
+
+    public void shouldRetrieveDefaultConstantWhenFindByIdOrNameNotFound() {
+        assertThat(EnumId.parseIdOrName(People.class, "UNKNOWN", People.JOHN_DOE)).isSameAs(People.JOHN_DOE);
+    }
+
     public void shouldRetrieveDefaultValueWhenConstantByIdWasNotFound() {
         People actual = EnumId.parseId(People.class, "UNKNOWN", People.OLEG_CHEREDNIK);
         assertThat(actual).isSameAs(People.OLEG_CHEREDNIK);
@@ -237,7 +257,8 @@ public class EnumIdTest {
 
     public enum People implements EnumId {
 
-        OLEG_CHEREDNIK("oleg-cherednik");
+        OLEG_CHEREDNIK("oleg-cherednik"),
+        JOHN_DOE("john-doe");
 
         private final String id;
 

@@ -19,6 +19,7 @@
 
 package ru.olegcherednik.json.api.data;
 
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,18 +34,17 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @EqualsAndHashCode
+@AllArgsConstructor
 @ToString
 public class Data {
+
+    public static final String FIRST_NAME = "firstName";
+    public static final String LAST_NAME = "lastName";
 
     public static final Data TOM_CRUISE = new Data("Tom", "Cruise");
     public static final Data NICOLE_KIDMAN = new Data("Nicole", "Kidman");
 
     private String firstName;
     private String lastName;
-
-    public Data(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
 
 }

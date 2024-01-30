@@ -98,18 +98,18 @@ public class ByteBufferTest {
 
         assertThat(actual).hasSize(2);
         assertThat(actual.get(0)).hasSize(2);
-        assertThat(actual.get(0)).containsEntry("firstName", "Tom");
-        assertThat(actual.get(0)).containsEntry("lastName", "Cruise");
+        assertThat(actual.get(0)).containsEntry(Data.FIRST_NAME, Data.TOM_CRUISE.getFirstName());
+        assertThat(actual.get(0)).containsEntry(Data.LAST_NAME, Data.TOM_CRUISE.getLastName());
         assertThat(actual.get(1)).hasSize(2);
-        assertThat(actual.get(1)).containsEntry("firstName", "Nicole");
-        assertThat(actual.get(1)).containsEntry("lastName", "Kidman");
+        assertThat(actual.get(1)).containsEntry(Data.FIRST_NAME, Data.NICOLE_KIDMAN.getFirstName());
+        assertThat(actual.get(1)).containsEntry(Data.LAST_NAME, Data.NICOLE_KIDMAN.getLastName());
     }
 
     public void shouldRetrieveIteratorOfDeserializedObjectsWhenReadAsLazyList() throws Exception {
-        Map<String, Object> expected1 = MapUtils.of("firstName", "Tom",
-                                                    "lastName", "Cruise");
-        Map<String, Object> expected2 = MapUtils.of("firstName", "Nicole",
-                                                    "lastName", "Kidman");
+        Map<String, Object> expected1 = MapUtils.of(Data.FIRST_NAME, Data.TOM_CRUISE.getFirstName(),
+                                                    Data.LAST_NAME, Data.TOM_CRUISE.getLastName());
+        Map<String, Object> expected2 = MapUtils.of(Data.FIRST_NAME, Data.NICOLE_KIDMAN.getFirstName(),
+                                                    Data.LAST_NAME, Data.NICOLE_KIDMAN.getLastName());
 
         Iterator<Object> it = Json.readListLazy(ResourceData.byteBufferDataList());
         assertThat(it.hasNext()).isTrue();
@@ -141,10 +141,10 @@ public class ByteBufferTest {
     }
 
     public void shouldRetrieveIteratorOfDeserializedObjectsWhenReadByteBufferAsListOfMapLazy() throws Exception {
-        Map<String, Object> tomCruise = MapUtils.of("firstName", "Tom",
-                                                    "lastName", "Cruise");
-        Map<String, Object> nicoleKidman = MapUtils.of("firstName", "Nicole",
-                                                       "lastName", "Kidman");
+        Map<String, Object> tomCruise = MapUtils.of(Data.FIRST_NAME, Data.TOM_CRUISE.getFirstName(),
+                                                    Data.LAST_NAME, Data.TOM_CRUISE.getLastName());
+        Map<String, Object> nicoleKidman = MapUtils.of(Data.FIRST_NAME, Data.NICOLE_KIDMAN.getFirstName(),
+                                                       Data.LAST_NAME, Data.NICOLE_KIDMAN.getLastName());
 
         Iterator<Map<String, Object>> it = Json.readListOfMapLazy(ResourceData.byteBufferDataList());
         assertThat(it.hasNext()).isTrue();
@@ -161,10 +161,10 @@ public class ByteBufferTest {
     }
 
     public void shouldRetrieveDataMapWhenReadAsMapWithStringKey() throws IOException {
-        Map<String, Object> tomCruise = MapUtils.of("firstName", "Tom",
-                                                    "lastName", "Cruise");
-        Map<String, Object> nicoleKidman = MapUtils.of("firstName", "Nicole",
-                                                       "lastName", "Kidman");
+        Map<String, Object> tomCruise = MapUtils.of(Data.FIRST_NAME, Data.TOM_CRUISE.getFirstName(),
+                                                    Data.LAST_NAME, Data.TOM_CRUISE.getLastName());
+        Map<String, Object> nicoleKidman = MapUtils.of(Data.FIRST_NAME, Data.NICOLE_KIDMAN.getFirstName(),
+                                                       Data.LAST_NAME, Data.NICOLE_KIDMAN.getLastName());
 
         Map<String, Object> actual = Json.readMap(ResourceData.byteBufferDataMap());
         assertThat(actual).isNotNull();

@@ -38,14 +38,18 @@ import java.util.Objects;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class ResourceData {
 
+    private static final String DATA_LIST_JSON = "/data_list.json";
+    private static final String DATA_MAP_JSON = "/data_map.json";
+    private static final String DATA_SET_JSON = "/data_set.json";
+
     // ---------- String ----------
 
     public static String stringDataList() throws IOException {
-        return getResourceAsString("/data_list.json");
+        return getResourceAsString(DATA_LIST_JSON);
     }
 
     public static String stringDataMap() throws IOException {
-        return getResourceAsString("/data_map.json");
+        return getResourceAsString(DATA_MAP_JSON);
     }
 
     public static String getResourceAsString(String name) throws IOException {
@@ -57,15 +61,15 @@ public final class ResourceData {
     // ---------- InputStream ----------
 
     public static InputStream inputStreamDataList() throws IOException {
-        return getResourceAsInputStream("/data_list.json");
+        return getResourceAsInputStream(DATA_LIST_JSON);
     }
 
     public static InputStream inputStreamDataSet() throws IOException {
-        return getResourceAsInputStream("/data_set.json");
+        return getResourceAsInputStream(DATA_SET_JSON);
     }
 
     public static InputStream inputStreamDataMap() throws IOException {
-        return getResourceAsInputStream("/data_map.json");
+        return getResourceAsInputStream(DATA_MAP_JSON);
     }
 
     public static InputStream getResourceAsInputStream(String name) throws IOException {
@@ -75,15 +79,15 @@ public final class ResourceData {
     // ---------- Reader ----------
 
     public static Reader readerDataList() throws IOException {
-        return getResourceAsReader("/data_list.json");
+        return getResourceAsReader(DATA_LIST_JSON);
     }
 
     public static Reader readerDataSet() throws IOException {
-        return getResourceAsReader("/data_set.json");
+        return getResourceAsReader(DATA_SET_JSON);
     }
 
     public static Reader readerDataMap() throws IOException {
-        return getResourceAsReader("/data_map.json");
+        return getResourceAsReader(DATA_MAP_JSON);
     }
 
     public static Reader getResourceAsReader(String name) throws IOException {
@@ -94,15 +98,15 @@ public final class ResourceData {
     // ---------- ByteBuffer ----------
 
     public static ByteBuffer byteBufferDataList() throws IOException {
-        return getResourceAsByteBuffer("/data_list.json");
+        return getResourceAsByteBuffer(DATA_LIST_JSON);
     }
 
     public static ByteBuffer byteBufferDataSet() throws IOException {
-        return getResourceAsByteBuffer("/data_set.json");
+        return getResourceAsByteBuffer(DATA_SET_JSON);
     }
 
     public static ByteBuffer byteBufferDataMap() throws IOException {
-        return getResourceAsByteBuffer("/data_map.json");
+        return getResourceAsByteBuffer(DATA_MAP_JSON);
     }
 
     public static ByteBuffer getResourceAsByteBuffer(String name) throws IOException {
