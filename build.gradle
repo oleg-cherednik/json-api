@@ -13,13 +13,14 @@ plugins {
     id 'checkstyle'
     id 'pmd'
     id 'java-library'
-    id 'org.cadixdev.licenser' version '0.6.1'
     id 'io.freefair.lombok' version '8.4'
+
+    id 'org.cadixdev.licenser' version '0.6.1'
+    id 'com.github.jk1.dependency-license-report' version '2.5'
 
     id 'signing'
     id 'maven-publish'
     id 'io.github.gradle-nexus.publish-plugin' version '1.0.0'
-    id 'com.github.jk1.dependency-license-report' version '2.5'
 }
 
 repositories {
@@ -52,7 +53,7 @@ checkstyle {
 
 pmd {
     toolVersion = '6.21.0'
-    consoleOutput = true
+    consoleOutput = false
     rulesMinimumPriority = 5
     ignoreFailures = false
     ruleSets = [
