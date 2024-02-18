@@ -32,6 +32,7 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Map;
 
 /**
  * @author Oleg Cherednik
@@ -111,8 +112,13 @@ public class JsonSettings {
     @Builder.Default
     private final DateTimeFormatter zonedDateTimeFormatter = DF_ZONED_DATE_TIME;
     /**
-     * If {@literal true}, then <tt>null</tt> values will be serialized as well.
+     * If {@literal true}, then <tt>null</tt> values will be serialized.
      */
     private final boolean serializeNull;
+    /**
+     * If {@literal true}, then <tt>null</tt> values of the {@link Map} will be serialized.
+     */
+    @Builder.Default
+    private final boolean serializeNullMapValue = true;
 
 }
