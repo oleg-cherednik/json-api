@@ -6,12 +6,23 @@ jobs:
     with:
       java-version: '8'
       codacy-report: true
-    secrets: inherit
+#    secrets: inherit
+    permissions:
+      contents: read
+      packages: write
   java-11:
     uses: oleg-cherednik/github-workflows/.github/workflows/gradle-java-build-test.yml@main
     with:
       java-version: '11'
+    #    secrets: inherit
+    permissions:
+      contents: read
+      packages: write
   java-17:
     uses: oleg-cherednik/github-workflows/.github/workflows/gradle-java-build-test.yml@main
     with:
       java-version: '17'
+    #    secrets: inherit
+    permissions:
+      contents: read
+      packages: write
