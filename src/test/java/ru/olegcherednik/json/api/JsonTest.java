@@ -17,8 +17,8 @@
 package ru.olegcherednik.json.api;
 
 import org.testng.annotations.Test;
+import ru.olegcherednik.json.api.data.Data;
 
-import java.time.ZonedDateTime;
 import java.util.Collections;
 import java.util.List;
 
@@ -32,8 +32,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SuppressWarnings("NewClassNamingConvention")
 public class JsonTest {
 
-    private static final ZonedDateTime ZONED_DATE_TIME = ZonedDateTime.parse("2017-07-23T13:57:14.225Z");
-
     public void shouldCreateSeparateReaderWhenCreateReader() {
         JsonReader one = Json.createReader();
         JsonReader two = Json.createReader();
@@ -45,7 +43,7 @@ public class JsonTest {
         JsonWriter two = Json.createWriter();
         assertThat(one).isNotSameAs(two);
 
-        List<ZonedDateTime> data = Collections.singletonList(ZONED_DATE_TIME);
+        List<Data> data = Collections.singletonList(Data.TOM_CRUISE);
         assertThat(one.writeValue(data)).isEqualTo(two.writeValue(data));
     }
 
@@ -54,17 +52,20 @@ public class JsonTest {
         JsonWriter two = Json.createPrettyPrint();
         assertThat(one).isNotSameAs(two);
 
-        List<ZonedDateTime> data = Collections.singletonList(ZONED_DATE_TIME);
+        List<Data> data = Collections.singletonList(Data.NICOLE_KIDMAN);
         assertThat(one.writeValue(data)).isEqualTo(two.writeValue(data));
     }
 
     public void shouldCreateSeparatePrettyPrintWriterWithGivenSettingWhenCreatePrettyPrint() {
-        JsonSettings settings = JsonSettings.builder().zoneId(LocalZoneId.ASIA_SINGAPORE).build();
+        JsonSettings settings = JsonSettings.builder()
+                                            .serializeNullMapValue(false)
+                                            .build();
         JsonWriter one = Json.createPrettyPrint(settings);
         JsonWriter two = Json.createPrettyPrint(settings);
         assertThat(one).isNotSameAs(two);
 
-        List<ZonedDateTime> data = Collections.singletonList(ZONED_DATE_TIME);
+        List<Data> data = Collections.singletonList(Data.NICOLE_KIDMAN);
         assertThat(one.writeValue(data)).isEqualTo(two.writeValue(data));
     }
+
 }
