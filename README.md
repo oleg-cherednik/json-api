@@ -21,12 +21,22 @@
 
 # JSON-API
 
-> The __JASON API__ is a wrapper over various frameworks for working with json
-> files, such as [Jackson](https://github.com/FasterXML/jackson) or
-> [Gson](https://github.com/google/gson).
->
-> This wrapper provides a unified interface and makes it easy to move from one
-> implementation to another.
+First of all, let's define some definitions:
+*   __json framework__ is a framework for working with json files like
+[jackson](https://github.com/FasterXML/jackson) or
+[gson](https://github.com/google/gson). Usually we use __json framework__
+directly in the application by adding dependencies required for it. In general
+all these __json frameworks__ have its own API and style of coding.
+*   __json engine__ is an abstraction of all __json framework__. The main
+idea is to provide a unified API over all __json frameworks__. I.e. using this
+unified API (i.e. __json engine__), the client is able to avoid any of specific
+logic of concrete __json framework__, and use common way to work with it
+(indeed, some specific feature of the concrete __json framework__ will be
+ignored).
+*   __json api__ is a wrapper over various __json engine__. It provides a simple
+way to do the most common actions of json manipulations. Moreover, it provides
+the way of single point configuration and exception handling.
+
 
 ## Features
 
@@ -55,10 +65,37 @@ _* additionally an engine implementation should be added_
 _* additionally an engine implementation should be added_
 
 
+## Usage
+
+### Add dependency with required engine
+
+E.g. you would like to use [jackson](https://github.com/FasterXML/jackson) as
+a json framework in your application. In this case, you have several options:
+*   Add [jackson](https://github.com/FasterXML/jackson) dependencies directly;
+*   Or use [json-api](https://github.com/oleg-cherednik/json-api) with
+[jackson-json-api](https://github.com/oleg-cherednik/json-jackson-impl)
+implementation.
+
+If you choose 2nd option, you should add given dependencies.
+
+#### Gradle
+
+```groovy
+implementation 'ru.oleg-cherednik.json:json-jackson-impl:3.0'
+```
 __Note:__ `jackson-utils` does not contain dependency to the specific `Jackson Project`
 version, so you have to add any version additionally
 
-## Usage
+
+```groovy
+testImplementation "com.fasterxml.jackson.core:jackson-databind:${property('jackson.version')}"
+testImplementation "com.fasterxml.jackson.module:jackson-module-afterburner:${property('jackson.version')}"
+testImplementation "com.fasterxml.jackson.module:jackson-module-parameter-names:${property('jackson.version')}"
+testImplementation "com.fasterxml.jackson.datatype:jackson-datatype-jdk8:${property('jackson.version')}"
+testImplementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${property('jackson.version')}"
+```
+
+
 
 To simplify usage of _jackson-utils_, there're following classes:
 

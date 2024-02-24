@@ -24,7 +24,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Represents an implementation of concrete json engine (e.g. Jackson or Gson).
+ * Represents an implementation of concrete json framework (e.g. Jackson or Gson).
  *
  * @author Oleg Cherednik
  * @since 24.11.2023
