@@ -1,20 +1,20 @@
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/ru.oleg-cherednik.jackson/jackson-utils/badge.svg)](https://maven-badges.herokuapp.com/maven-central/ru.oleg-cherednik.jackson/jackson-utils)
-[![javadoc](https://javadoc.io/badge2/ru.oleg-cherednik.jackson/jackson-utils/javadoc.svg)](https://javadoc.io/doc/ru.oleg-cherednik.jackson/jackson-utils)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/ru.oleg-cherednik.json/json-api/badge.svg)](https://maven-badges.herokuapp.com/maven-central/ru.oleg-cherednik.json/json-api)
+[![javadoc](https://javadoc.io/badge2/ru.oleg-cherednik.json/json-api/javadoc.svg)](https://javadoc.io/doc/ru.oleg-cherednik.json/json-api)
 [![java8](https://badgen.net/badge/java/8+/blue)](https://badgen.net/)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.txt)
 
 [![github-ci](https://github.com/oleg-cherednik/json-api/actions/workflows/github-ci.yml/badge.svg?branch=master&event=push)](https://github.com/oleg-cherednik/json-api/actions)
 [![vulnerabilities](https://snyk.io/test/github/oleg-cherednik/json-api/badge.svg?targetFile=build.gradle)](https://snyk.io/test/github/oleg-cherednik/json-api?targetFile=build.gradle)
 [![license-scan](https://app.fossa.com/api/projects/git%2Bgithub.com%2Foleg-cherednik%2Fjson-api.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Foleg-cherednik%2Fjson-api?ref=badge_shield)
-[![quality](https://app.codacy.com/project/badge/Grade/1d5034efd99f44e59b0247c77c615c97?branch=master)](https://app.codacy.com/gh/oleg-cherednik/jackson-utils/dashboard?branch=master)
-[![coverage](https://app.codacy.com/project/badge/Coverage/1d5034efd99f44e59b0247c77c615c97?branch=master)](https://app.codacy.com/gh/oleg-cherednik/jackson-utils/coverage/dashboard?branch=master)
+[![quality](https://app.codacy.com/project/badge/Grade/7645235119a749c79dd1bfb22b78dc34?branch=master)](https://app.codacy.com/gh/oleg-cherednik/json-api/dashboard?branch=master)
+[![coverage](https://app.codacy.com/project/badge/Coverage/7645235119a749c79dd1bfb22b78dc34?branch=master)](https://app.codacy.com/gh/oleg-cherednik/json-api/coverage/dashboard?branch=master)
 
 <details><summary>develop</summary>
 <p>
 
 [![github-ci](https://github.com/oleg-cherednik/json-api/actions/workflows/github-ci.yml/badge.svg?branch=develop&event=push)](https://github.com/oleg-cherednik/json-api/actions)
-[![quality](https://app.codacy.com/project/badge/Grade/1d5034efd99f44e59b0247c77c615c97?branch=develop)](https://app.codacy.com/gh/oleg-cherednik/jackson-utils/dashboard?branch=develop)
-[![coverage](https://app.codacy.com/project/badge/Coverage/1d5034efd99f44e59b0247c77c615c97?branch=develop)](https://app.codacy.com/gh/oleg-cherednik/jackson-utils/coverage/dashboard?branch=develop)
+[![quality](https://app.codacy.com/project/badge/Grade/7645235119a749c79dd1bfb22b78dc34?branch=develop)](https://app.codacy.com/gh/oleg-cherednik/json-api/dashboard?branch=develop)
+[![coverage](https://app.codacy.com/project/badge/Coverage/7645235119a749c79dd1bfb22b78dc34?branch=develop)](https://app.codacy.com/gh/oleg-cherednik/json-api/coverage/dashboard?branch=develop)
 
 </p>
 </details>
