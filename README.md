@@ -19,86 +19,41 @@
 </p>
 </details>
 
-# jackson-utils
+# JSON-API
 
-> [Jackson Project](https://github.com/FasterXML/jackson) usability utilities.
-> It's designed to add additional features like easy and centralized configuration,
-> builder or static method set. Artifact does not include direct `Jackson Project`.
-> It is up to you to add them into your project.
+> The __JASON API__ is a wrapper over various frameworks for working with json
+> files, such as [Jackson](https://github.com/FasterXML/jackson) or
+> [Gson](https://github.com/google/gson).
+>
+> This wrapper provides a unified interface and makes it easy to move from one
+> implementation to another.
 
 ## Features
 
-*   Encapsulate all checked exceptions from Jackson with custom runtime exception;
-*   A central place for configuration;
-*   A central place for holding `ObjectMapper` instances;
-*   Utility class to make most common operations much more comfortable to use;
-*   Ability to change `Zone` to save `ZonedDateTime` independently of original zone;
-*   `ByteBuffer`/`InputStream` support for objects, lists and maps;
-*   Lazy read support for list from `Writer`;
-*   Read numeric as `Integer`, `Long`, `BigInteger` or `Double` (but not only as `Double`);
-*   Advanced `Reader`/`Writer` support for `enum`.
+*   Provides a unified API for json manipulation;
+*   Give an easy way to provide custom engine implementation;
+*   It's free of any engine's specific code;
+*   It's fully open-source and does not depend on any limited licenses.
 
 ## Gradle
 
-_e.g. Jackson of version __2.15.3__:_
-
 ```groovy
-implementation 'ru.oleg-cherednik.jackson:jackson-utils:2.7'
-implementation 'com.fasterxml.jackson.core:jackson-databind:2.15.3'
+implementation 'ru.oleg-cherednik.json:json-api:3.0'
 ```
-
-_Optional dependencies:_
-
-```groovy
-implementation 'com.fasterxml.jackson.module:jackson-module-afterburner:2.15.3'
-implementation 'com.fasterxml.jackson.module:jackson-module-parameter-names:2.15.3'
-implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.15.3'
-implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.15.3'
-```
+_* additionally an engine implementation should be added_
 
 ## Maven
 
-_e.g. Jackson of version __2.15.3__:_
-
 ```xml
 <dependency>
-    <groupId>ru.oleg-cherednik.jackson</groupId>
-    <artifactId>jackson-utils</artifactId>
-    <version>2.7</version>
-</dependency>
-<dependency>
-    <groupId>com.fasterxml.jackson.core</groupId>
-    <artifactId>jackson-databind</artifactId>
-    <version>2.15.3</version>
+    <groupId>ru.oleg-cherednik.json</groupId>
+    <artifactId>json-api</artifactId>
+    <version>3.0</version>
 </dependency>
 ```
 
-_Optional dependencies:_
+_* additionally an engine implementation should be added_
 
-```xml
-<dependencies>
-   <dependency>
-      <groupId>com.fasterxml.jackson.module</groupId>
-      <artifactId>jackson-module-afterburner</artifactId>
-      <version>2.15.3</version>
-   </dependency>
-   <dependency>
-      <groupId>com.fasterxml.jackson.module</groupId>
-      <artifactId>jackson-module-parameter-names</artifactId>
-      <version>2.15.3</version>
-   </dependency>
-   <dependency>
-      <groupId>com.fasterxml.jackson.datatype</groupId>
-      <artifactId>jackson-datatype-jdk8</artifactId>
-      <version>2.15.3</version>
-   </dependency>
-   <dependency>
-      <groupId>com.fasterxml.jackson.datatype</groupId>
-      <artifactId>jackson-datatype-jsr310</artifactId>
-      <version>2.15.3</version>
-   </dependency>
-</dependencies>
-```
 
 __Note:__ `jackson-utils` does not contain dependency to the specific `Jackson Project`
 version, so you have to add any version additionally
