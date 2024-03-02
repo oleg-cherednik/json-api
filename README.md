@@ -117,6 +117,9 @@ There are following classes to work with json using `json-api`:
 
 ##### `String` to a custom object type (but not a collection)
 
+<details><summary>example</summary>
+<p>
+
 ```java
 class Data {
 
@@ -136,8 +139,13 @@ class Data {
 }
 ```
 
+</p>
+</details>
+
 ##### `String` to a list of custom object type
 
+<details><summary>example</summary>
+<p>
 ```java
 class Data {
 
@@ -161,7 +169,10 @@ class Data {
     }
 
 }
+
 ```
+</p>
+</details>
 
 #### Read json from `ByteBuffer`
 
