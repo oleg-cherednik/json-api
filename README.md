@@ -204,6 +204,122 @@ class Data {
 </p>
 </details>
 
+<details><summary><code>String</code> to a list of <code>Map</code></summary>
+<p>
+
+```java
+class Data {
+
+    int intVal;
+    String strVal;
+
+    public static void demo() {
+        String json = """
+                [
+                    {
+                        "intVal" : 555,
+                        "strVal" : "victory"
+                    },
+                    {
+                        "intVal" : 666,
+                        "strVal" : "omen"
+                    }
+                ]
+                """;
+        List<Map<String, Object>> res = Json.readListOfMap(json);
+    }
+
+}
+
+```
+
+</p>
+</details>
+
+<details><summary><code>String</code> to a Map of string key and custom object value type</summary>
+<p>
+
+```java
+public class Book {
+
+    private String title;
+    private ZonedDateTime date;
+    private int year;
+    private List<String> authors;
+
+    public static void demo() {
+        String json = """
+                {
+                    "one": {
+                        "title": "Thinking in Java",
+                        "date": "2017-07-23T13:57:14.225Z",
+                        "year": 1998,
+                        "authors": [
+                            "Bruce Eckel"
+                        ]
+                    },
+                    "two": {
+                        "title": "Ready for a victory",
+                        "date": "2020-07-23T13:57:14.225Z",
+                        "year": 2020,
+                        "authors": [
+                            "Oleg Cherednik"
+                        ]
+                    }
+                }
+                """;
+        Map<String, Data> res = Json.readMap(json, Book.class);
+    }
+
+}
+
+```
+
+</p>
+</details>
+
+<details><summary><code>String</code> to a Map of custom key and value type</summary>
+<p>
+
+```java
+public class Book {
+
+    private String title;
+    private ZonedDateTime date;
+    private int year;
+    private List<String> authors;
+
+    public static void demo() {
+        String json = """
+                {
+                    "1": {
+                        "title": "Thinking in Java",
+                        "date": "2017-07-23T13:57:14.225Z",
+                        "year": 1998,
+                        "authors": [
+                            "Bruce Eckel"
+                        ]
+                    },
+                    "2": {
+                        "title": "Ready for a victory",
+                        "date": "2020-07-23T13:57:14.225Z",
+                        "year": 2020,
+                        "authors": [
+                            "Oleg Cherednik"
+                        ]
+                    }
+                }
+                """;
+        Map<Integer, Data> res = Json.readMap(json, Integer.class, Book.class);
+    }
+
+}
+
+```
+
+</p>
+</details>
+
 #### Read json from `ByteBuffer`
 
        xcv
