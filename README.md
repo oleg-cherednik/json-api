@@ -140,7 +140,7 @@ class Data {
 </p>
 </details>
 
-<details><summary><code>String</code> to a list of custom object type</summary>
+<details><summary><code>String</code> to a <code>List</code> of custom object type</summary>
 <p>
 
 ```java
@@ -172,7 +172,7 @@ class Data {
 </p>
 </details>
 
-<details><summary><code>String</code> to a set of custom object type</summary>
+<details><summary><code>String</code> to a <code>Set</code> of custom object type</summary>
 <p>
 
 ```java
@@ -204,7 +204,7 @@ class Data {
 </p>
 </details>
 
-<details><summary><code>String</code> to a list of <code>Map</code></summary>
+<details><summary><code>String</code> to a <code>List</code> of <code>Map</code></summary>
 <p>
 
 ```java
@@ -236,7 +236,7 @@ class Data {
 </p>
 </details>
 
-<details><summary><code>String</code> to a Map of string key and custom object value type</summary>
+<details><summary><code>String</code> to a <code>Map</code> of string key and custom object value type</summary>
 <p>
 
 ```java
@@ -278,7 +278,7 @@ public class Book {
 </p>
 </details>
 
-<details><summary><code>String</code> to a Map of custom key and value type</summary>
+<details><summary><code>String</code> to a <code>Map</code> of custom key and value type</summary>
 <p>
 
 ```java
