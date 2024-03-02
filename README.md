@@ -146,6 +146,7 @@ class Data {
 
 <details><summary>example</summary>
 <p>
+
 ```java
 class Data {
 
@@ -171,6 +172,7 @@ class Data {
 }
 
 ```
+
 </p>
 </details>
 
