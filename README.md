@@ -172,6 +172,38 @@ class Data {
 </p>
 </details>
 
+<details><summary><code>String</code> to a set of custom object type</summary>
+<p>
+
+```java
+class Data {
+
+    int intVal;
+    String strVal;
+
+    public static void demo() {
+        String json = """
+                [
+                    {
+                        "intVal" : 555,
+                        "strVal" : "victory"
+                    },
+                    {
+                        "intVal" : 666,
+                        "strVal" : "omen"
+                    }
+                ]
+                """;
+        Set<Data> res = Json.readSet(json, Data.class);
+    }
+
+}
+
+```
+
+</p>
+</details>
+
 #### Read json from `ByteBuffer`
 
        xcv
