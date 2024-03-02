@@ -115,7 +115,7 @@ There are following classes to work with json using `json-api`:
 
 #### Read json from `String`
 
-<details><summary>`String` to a custom object type (but not a collection)</summary>
+<details><summary><code>String</code> to a custom object type (but not a collection)</summary>
 <p>
 
 ```java
@@ -140,7 +140,7 @@ class Data {
 </p>
 </details>
 
-<details><summary>`String` to a list of custom object type</summary>
+<details><summary><code>String</code> to a list of custom object type</summary>
 <p>
 
 ```java
