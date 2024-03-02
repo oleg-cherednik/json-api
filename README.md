@@ -268,7 +268,7 @@ public class Book {
                     }
                 }
                 """;
-        Map<String, Data> res = Json.readMap(json, Book.class);
+        Map<String, Book> res = Json.readMap(json, Book.class);
     }
 
 }
@@ -310,7 +310,7 @@ public class Book {
                     }
                 }
                 """;
-        Map<Integer, Data> res = Json.readMap(json, Integer.class, Book.class);
+        Map<Integer, Book> res = Json.readMap(json, Integer.class, Book.class);
     }
 
 }
