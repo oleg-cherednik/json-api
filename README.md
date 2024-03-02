@@ -115,6 +115,54 @@ There are following classes to work with json using `json-api`:
 
 #### Read json from `String`
 
+##### `String` to a custom object type (but not a collection)
+
+```java
+class Data {
+
+    int intVal;
+    String strVal;
+
+    public static void demo() {
+        String json = """
+                 {
+                    "intVal" : 666,
+                    "strVal" : "omen"
+                 }
+                """;
+        Data data = Json.readValue(json, Data.class);
+    }
+
+}
+```
+
+##### `String` to a list of custom object type
+
+```java
+class Data {
+
+    int intVal;
+    String strVal;
+
+    public static void demo() {
+        String json = """
+                [
+                    {
+                        "intVal" : 555,
+                        "strVal" : "victory"
+                    },
+                    {
+                        "intVal" : 666,
+                        "strVal" : "omen"
+                    }
+                ]
+                """;
+        List<Data> res = Json.readList(json, Data.class);
+    }
+
+}
+```
+
 #### Read json from `ByteBuffer`
 
 #### Read json from `InputStream`
@@ -126,27 +174,6 @@ There are following classes to work with json using `json-api`:
 #### Write json to `OutputStream`
 
 #### Write json to `Writer`
-
-##### `String` to a custom object type (but not a collection)
-
-```java
-class Data {
-
-    int intVal;
-    String strVal;
-
-}
-```
-
-```java
-String json="""
-              {
-                  "intVal" : 666,
-                  "strVal" : "omen"
-              }
-              """;
-        Data data=Json.readValue(json,Data.class);
-```
 
 ##### `String` to a list of custom object type
 
