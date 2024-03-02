@@ -21,26 +21,27 @@
 
 # JSON-API
 
-First of all, let's define some definitions:
 *   __json framework__ is a framework for working with json files like
-[jackson](https://github.com/FasterXML/jackson) or
-[gson](https://github.com/google/gson). Usually we use __json framework__
-directly in the application by adding dependencies required for it. In general
-all these __json frameworks__ have its own API and style of coding.
-*   __json engine__ is an abstraction of all __json framework__. The main
-idea is to provide a unified API over all __json frameworks__. I.e. using this
-unified API (i.e. __json engine__), the client is able to avoid any of specific
-logic of concrete __json framework__, and use common way to work with it
-(indeed, some specific feature of the concrete __json framework__ will be
-ignored).
-*   __json api__ is a wrapper over various __json engine__. It provides a simple
-way to do the most common actions of json manipulations. Moreover, it provides
-the way of single point configuration and exception handling.
+    [jackson](https://github.com/FasterXML/jackson) or
+    [gson](https://github.com/google/gson). Usually we use __json framework__
+    in the application directly by adding dependencies required for it. In general
+    all these __json frameworks__ have its own API and style of coding.
 
+*   __json engine__ is an abstraction of all __json framework__. The main
+    idea is to provide a unified API over all __json frameworks__. I.e. using this
+    unified API (i.e. __json engine__), the client is able to avoid any of specific
+    logic of concrete __json framework__, and use common way to work with it
+    (indeed, some specific feature of the concrete __json framework__ will be
+    ignored).
+
+* __JSON-API__ is a wrapper over various __json engines__. It provides a simple
+  way to do the most common actions of json manipulations. Moreover, it provides
+  the way of single point configuration and exception handling.
 
 ## Features
 
-*   Provides a unified API for json manipulation;
+*   Single file API for all json actions;
+*
 *   Give an easy way to provide custom engine implementation;
 *   It's free of any engine's specific code;
 *   It's fully open-source and does not depend on any limited licenses.
@@ -50,11 +51,13 @@ the way of single point configuration and exception handling.
 ```groovy
 implementation 'ru.oleg-cherednik.json:json-api:3.0'
 ```
+
 _* additionally an engine implementation should be added_
 
 ## Maven
 
 ```xml
+
 <dependency>
     <groupId>ru.oleg-cherednik.json</groupId>
     <artifactId>json-api</artifactId>
@@ -64,17 +67,17 @@ _* additionally an engine implementation should be added_
 
 _* additionally an engine implementation should be added_
 
-
 ## Usage
 
 ### Add dependency with required engine
 
 E.g. you would like to use [jackson](https://github.com/FasterXML/jackson) as
 a json framework in your application. In this case, you have several options:
+
 *   Add [jackson](https://github.com/FasterXML/jackson) dependencies directly;
 *   Or use [json-api](https://github.com/oleg-cherednik/json-api) with
-[jackson-json-api](https://github.com/oleg-cherednik/json-jackson-impl)
-implementation.
+    [jackson-json-api](https://github.com/oleg-cherednik/json-jackson-impl)
+    implementation.
 
 If you choose 2nd option, you should add given dependencies.
 
@@ -83,9 +86,9 @@ If you choose 2nd option, you should add given dependencies.
 ```groovy
 implementation 'ru.oleg-cherednik.json:json-jackson-impl:3.0'
 ```
+
 __Note:__ `jackson-utils` does not contain dependency to the specific `Jackson Project`
 version, so you have to add any version additionally
-
 
 ```groovy
 testImplementation "com.fasterxml.jackson.core:jackson-databind:${property('jackson.version')}"
@@ -94,8 +97,6 @@ testImplementation "com.fasterxml.jackson.module:jackson-module-parameter-names:
 testImplementation "com.fasterxml.jackson.datatype:jackson-datatype-jdk8:${property('jackson.version')}"
 testImplementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${property('jackson.version')}"
 ```
-
-
 
 To simplify usage of _jackson-utils_, there're following classes:
 
@@ -118,13 +119,13 @@ class Data {
 ```
 
 ```java
-String json = """
+String json="""
               {
                   "intVal" : 666,
                   "strVal" : "omen"
               }
               """;
-Data data = JacksonUtils.readValue(json, Data.class);
+        Data data=Json.readValue(json,Data.class);
 ```
 
 ##### `String` to a list of custom object type
@@ -139,7 +140,7 @@ class Data {
 ```
 
 ```java
-String json = """
+String json="""
               [
                   {
                       "intVal" : 555,
@@ -151,29 +152,10 @@ String json = """
                   }
               ]
               """;
-List<Data> res = JacksonUtils.readList(json, Data.class);
+        List<Data> res=Json.readList(json,Data.class);
 ```
 
 ##### `String` to a map of custom object type
-
-###### Map with `String` keys and `Map` or primitive types as values
-
-```java
-String json = """
-              {
-                  "victory" : {
-                      "intVal" : 555,
-                      "strVal" : "victory"
-                  },
-                  "omen" : {
-                      "intVal" : 666,
-                      "strVal" : "omen"
-                  }
-              }
-              """;
-Map<String, Object> map = JacksonUtils.readMap(json);
-```
-__Note:__ `map` values have either primitive type or `Map` or `List`.
 
 ###### `String` to a map with `String` keys and given type as value
 
@@ -187,7 +169,7 @@ class Data {
 ```
 
 ```java
-String json = """
+String json="""
               {
                   "victory" : {
                       "intVal" : 555,
@@ -199,211 +181,7 @@ String json = """
                   }
               }
               """;
-Map<String, Data> map = JacksonUtils.readMap(json, Data.class);
-```
-
-###### `String` to a map with `Integer` keys and given type as value
-
-```java
-class Data {
-
-    int intVal;
-    String strVal;
-
-}
-```
-
-```java
-String json = """
-              {
-                  "1" : {
-                      "intVal" : 555,
-                      "strVal" : "victory"
-                  },
-                  "2" : {
-                      "intVal" : 666,
-                      "strVal" : "omen"
-                  }
-              }
-              """;
-Map<Integer, Data> map = JacksonUtils.readMap(json, Integer.class, Data.class);
-```
-
-#### Read json from `InputStream`
-
-##### `InputStream` to a custom object type (but not a collection)
-
-```java
-class Data {
-
-    int intVal;
-    String strVal;
-
-}
-```
-
-```json
-{
-  "intVal": 666,
-  "strVal": "omen"
-}
-```
-
-```java
-try(InputStream in = ...) {
-    Data data = JacksonUtils.readValue(in, Data.class);
-}
-```
-
-##### `InputStream` to a list of custom object type
-
-##### Read eager
-
-```java
-class Data {
-
-    int intVal;
-    String strVal;
-
-}
-```
-
-```json
-[
-  {
-    "intVal": 555,
-    "strVal": "victory"
-  },
-  {
-    "intVal": 666,
-    "strVal": "omen"
-  }
-]
-```
-
-```java
-try (InputStream in = ...) {
-    List<Data> res = JacksonUtils.readList(in, Data.class);
-}
-```
-
-##### Read lazy
-
-```java
-class Data {
-
-    int intVal;
-    String strVal;
-
-}
-```
-
-```json
-[
-  {
-    "intVal": 555,
-    "strVal": "victory"
-  },
-  {
-    "intVal": 666,
-    "strVal": "omen"
-  }
-]
-```
-
-```java
-try(InputStream in = ...) {
-    Iterator<Data> it = JacksonUtils.readListLazy(in, Data.class);
-
-    while (it.hasNext()) {
-        Data data = it.next();
-    }
-}
-```
-
-##### `InputStream` to a map of custom object type
-
-###### `InputStream` to a map with `String` keys and `Map` or primitive types as values
-
-```json
-{
-  "victory": {
-    "intVal": 555,
-    "strVal": "victory"
-  },
-  "omen": {
-    "intVal": 666,
-    "strVal": "omen"
-  }
-}
-```
-
-```java
-try (InputStream in = ...) {
-    Map<String, Object> map = JacksonUtils.readMap(in);
-}
-```
-
-__Note:__ `map` values have either primitive type or `Map` or `List`.
-
-###### `InputStream` to a map with `String` keys and given type as value
-
-```java
-class Data {
-
-    int intVal;
-    String strVal;
-
-}
-```
-
-```json
-{
-  "victory": {
-    "intVal": 555,
-    "strVal": "victory"
-  },
-  "omen": {
-    "intVal": 666,
-    "strVal": "omen"
-  }
-}
-```
-
-```java
-try (InputStream in = ...) {
-    Map<String, Object> map = JacksonUtils.readMap(in, Data.class);
-}
-```
-
-###### Map with `Integer` keys and given type as value
-
-```java
-class Data {
-
-    int intVal;
-    String strVal;
-
-}
-```
-
-```json
-{
-  "1": {
-    "intVal": 555,
-    "strVal": "victory"
-  },
-  "2": {
-    "intVal": 666,
-    "strVal": "omen"
-  }
-}
-```
-
-```java
-try (InputStream in = ...) {
-    Map<Integer, Data> map = JacksonUtils.readMap(in, Integer.class, Data.class);
-}
+        Map<String, Data> map=Json.readMap(json,Data.class);
 ```
 
 ##### Links
