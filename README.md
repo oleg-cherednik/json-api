@@ -24,24 +24,23 @@
 *   __json framework__ is a framework for working with json files like
     [jackson](https://github.com/FasterXML/jackson) or
     [gson](https://github.com/google/gson). Usually we use __json framework__
-    in the application directly by adding dependencies required for it. In general
-    all these __json frameworks__ have its own API and style of coding.
+    in the application directly by adding dependencies required for it. In
+    general all these __json frameworks__ have its own API and style of coding.
 
 *   __json engine__ is an abstraction of all __json framework__. The main
-    idea is to provide a unified API over all __json frameworks__. I.e. using this
-    unified API (i.e. __json engine__), the client is able to avoid any of specific
-    logic of concrete __json framework__, and use common way to work with it
-    (indeed, some specific feature of the concrete __json framework__ will be
-    ignored).
+    idea is to provide a unified API over all __json frameworks__. I.e. using
+    this unified API (i.e. __json engine__), the client is able to use some
+    specific logic of concrete __json framework__, and use common way to work
+    with it (indeed, some specific feature of the concrete __json framework__
+    will be ignored).
 
-* __JSON-API__ is a wrapper over various __json engines__. It provides a simple
-  way to do the most common actions of json manipulations. Moreover, it provides
-  the way of single point configuration and exception handling.
+*   __JSON-API__ is a wrapper over various __json engines__. It provides a
+    simple way to do the most common actions of json manipulations. Moreover, it
+    provides the way of single point configuration and exception handling.
 
 ## Features
 
 *   Single file API for all json actions;
-*
 *   Give an easy way to provide custom engine implementation;
 *   It's free of any engine's specific code;
 *   It's fully open-source and does not depend on any limited licenses.
@@ -71,15 +70,15 @@ _* additionally an engine implementation should be added_
 
 ### Add dependency with required engine
 
-E.g. you would like to use [jackson](https://github.com/FasterXML/jackson) as
-a json framework in your application. In this case, you have several options:
+E.g. you would like to use [jackson 2.16.1](https://github.com/FasterXML/jackson)
+as a json framework in your application. In this case, you have several options:
 
 *   Add [jackson](https://github.com/FasterXML/jackson) dependencies directly;
 *   Or use [json-api](https://github.com/oleg-cherednik/json-api) with
     [jackson-json-api](https://github.com/oleg-cherednik/json-jackson-impl)
     implementation.
 
-If you choose 2nd option, you should add given dependencies.
+If you choose 2nd option, you should add following dependencies.
 
 #### Gradle
 
@@ -87,23 +86,32 @@ If you choose 2nd option, you should add given dependencies.
 implementation 'ru.oleg-cherednik.json:json-jackson-impl:3.0'
 ```
 
-__Note:__ `jackson-utils` does not contain dependency to the specific `Jackson Project`
-version, so you have to add any version additionally
+__Note:__ `jackson-utils` does not contain dependency to the specific
+`Jackson Project` version, so you have to add any version additionally
 
 ```groovy
-testImplementation "com.fasterxml.jackson.core:jackson-databind:${property('jackson.version')}"
-testImplementation "com.fasterxml.jackson.module:jackson-module-afterburner:${property('jackson.version')}"
-testImplementation "com.fasterxml.jackson.module:jackson-module-parameter-names:${property('jackson.version')}"
-testImplementation "com.fasterxml.jackson.datatype:jackson-datatype-jdk8:${property('jackson.version')}"
-testImplementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${property('jackson.version')}"
+testImplementation 'com.fasterxml.jackson.core:jackson-databind:2.16.1'
 ```
 
-To simplify usage of _jackson-utils_, there're following classes:
+In case you want to use additional features of the framework, e.g. work with
+jdk8 data-types, you have to add additional dependencies. `json-api` detects it
+and these features will be added to it's configuration as well.
 
-*   [JacksonUtils](#jacksonutils-class) - utility class with set of methods to use json transformation;
+```groovy
+testImplementation 'com.fasterxml.jackson.module:jackson-module-afterburner:2.16.1'
+testImplementation 'com.fasterxml.jackson.module:jackson-module-parameter-names:2.16.1'
+testImplementation 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.16.1'
+testImplementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.16.1'
+```
+
+### Main classes
+
+There are following classes to work with json using `json-api`:
+
+*   [Json](#json) - utility class with set of methods to use json transformation;
 *   [EnumId](#work-with-enum) - advanced enum serialization support.
 
-### JacksonUtils class
+### Json class
 
 #### Read json from `String`
 
