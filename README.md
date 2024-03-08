@@ -90,7 +90,7 @@ __Note:__ `jackson-utils` does not contain dependency to the specific
 `Jackson Project` version, so you have to add any version additionally
 
 ```groovy
-testImplementation 'com.fasterxml.jackson.core:jackson-databind:2.16.1'
+implementation 'com.fasterxml.jackson.core:jackson-databind:2.16.1'
 ```
 
 In case you want to use additional features of the framework, e.g. work with
@@ -98,10 +98,10 @@ jdk8 data-types, you have to add additional dependencies. `json-api` detects it
 and these features will be added to it's configuration as well.
 
 ```groovy
-testImplementation 'com.fasterxml.jackson.module:jackson-module-afterburner:2.16.1'
-testImplementation 'com.fasterxml.jackson.module:jackson-module-parameter-names:2.16.1'
-testImplementation 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.16.1'
-testImplementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.16.1'
+implementation 'com.fasterxml.jackson.module:jackson-module-afterburner:2.16.1'
+implementation 'com.fasterxml.jackson.module:jackson-module-parameter-names:2.16.1'
+implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.16.1'
+implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.16.1'
 ```
 
 ### Main classes
