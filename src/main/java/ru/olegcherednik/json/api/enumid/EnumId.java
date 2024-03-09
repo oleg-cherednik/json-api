@@ -16,7 +16,12 @@
 
 package ru.olegcherednik.json.api.enumid;
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
 
 /**
  * This interface hides enum implementation and enum constant id. In general case, it is not good to use
@@ -84,6 +89,76 @@ public interface EnumId {
                 return value;
 
         return def;
+    }
+
+    // ---------- MAP_ID ----------
+
+    static <T extends Enum<?> & EnumId> Map<String, T> createMapId(Class<T> cls) {
+        return createMap(cls, EnumId::getId);
+    }
+
+    static <T extends Enum<?> & EnumId> T parseId(Class<T> cls, Map<String, T> mapId, String id) {
+        String lowerCaseId = id == null ? null : id.toLowerCase(Locale.ROOT);
+        return Optional.ofNullable(mapId.get(lowerCaseId))
+                       .orElseThrow(() -> new EnumConstantNotPresentException(cls, id));
+    }
+
+    static <T extends Enum<?> & EnumId> T parseId(Class<T> cls, Map<String, T> mapId, String id, T def) {
+        String lowerCaseId = id == null ? null : id.toLowerCase(Locale.ROOT);
+        return mapId.getOrDefault(lowerCaseId, def);
+    }
+
+    // ---------- MAP_NAME ----------
+
+    static <T extends Enum<?> & EnumId> Map<String, T> createMapName(Class<T> cls) {
+        return createMap(cls, EnumId::name);
+    }
+
+    static <T extends Enum<?> & EnumId> T parseName(Class<T> cls, Map<String, T> mapName, String name) {
+        return Optional.ofNullable(name)
+                       .map(n -> name.toLowerCase(Locale.ROOT))
+                       .map(mapName::get)
+                       .orElseThrow(() -> new EnumConstantNotPresentException(cls, name));
+    }
+
+    static <T extends Enum<?> & EnumId> T parseName(Class<T> cls, Map<String, T> mapName, String name, T def) {
+        return mapName.getOrDefault(name.toLowerCase(Locale.ROOT), def);
+    }
+
+    // ---------- MAP_ID + MAP_NAME ----------
+
+    static <T extends Enum<?> & EnumId> T parseIdOrName(Class<T> cls,
+                                                        Map<String, T> mapId,
+                                                        Map<String, T> mapName,
+                                                        String idOrName) {
+        return Optional.ofNullable(parseId(cls, mapId, idOrName, null))
+                       .orElseGet(() -> parseName(cls, mapName, idOrName));
+    }
+
+    static <T extends Enum<?> & EnumId> T parseIdOrName(Class<T> cls,
+                                                        Map<String, T> mapId,
+                                                        Map<String, T> mapName,
+                                                        String idOrName,
+                                                        T def) {
+        return Optional.ofNullable(parseId(cls, mapId, idOrName, null))
+                       .orElseGet(() -> parseName(cls, mapName, idOrName, def));
+    }
+
+    // ----------
+
+    static <T extends Enum<?> & EnumId> Map<String, T> createMap(Class<T> cls, Function<T, String> getKey) {
+        Map<String, T> map = new HashMap<>();
+
+        for (T value : cls.getEnumConstants()) {
+            String key = Optional.ofNullable(getKey.apply(value))
+                                 .map(k -> k.toLowerCase(Locale.ROOT))
+                                 .orElse(null);
+
+            if (map.put(key, value) != null)
+                throw new ExceptionInInitializerError();
+        }
+
+        return map.isEmpty() ? Collections.emptyMap() : Collections.unmodifiableMap(map);
     }
 
 }
