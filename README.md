@@ -140,6 +140,34 @@ class Data {
 </p>
 </details>
 
+<details><summary><code>String</code> to a <code>List</code> of <code>Object</code> type</summary>
+<p>
+
+```java
+class Data {
+
+    public static void demo() {
+        String json = """
+                [
+                    {
+                        "intVal" : 555,
+                        "strVal" : "victory"
+                    },
+                    {
+                        "intVal" : 666,
+                        "strVal" : "omen"
+                    }
+                ]
+                """;
+        List<Object> res = Json.readList(json);
+    }
+
+}
+
+```
+</p>
+</details>
+
 <details><summary><code>String</code> to a <code>List</code> of custom object type</summary>
 <p>
 
