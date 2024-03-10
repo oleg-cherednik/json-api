@@ -294,7 +294,7 @@ class Data {
 </p>
 </details>
 
-<details><summary><code>String</code> to a <code>Map</code> of <code>String</code> key and custom value object type</summary>
+<details><summary><code>String</code> to a <code>Map</code> of <code>String</code> key and custom value type</summary>
 <p>
 
 ```java

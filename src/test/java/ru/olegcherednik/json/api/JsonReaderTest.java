@@ -16,13 +16,17 @@
 
 package ru.olegcherednik.json.api;
 
+import com.sun.tools.javac.util.List;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
+import java.util.Map;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
@@ -80,6 +84,13 @@ public class JsonReaderTest {
 
         reader.reset();
         verify(in, times(1)).reset();
+    }
+
+    public void shouldThrowExceptionWhenReadStringValueForCollection() {
+        String json = "a simple string";
+        assertThatThrownBy(() -> Json.readValue(json, List.class)).isExactlyInstanceOf(JsonException.class);
+        assertThatThrownBy(() -> Json.readValue(json, Set.class)).isExactlyInstanceOf(JsonException.class);
+        assertThatThrownBy(() -> Json.readValue(json, Map.class)).isExactlyInstanceOf(JsonException.class);
     }
 
     private static final class LocalJsonReader extends JsonReader {

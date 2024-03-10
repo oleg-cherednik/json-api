@@ -29,6 +29,7 @@ import java.util.Map;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
  * @author Oleg Cherednik
@@ -187,6 +188,13 @@ public class ByteBufferTest {
                                                    Character.class, Data.class);
         assertThat(actual).isNotNull();
         assertThat(actual).isEqualTo(expected);
+    }
+
+    public void shouldThrowExceptionWhenReadByteBufferValueForCollection() {
+        ByteBuffer buf = convertToByteBuffer("a simple string");
+        assertThatThrownBy(() -> Json.readValue(buf, com.sun.tools.javac.util.List.class)).isExactlyInstanceOf(JsonException.class);
+        assertThatThrownBy(() -> Json.readValue(buf, Set.class)).isExactlyInstanceOf(JsonException.class);
+        assertThatThrownBy(() -> Json.readValue(buf, Map.class)).isExactlyInstanceOf(JsonException.class);
     }
 
     private static ByteBuffer convertToByteBuffer(String str) {

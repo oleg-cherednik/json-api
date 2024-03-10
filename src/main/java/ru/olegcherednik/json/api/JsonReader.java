@@ -24,6 +24,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -55,6 +56,7 @@ public class JsonReader {
         if (isBlank(json))
             return null;
 
+        requireNotCollection(valueClass);
         requireNotNullValueClass(valueClass);
         return apply(jsonEngine -> jsonEngine.readValue(json, valueClass));
     }
@@ -121,6 +123,7 @@ public class JsonReader {
         if (buf == null)
             return null;
 
+        requireNotCollection(valueClass);
         requireNotNullValueClass(valueClass);
         return readValue(utf8Reader(buf), valueClass);
     }
@@ -216,6 +219,7 @@ public class JsonReader {
         if (in == null)
             return null;
 
+        requireNotCollection(valueClass);
         requireNotNullValueClass(valueClass);
         return readValue(utf8Reader(in), valueClass);
     }
@@ -302,6 +306,7 @@ public class JsonReader {
         if (reader == null)
             return null;
 
+        requireNotCollection(valueClass);
         requireNotNullValueClass(valueClass);
         return apply(reader, jsonEngine -> jsonEngine.readValue(reader, valueClass));
     }
@@ -437,6 +442,11 @@ public class JsonReader {
 
     protected static <V> void requireNotNullValueClass(Class<V> valueClass) {
         Objects.requireNonNull(valueClass, "'valueClass' should not be null");
+    }
+
+    protected static <V> void requireNotCollection(Class<V> valueClass) {
+        if (Collection.class.isAssignableFrom(valueClass) || Map.class.isAssignableFrom(valueClass))
+            throw new JsonException("'valueClass' should not be a collection");
     }
 
     @SuppressWarnings("NewMethodNamingConvention")
