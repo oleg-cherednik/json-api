@@ -741,10 +741,6 @@ public class Book {
 <details><summary><code>ByteBuffer</code> to an <code>Iterator</code> of <code>Object</code> type with lazy reading</summary>
 <p>
 
-    public static Iterator<Object> readListLazy(ByteBuffer buf) {
-        return reader().readListLazy(buf);
-    }
-
 ```java
 class Data {
 
