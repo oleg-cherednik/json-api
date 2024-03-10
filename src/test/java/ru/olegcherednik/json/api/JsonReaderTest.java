@@ -16,12 +16,12 @@
 
 package ru.olegcherednik.json.api;
 
-import com.sun.tools.javac.util.List;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
