@@ -294,6 +294,48 @@ class Data {
 </p>
 </details>
 
+<details><summary><code>String</code> to a <code>Map</code> of <code>String</code> key and <code>Object</code> value type</summary>
+<p>
+
+```java
+public class Book {
+
+    private String title;
+    private ZonedDateTime date;
+    private int year;
+    private List<String> authors;
+
+    public static void demo() {
+        String json = """
+                {
+                    "one": {
+                        "title": "Thinking in Java",
+                        "date": "2017-07-23T13:57:14.225Z",
+                        "year": 1998,
+                        "authors": [
+                            "Bruce Eckel"
+                        ]
+                    },
+                    "two": {
+                        "title": "Ready for a victory",
+                        "date": "2020-07-23T13:57:14.225Z",
+                        "year": 2020,
+                        "authors": [
+                            "Oleg Cherednik"
+                        ]
+                    }
+                }
+                """;
+        Map<String, Object> res = Json.readMap(json);
+    }
+
+}
+
+```
+
+</p>
+</details>
+
 <details><summary><code>String</code> to a <code>Map</code> of <code>String</code> key and custom value type</summary>
 <p>
 
@@ -558,6 +600,49 @@ class Data {
                 """;
         ByteBuffer buf = ByteBuffer.wrap(json.getBytes(StandardCharsets.UTF_8));
         List<Map<String, Object>> res = Json.readListOfMap(buf);
+    }
+
+}
+
+```
+
+</p>
+</details>
+
+<details><summary><code>ByteBuffer</code> to a <code>Map</code> of <code>String</code> key and <code>Object</code> value type</summary>
+<p>
+
+```java
+public class Book {
+
+    private String title;
+    private ZonedDateTime date;
+    private int year;
+    private List<String> authors;
+
+    public static void demo() {
+        String json = """
+                {
+                    "one": {
+                        "title": "Thinking in Java",
+                        "date": "2017-07-23T13:57:14.225Z",
+                        "year": 1998,
+                        "authors": [
+                            "Bruce Eckel"
+                        ]
+                    },
+                    "two": {
+                        "title": "Ready for a victory",
+                        "date": "2020-07-23T13:57:14.225Z",
+                        "year": 2020,
+                        "authors": [
+                            "Oleg Cherednik"
+                        ]
+                    }
+                }
+                """;
+        ByteBuffer buf = ByteBuffer.wrap(json.getBytes(StandardCharsets.UTF_8));
+        Map<String, Object> res = Json.readMap(buf);
     }
 
 }

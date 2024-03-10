@@ -101,20 +101,8 @@ public final class Json {
         return reader().readSet(buf, valueClass);
     }
 
-    public static Iterator<Object> readListLazy(ByteBuffer buf) {
-        return reader().readListLazy(buf);
-    }
-
-    public static <V> Iterator<V> readListLazy(ByteBuffer buf, Class<V> valueClass) {
-        return reader().readListLazy(buf, valueClass);
-    }
-
     public static List<Map<String, Object>> readListOfMap(ByteBuffer buf) {
         return reader().readListOfMap(buf);
-    }
-
-    public static Iterator<Map<String, Object>> readListOfMapLazy(ByteBuffer buf) {
-        return reader().readListOfMapLazy(buf);
     }
 
     public static Map<String, Object> readMap(ByteBuffer buf) {
@@ -127,6 +115,18 @@ public final class Json {
 
     public static <K, V> Map<K, V> readMap(ByteBuffer buf, Class<K> keyClass, Class<V> valueClass) {
         return reader().readMap(buf, keyClass, valueClass);
+    }
+
+    public static Iterator<Object> readListLazy(ByteBuffer buf) {
+        return reader().readListLazy(buf);
+    }
+
+    public static <V> Iterator<V> readListLazy(ByteBuffer buf, Class<V> valueClass) {
+        return reader().readListLazy(buf, valueClass);
+    }
+
+    public static Iterator<Map<String, Object>> readListOfMapLazy(ByteBuffer buf) {
+        return reader().readListOfMapLazy(buf);
     }
 
     // ---------- read InputStream ----------
