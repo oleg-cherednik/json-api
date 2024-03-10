@@ -738,6 +738,43 @@ public class Book {
 </p>
 </details>
 
+<details><summary><code>ByteBuffer</code> to an <code>Iterator</code> of <code>Object</code> type with lazy reading</summary>
+<p>
+
+    public static Iterator<Object> readListLazy(ByteBuffer buf) {
+        return reader().readListLazy(buf);
+    }
+
+```java
+class Data {
+
+    int intVal;
+    String strVal;
+
+    public static void demo() {
+        String json = """
+                [
+                    {
+                        "intVal" : 555,
+                        "strVal" : "victory"
+                    },
+                    {
+                        "intVal" : 666,
+                        "strVal" : "omen"
+                    }
+                ]
+                """;
+        ByteBuffer buf = ByteBuffer.wrap(json.getBytes(StandardCharsets.UTF_8));
+        Iterator<Object> it = Json.readListLazy(buf);
+    }
+
+}
+
+```
+
+</p>
+</details>
+
 #### Read json from `InputStream`
 
          zxcv
