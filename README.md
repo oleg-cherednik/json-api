@@ -115,8 +115,6 @@ There are following classes to work with json using `json-api`:
 
 #### Read json from `String`
 
-##### Read json from `String`
-
 <details><summary><code>String</code> to a custom object type (but not a collection)</summary>
 <p>
 
@@ -167,6 +165,36 @@ class Data {
 }
 
 ```
+
+</p>
+</details>
+
+<details><summary><code>String</code> to a <code>Set</code> of <code>Object</code> type</summary>
+<p>
+
+```java
+class Data {
+
+    public static void demo() {
+        String json = """
+                [
+                    {
+                        "intVal" : 555,
+                        "strVal" : "victory"
+                    },
+                    {
+                        "intVal" : 666,
+                        "strVal" : "omen"
+                    }
+                ]
+                """;
+        Set<Object> res = Json.readSet(json);
+    }
+
+}
+
+```
+
 </p>
 </details>
 
@@ -266,7 +294,7 @@ class Data {
 </p>
 </details>
 
-<details><summary><code>String</code> to a <code>Map</code> of string key and custom object value type</summary>
+<details><summary><code>String</code> to a <code>Map</code> of <code>String</code> key and custom value object type</summary>
 <p>
 
 ```java
