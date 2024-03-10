@@ -192,7 +192,7 @@ public class ByteBufferTest {
 
     public void shouldThrowExceptionWhenReadByteBufferValueForCollection() {
         ByteBuffer buf = convertToByteBuffer("a simple string");
-        assertThatThrownBy(() -> Json.readValue(buf, com.sun.tools.javac.util.List.class)).isExactlyInstanceOf(JsonException.class);
+        assertThatThrownBy(() -> Json.readValue(buf, List.class)).isExactlyInstanceOf(JsonException.class);
         assertThatThrownBy(() -> Json.readValue(buf, Set.class)).isExactlyInstanceOf(JsonException.class);
         assertThatThrownBy(() -> Json.readValue(buf, Map.class)).isExactlyInstanceOf(JsonException.class);
     }
