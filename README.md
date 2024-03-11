@@ -1227,7 +1227,410 @@ class Data {
 
 #### Read json from `Reader`
 
-          zxv
+<details><summary><code>Reader</code> to a custom object type (but not a collection)</summary>
+<p>
+
+```java
+class Data {
+
+    int intVal;
+    String strVal;
+
+    public static void demo() {
+        String json = """
+                 {
+                    "intVal" : 666,
+                    "strVal" : "omen"
+                 }
+                """;
+        Reader reader = new ByteArrayInputStream(json.getBytes());
+        Data data = Json.readValue(reader, Data.class);
+    }
+
+}
+```
+
+</p>
+</details>
+
+<details><summary><code>Reader</code> to a <code>List</code> of <code>Object</code> type</summary>
+<p>
+
+```java
+class Data {
+
+    public static void demo() {
+        String json = """
+                [
+                    {
+                        "intVal" : 555,
+                        "strVal" : "victory"
+                    },
+                    {
+                        "intVal" : 666,
+                        "strVal" : "omen"
+                    }
+                ]
+                """;
+        Reader reader = new StringReader(json);
+        List<Object> res = Json.readList(reader);
+    }
+
+}
+```
+
+</p>
+</details>
+
+<details><summary><code>Reader</code> to a <code>Set</code> of <code>Object</code> type</summary>
+<p>
+
+```java
+class Data {
+
+    public static void demo() {
+        String json = """
+                [
+                    {
+                        "intVal" : 555,
+                        "strVal" : "victory"
+                    },
+                    {
+                        "intVal" : 666,
+                        "strVal" : "omen"
+                    }
+                ]
+                """;
+        Reader reader = new StringReader(json);
+        Set<Object> res = Json.readSet(reader);
+    }
+
+}
+```
+
+</p>
+</details>
+
+<details><summary><code>Reader</code> to a <code>List</code> of custom object type</summary>
+<p>
+
+```java
+class Data {
+
+    int intVal;
+    String strVal;
+
+    public static void demo() {
+        String json = """
+                [
+                    {
+                        "intVal" : 555,
+                        "strVal" : "victory"
+                    },
+                    {
+                        "intVal" : 666,
+                        "strVal" : "omen"
+                    }
+                ]
+                """;
+        Reader reader = new StringReader(json);
+        List<Data> res = Json.readList(reader, Data.class);
+    }
+
+}
+```
+
+</p>
+</details>
+
+<details><summary><code>Reader</code> to a <code>Set</code> of custom object type</summary>
+<p>
+
+```java
+class Data {
+
+    int intVal;
+    String strVal;
+
+    public static void demo() {
+        String json = """
+                [
+                    {
+                        "intVal" : 555,
+                        "strVal" : "victory"
+                    },
+                    {
+                        "intVal" : 666,
+                        "strVal" : "omen"
+                    }
+                ]
+                """;
+        Reader reader = new StringReader(json);
+        Set<Data> res = Json.readSet(reader, Data.class);
+    }
+
+}
+```
+
+</p>
+</details>
+
+<details><summary><code>Reader</code> to a <code>List</code> of <code>Map</code></summary>
+<p>
+
+```java
+class Data {
+
+    int intVal;
+    String strVal;
+
+    public static void demo() {
+        String json = """
+                [
+                    {
+                        "intVal" : 555,
+                        "strVal" : "victory"
+                    },
+                    {
+                        "intVal" : 666,
+                        "strVal" : "omen"
+                    }
+                ]
+                """;
+        Reader reader = new StringReader(json);
+        List<Map<String, Object>> res = Json.readListOfMap(reader);
+    }
+
+}
+```
+
+</p>
+</details>
+
+<details><summary><code>Reader</code> to a <code>Map</code> of <code>String</code> key and <code>Object</code> value type</summary>
+<p>
+
+```java
+public class Book {
+
+    private String title;
+    private ZonedDateTime date;
+    private int year;
+    private List<String> authors;
+
+    public static void demo() {
+        String json = """
+                {
+                    "one": {
+                        "title": "Thinking in Java",
+                        "date": "2017-07-23T13:57:14.225Z",
+                        "year": 1998,
+                        "authors": [
+                            "Bruce Eckel"
+                        ]
+                    },
+                    "two": {
+                        "title": "Ready for a victory",
+                        "date": "2020-07-23T13:57:14.225Z",
+                        "year": 2020,
+                        "authors": [
+                            "Oleg Cherednik"
+                        ]
+                    }
+                }
+                """;
+        Reader reader = new StringReader(json);
+        Map<String, Object> res = Json.readMap(reader);
+    }
+
+}
+```
+
+</p>
+</details>
+
+<details><summary><code>Reader</code> to a <code>Map</code> of <code>String</code> key and custom value type</summary>
+<p>
+
+```java
+public class Book {
+
+    private String title;
+    private ZonedDateTime date;
+    private int year;
+    private List<String> authors;
+
+    public static void demo() {
+        String json = """
+                {
+                    "one": {
+                        "title": "Thinking in Java",
+                        "date": "2017-07-23T13:57:14.225Z",
+                        "year": 1998,
+                        "authors": [
+                            "Bruce Eckel"
+                        ]
+                    },
+                    "two": {
+                        "title": "Ready for a victory",
+                        "date": "2020-07-23T13:57:14.225Z",
+                        "year": 2020,
+                        "authors": [
+                            "Oleg Cherednik"
+                        ]
+                    }
+                }
+                """;
+        Reader reader = new StringReader(json);
+        Map<String, Book> res = Json.readMap(reader, Book.class);
+    }
+
+}
+```
+
+</p>
+</details>
+
+<details><summary><code>Reader</code> to a <code>Map</code> of custom key and value type</summary>
+<p>
+
+```java
+public class Book {
+
+    private String title;
+    private ZonedDateTime date;
+    private int year;
+    private List<String> authors;
+
+    public static void demo() {
+        String json = """
+                {
+                    "1": {
+                        "title": "Thinking in Java",
+                        "date": "2017-07-23T13:57:14.225Z",
+                        "year": 1998,
+                        "authors": [
+                            "Bruce Eckel"
+                        ]
+                    },
+                    "2": {
+                        "title": "Ready for a victory",
+                        "date": "2020-07-23T13:57:14.225Z",
+                        "year": 2020,
+                        "authors": [
+                            "Oleg Cherednik"
+                        ]
+                    }
+                }
+                """;
+        Reader reader = new StringReader(json);
+        Map<Integer, Book> res = Json.readMap(reader, Integer.class, Book.class);
+    }
+
+}
+```
+
+</p>
+</details>
+
+##### Read json from `Reader` lazy
+
+<details><summary><code>Reader</code> to an <code>Iterator</code> of <code>Object</code> type with lazy reading</summary>
+<p>
+
+```java
+class Data {
+
+    int intVal;
+    String strVal;
+
+    public static void demo() {
+        String json = """
+                [
+                    {
+                        "intVal" : 555,
+                        "strVal" : "victory"
+                    },
+                    {
+                        "intVal" : 666,
+                        "strVal" : "omen"
+                    }
+                ]
+                """;
+        Reader reader = new StringReader(json);
+        Iterator<Object> it = Json.readListLazy(reader);
+    }
+
+}
+```
+
+</p>
+</details>
+
+
+<details><summary><code>Reader</code> to an <code>Iterator</code> of custom object type with lazy reading</summary>
+<p>
+
+```java
+class Data {
+
+    int intVal;
+    String strVal;
+
+    public static void demo() {
+        String json = """
+                [
+                    {
+                        "intVal" : 555,
+                        "strVal" : "victory"
+                    },
+                    {
+                        "intVal" : 666,
+                        "strVal" : "omen"
+                    }
+                ]
+                """;
+        Reader reader = new StringReader(json);
+        Iterator<Data> it = Json.readListLazy(reader, Data.class);
+    }
+
+}
+```
+
+</p>
+</details>
+
+<details><summary><code>Reader</code> to an <code>Iterator</code> of <code>Map</code> with lazy reading</summary>
+<p>
+
+```java
+class Data {
+
+    int intVal;
+    String strVal;
+
+    public static void demo() {
+        String json = """
+                [
+                    {
+                        "intVal" : 555,
+                        "strVal" : "victory"
+                    },
+                    {
+                        "intVal" : 666,
+                        "strVal" : "omen"
+                    }
+                ]
+                """;
+        Reader reader = new StringReader(json);
+        Iterator<Map<String, Object>> it = Json.readListOfMapLazy(reader);
+    }
+
+}
+```
+
+</p>
+</details>
 
 #### Write json to `String`
 
