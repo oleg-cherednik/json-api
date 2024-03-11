@@ -104,6 +104,14 @@ public class GsonEngine implements JsonEngine {
     }
 
     @Override
+    public <K, V> Map<K, V> readMap(Reader reader, Class<K> keyClass, Class<V> valueClass) throws IOException {
+        try (Reader r = reader) {
+            Type type = new LinkedHashMapParameterizedType<>(keyClass, valueClass);
+            return gson.fromJson(r, type);
+        }
+    }
+
+    @Override
     public <V> AutoCloseableIterator<V> readListLazy(Reader reader, Class<V> valueClass) throws IOException {
         return gson.fromJson(gson.newJsonReader(reader), new AutoCloseableIteratorParameterizedType<>(valueClass));
     }
@@ -111,14 +119,6 @@ public class GsonEngine implements JsonEngine {
     @Override
     public AutoCloseableIterator<Map<String, Object>> readListOfMapLazy(Reader reader) throws IOException {
         return gson.fromJson(gson.newJsonReader(reader), new AutoCloseableIteratorParameterizedType<>(Map.class));
-    }
-
-    @Override
-    public <K, V> Map<K, V> readMap(Reader reader, Class<K> keyClass, Class<V> valueClass) throws IOException {
-        try (Reader r = reader) {
-            Type type = new LinkedHashMapParameterizedType<>(keyClass, valueClass);
-            return gson.fromJson(r, type);
-        }
     }
 
     // ---------- write ----------

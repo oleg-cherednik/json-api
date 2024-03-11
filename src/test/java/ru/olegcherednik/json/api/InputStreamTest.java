@@ -38,9 +38,6 @@ public class InputStreamTest {
 
     public void shouldRetrieveNullWhenObjectNull() {
         assertThat(Json.readValue((InputStream) null, Object.class)).isNull();
-        assertThat(Json.readListLazy((InputStream) null)).isNull();
-        assertThat(Json.readListLazy((InputStream) null, Object.class)).isNull();
-        assertThat(Json.readListOfMapLazy((InputStream) null)).isNull();
     }
 
     public void shouldRetrieveEmptyCollectionWhenObjectNull() {
@@ -52,6 +49,13 @@ public class InputStreamTest {
         assertThat(Json.readMap((InputStream) null)).isEmpty();
         assertThat(Json.readMap((InputStream) null, String.class)).isEmpty();
         assertThat(Json.readMap((InputStream) null, String.class, String.class)).isEmpty();
+    }
+
+    public void shouldRetrieveEmptyIteratorWhenObjectNull() {
+        assertThat(Json.readListLazy((InputStream) null)).isSameAs(EmptyAutoCloseableIterator.getInstance());
+        assertThat(Json.readListLazy((InputStream) null, Object.class))
+                .isSameAs(EmptyAutoCloseableIterator.getInstance());
+        assertThat(Json.readListOfMapLazy((InputStream) null)).isSameAs(EmptyAutoCloseableIterator.getInstance());
     }
 
     public void shouldRetrieveDeserializedObjectWhenReadValue() throws IOException {
@@ -96,6 +100,38 @@ public class InputStreamTest {
         assertThat(actual.get(1)).hasSize(2);
         assertThat(actual.get(1)).containsEntry(Data.FIRST_NAME, Data.NICOLE_KIDMAN.getFirstName());
         assertThat(actual.get(1)).containsEntry(Data.LAST_NAME, Data.NICOLE_KIDMAN.getLastName());
+    }
+
+    public void shouldRetrieveDataMapWhenReadAsMapWithStringKey() throws IOException {
+        Map<String, Object> tomCruise = MapUtils.of(Data.FIRST_NAME, Data.TOM_CRUISE.getFirstName(),
+                                                    Data.LAST_NAME, Data.TOM_CRUISE.getLastName());
+        Map<String, Object> nicoleKidman = MapUtils.of(Data.FIRST_NAME, Data.NICOLE_KIDMAN.getFirstName(),
+                                                       Data.LAST_NAME, Data.NICOLE_KIDMAN.getLastName());
+
+        Map<String, Object> actual = Json.readMap(ResourceData.inputStreamDataMap());
+        assertThat(actual).isNotNull();
+        assertThat(actual.keySet()).containsExactly("man", "woman");
+        assertThat(actual).containsEntry("man", tomCruise);
+        assertThat(actual).containsEntry("woman", nicoleKidman);
+    }
+
+    public void shouldRetrieveDeserializedMapWhenReadAsMapListWithStringKeyAndDataType() throws IOException {
+        Map<String, Data> expected = MapUtils.of("man", Data.TOM_CRUISE,
+                                                 "woman", Data.NICOLE_KIDMAN);
+
+        Map<String, Data> actual = Json.readMap(ResourceData.inputStreamDataMap(), Data.class);
+        assertThat(actual).isNotNull();
+        assertThat(actual).isEqualTo(expected);
+    }
+
+    public void shouldRetrieveIntegerValueMapWhenReadAsMapWithIntKeyAndBookType() throws IOException {
+        Map<Character, Data> expected = MapUtils.of('M', Data.TOM_CRUISE,
+                                                    'W', Data.NICOLE_KIDMAN);
+
+        Map<Character, Data> actual = Json.readMap(ResourceData.getResourceAsInputStream("/data_map_char.json"),
+                                                   Character.class, Data.class);
+        assertThat(actual).isNotNull();
+        assertThat(actual).isEqualTo(expected);
     }
 
     public void shouldRetrieveIteratorOfDeserializedObjectsWhenReadAsLazyList() throws Exception {
@@ -155,38 +191,6 @@ public class InputStreamTest {
             assertThat(actual2).isEqualTo(nicoleKidman);
             assertThat(it.hasNext()).isFalse();
         }
-    }
-
-    public void shouldRetrieveDataMapWhenReadAsMapWithStringKey() throws IOException {
-        Map<String, Object> tomCruise = MapUtils.of(Data.FIRST_NAME, Data.TOM_CRUISE.getFirstName(),
-                                                    Data.LAST_NAME, Data.TOM_CRUISE.getLastName());
-        Map<String, Object> nicoleKidman = MapUtils.of(Data.FIRST_NAME, Data.NICOLE_KIDMAN.getFirstName(),
-                                                       Data.LAST_NAME, Data.NICOLE_KIDMAN.getLastName());
-
-        Map<String, Object> actual = Json.readMap(ResourceData.inputStreamDataMap());
-        assertThat(actual).isNotNull();
-        assertThat(actual.keySet()).containsExactly("man", "woman");
-        assertThat(actual).containsEntry("man", tomCruise);
-        assertThat(actual).containsEntry("woman", nicoleKidman);
-    }
-
-    public void shouldRetrieveDeserializedMapWhenReadAsMapListWithStringKeyAndDataType() throws IOException {
-        Map<String, Data> expected = MapUtils.of("man", Data.TOM_CRUISE,
-                                                 "woman", Data.NICOLE_KIDMAN);
-
-        Map<String, Data> actual = Json.readMap(ResourceData.inputStreamDataMap(), Data.class);
-        assertThat(actual).isNotNull();
-        assertThat(actual).isEqualTo(expected);
-    }
-
-    public void shouldRetrieveIntegerValueMapWhenReadAsMapWithIntKeyAndBookType() throws IOException {
-        Map<Character, Data> expected = MapUtils.of('M', Data.TOM_CRUISE,
-                                                    'W', Data.NICOLE_KIDMAN);
-
-        Map<Character, Data> actual = Json.readMap(ResourceData.getResourceAsInputStream("/data_map_char.json"),
-                                                   Character.class, Data.class);
-        assertThat(actual).isNotNull();
-        assertThat(actual).isEqualTo(expected);
     }
 
     private static InputStream convertToInputStream(String str) {

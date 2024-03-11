@@ -24,4 +24,5 @@ import java.util.Iterator;
  * @since 03.01.2024
  */
 public interface AutoCloseableIterator<E> extends Iterator<E>, AutoCloseable {
+
 }

@@ -47,34 +47,42 @@ public final class Json {
         return reader().readValue(json, valueClass);
     }
 
+    // @NotNull
     public static List<Object> readList(String json) {
         return reader().readList(json);
     }
 
+    // @NotNull
     public static <V> List<V> readList(String json, Class<V> valueClass) {
         return reader().readList(json, valueClass);
     }
 
+    // @NotNull
     public static Set<Object> readSet(String json) {
         return reader().readSet(json);
     }
 
+    // @NotNull
     public static <V> Set<V> readSet(String json, Class<V> valueClass) {
         return reader().readSet(json, valueClass);
     }
 
+    // @NotNull
     public static List<Map<String, Object>> readListOfMap(String json) {
         return reader().readListOfMap(json);
     }
 
+    // @NotNull
     public static Map<String, Object> readMap(String json) {
         return reader().readMap(json);
     }
 
+    // @NotNull
     public static <V> Map<String, V> readMap(String json, Class<V> valueClass) {
         return reader().readMap(json, valueClass);
     }
 
+    // @NotNull
     public static <K, V> Map<K, V> readMap(String json, Class<K> keyClass, Class<V> valueClass) {
         return reader().readMap(json, keyClass, valueClass);
     }
@@ -85,46 +93,57 @@ public final class Json {
         return reader().readValue(buf, valueClass);
     }
 
+    // @NotNull
     public static List<Object> readList(ByteBuffer buf) {
         return reader().readList(buf);
     }
 
+    // @NotNull
     public static <V> List<V> readList(ByteBuffer buf, Class<V> valueClass) {
         return reader().readList(buf, valueClass);
     }
 
+    // @NotNull
     public static Set<Object> readSet(ByteBuffer buf) {
         return reader().readSet(buf);
     }
 
+    // @NotNull
     public static <V> Set<V> readSet(ByteBuffer buf, Class<V> valueClass) {
         return reader().readSet(buf, valueClass);
     }
 
+    // @NotNull
     public static List<Map<String, Object>> readListOfMap(ByteBuffer buf) {
         return reader().readListOfMap(buf);
     }
 
+    // @NotNull
     public static Map<String, Object> readMap(ByteBuffer buf) {
         return reader().readMap(buf);
     }
 
+    // @NotNull
     public static <V> Map<String, V> readMap(ByteBuffer buf, Class<V> valueClass) {
         return reader().readMap(buf, valueClass);
     }
 
+    // @NotNull
     public static <K, V> Map<K, V> readMap(ByteBuffer buf, Class<K> keyClass, Class<V> valueClass) {
         return reader().readMap(buf, keyClass, valueClass);
     }
 
+    // @NotNull
     public static Iterator<Object> readListLazy(ByteBuffer buf) {
         return reader().readListLazy(buf);
     }
 
+    // @NotNull
     public static <V> Iterator<V> readListLazy(ByteBuffer buf, Class<V> valueClass) {
         return reader().readListLazy(buf, valueClass);
     }
 
+    // @NotNull
     public static Iterator<Map<String, Object>> readListOfMapLazy(ByteBuffer buf) {
         return reader().readListOfMapLazy(buf);
     }
@@ -135,48 +154,59 @@ public final class Json {
         return reader().readValue(in, valueClass);
     }
 
+    // @NotNull
     public static List<Object> readList(InputStream in) {
         return reader().readList(in);
     }
 
+    // @NotNull
     public static <V> List<V> readList(InputStream in, Class<V> valueClass) {
         return reader().readList(in, valueClass);
     }
 
+    // @NotNull
     public static Set<Object> readSet(InputStream in) {
         return reader().readSet(in);
     }
 
+    // @NotNull
     public static <V> Set<V> readSet(InputStream in, Class<V> valueClass) {
         return reader().readSet(in, valueClass);
     }
 
+    // @NotNull
     public static List<Map<String, Object>> readListOfMap(InputStream in) {
         return reader().readListOfMap(in);
     }
 
-    public static AutoCloseableIterator<Object> readListLazy(InputStream in) {
-        return reader().readListLazy(in);
-    }
-
-    public static <V> AutoCloseableIterator<V> readListLazy(InputStream in, Class<V> valueClass) {
-        return reader().readListLazy(in, valueClass);
-    }
-
-    public static AutoCloseableIterator<Map<String, Object>> readListOfMapLazy(InputStream in) {
-        return reader().readListOfMapLazy(in);
-    }
-
+    // @NotNull
     public static Map<String, Object> readMap(InputStream in) {
         return reader().readMap(in);
     }
 
+    // @NotNull
     public static <V> Map<String, V> readMap(InputStream in, Class<V> valueClass) {
         return reader().readMap(in, valueClass);
     }
 
+    // @NotNull
     public static <K, V> Map<K, V> readMap(InputStream in, Class<K> keyClass, Class<V> valueClass) {
         return reader().readMap(in, keyClass, valueClass);
+    }
+
+    // @NotNull
+    public static AutoCloseableIterator<Object> readListLazy(InputStream in) {
+        return reader().readListLazy(in);
+    }
+
+    // @NotNull
+    public static <V> AutoCloseableIterator<V> readListLazy(InputStream in, Class<V> valueClass) {
+        return reader().readListLazy(in, valueClass);
+    }
+
+    // @NotNull
+    public static AutoCloseableIterator<Map<String, Object>> readListOfMapLazy(InputStream in) {
+        return reader().readListOfMapLazy(in);
     }
 
     // ---------- read Reader ----------
@@ -185,48 +215,59 @@ public final class Json {
         return reader().readValue(reader, valueClass);
     }
 
+    // @NotNull
     public static List<Object> readList(Reader reader) {
         return reader().readList(reader);
     }
 
+    // @NotNull
     public static <V> List<V> readList(Reader reader, Class<V> valueClass) {
         return reader().readList(reader, valueClass);
     }
 
+    // @NotNull
     public static Set<Object> readSet(Reader reader) {
         return reader().readSet(reader);
     }
 
+    // @NotNull
     public static <V> Set<V> readSet(Reader reader, Class<V> valueClass) {
         return reader().readSet(reader, valueClass);
     }
 
+    // @NotNull
     public static List<Map<String, Object>> readListOfMap(Reader reader) {
         return reader().readListOfMap(reader);
     }
 
-    public static AutoCloseableIterator<Object> readListLazy(Reader reader) {
-        return reader().readListLazy(reader);
-    }
-
-    public static <V> AutoCloseableIterator<V> readListLazy(Reader reader, Class<V> valueClass) {
-        return reader().readListLazy(reader, valueClass);
-    }
-
-    public static AutoCloseableIterator<Map<String, Object>> readListOfMapLazy(Reader reader) {
-        return reader().readListOfMapLazy(reader);
-    }
-
+    // @NotNull
     public static Map<String, Object> readMap(Reader reader) {
         return reader().readMap(reader);
     }
 
+    // @NotNull
     public static <V> Map<String, V> readMap(Reader reader, Class<V> valueClass) {
         return reader().readMap(reader, valueClass);
     }
 
+    // @NotNull
     public static <K, V> Map<K, V> readMap(Reader reader, Class<K> keyClass, Class<V> valueClass) {
         return reader().readMap(reader, keyClass, valueClass);
+    }
+
+    // @NotNull
+    public static AutoCloseableIterator<Object> readListLazy(Reader reader) {
+        return reader().readListLazy(reader);
+    }
+
+    // @NotNull
+    public static <V> AutoCloseableIterator<V> readListLazy(Reader reader, Class<V> valueClass) {
+        return reader().readListLazy(reader, valueClass);
+    }
+
+    // @NotNull
+    public static AutoCloseableIterator<Map<String, Object>> readListOfMapLazy(Reader reader) {
+        return reader().readListOfMapLazy(reader);
     }
 
     // ---------- write ----------

@@ -58,14 +58,16 @@ public interface JsonEngine {
     <V> Set<V> readSet(Reader reader, Class<V> valueClass) throws IOException;
 
     // @NotNull
-    List<Map<String, Object>> readListOfMap(Reader reader) throws IOException;
-
-    <V> AutoCloseableIterator<V> readListLazy(Reader reader, Class<V> valueClass) throws IOException;
-
-    AutoCloseableIterator<Map<String, Object>> readListOfMapLazy(Reader reader) throws IOException;
+    <K, V> Map<K, V> readMap(Reader reader, Class<K> keyClass, Class<V> valueClass) throws IOException;
 
     // @NotNull
-    <K, V> Map<K, V> readMap(Reader reader, Class<K> keyClass, Class<V> valueClass) throws IOException;
+    List<Map<String, Object>> readListOfMap(Reader reader) throws IOException;
+
+    // @NotNull
+    <V> AutoCloseableIterator<V> readListLazy(Reader reader, Class<V> valueClass) throws IOException;
+
+    // @NotNull
+    AutoCloseableIterator<Map<String, Object>> readListOfMapLazy(Reader reader) throws IOException;
 
     // ---------- write ----------
 

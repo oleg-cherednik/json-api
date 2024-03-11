@@ -31,6 +31,12 @@ import java.util.Map;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class MapUtils {
 
+    public static <K, V> Map<K, V> of(K k1, V v1) {
+        Map<K, V> map = new LinkedHashMap<>();
+        map.put(k1, v1);
+        return Collections.unmodifiableMap(map);
+    }
+
     public static <K, V> Map<K, V> of(K k1, V v1, K k2, V v2) {
         Map<K, V> map = new LinkedHashMap<>();
         map.put(k1, v1);

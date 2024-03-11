@@ -113,7 +113,6 @@ public class JsonReader {
 
         requireNotNullKeyClass(keyClass);
         requireNotNullValueClass(valueClass);
-
         return apply(jsonEngine -> jsonEngine.readMap(json, keyClass, valueClass));
     }
 
@@ -160,31 +159,11 @@ public class JsonReader {
         return readSet(utf8Reader(buf), valueClass);
     }
 
-    public Iterator<Object> readListLazy(ByteBuffer buf) {
-        if (buf == null)
-            return Collections.emptyIterator();
-        return readListLazy(utf8Reader(buf));
-    }
-
-    public <V> Iterator<V> readListLazy(ByteBuffer buf, Class<V> valueClass) {
-        if (buf == null)
-            return Collections.emptyIterator();
-
-        requireNotNullValueClass(valueClass);
-        return readListLazy(utf8Reader(buf), valueClass);
-    }
-
     // @NotNull
     public List<Map<String, Object>> readListOfMap(ByteBuffer buf) {
         if (buf == null)
             return Collections.emptyList();
         return readListOfMap(utf8Reader(buf));
-    }
-
-    public Iterator<Map<String, Object>> readListOfMapLazy(ByteBuffer buf) {
-        if (buf == null)
-            return Collections.emptyIterator();
-        return readListOfMapLazy(utf8Reader(buf));
     }
 
     // @NotNull
@@ -211,6 +190,29 @@ public class JsonReader {
         requireNotNullKeyClass(keyClass);
         requireNotNullValueClass(valueClass);
         return readMap(utf8Reader(buf), keyClass, valueClass);
+    }
+
+    // @NotNull
+    public Iterator<Object> readListLazy(ByteBuffer buf) {
+        if (buf == null)
+            return Collections.emptyIterator();
+        return readListLazy(utf8Reader(buf));
+    }
+
+    // @NotNull
+    public <V> Iterator<V> readListLazy(ByteBuffer buf, Class<V> valueClass) {
+        if (buf == null)
+            return Collections.emptyIterator();
+
+        requireNotNullValueClass(valueClass);
+        return readListLazy(utf8Reader(buf), valueClass);
+    }
+
+    // @NotNull
+    public Iterator<Map<String, Object>> readListOfMapLazy(ByteBuffer buf) {
+        if (buf == null)
+            return Collections.emptyIterator();
+        return readListOfMapLazy(utf8Reader(buf));
     }
 
     // ---------- read InputStream ----------
@@ -259,24 +261,6 @@ public class JsonReader {
         return readListOfMap(utf8Reader(in));
     }
 
-    public AutoCloseableIterator<Object> readListLazy(InputStream in) {
-        return readListLazy(in, Object.class);
-    }
-
-    public <V> AutoCloseableIterator<V> readListLazy(InputStream in, Class<V> valueClass) {
-        if (in == null)
-            return null;
-
-        requireNotNullValueClass(valueClass);
-        return readListLazy(utf8Reader(in), valueClass);
-    }
-
-    public AutoCloseableIterator<Map<String, Object>> readListOfMapLazy(InputStream in) {
-        if (in == null)
-            return null;
-        return readListOfMapLazy(utf8Reader(in));
-    }
-
     // @NotNull
     public Map<String, Object> readMap(InputStream in) {
         if (in == null)
@@ -296,8 +280,28 @@ public class JsonReader {
 
         requireNotNullKeyClass(keyClass);
         requireNotNullValueClass(valueClass);
-
         return readMap(utf8Reader(in), keyClass, valueClass);
+    }
+
+    // @NotNull
+    public AutoCloseableIterator<Object> readListLazy(InputStream in) {
+        return readListLazy(in, Object.class);
+    }
+
+    // @NotNull
+    public <V> AutoCloseableIterator<V> readListLazy(InputStream in, Class<V> valueClass) {
+        if (in == null)
+            return EmptyAutoCloseableIterator.getInstance();
+
+        requireNotNullValueClass(valueClass);
+        return readListLazy(utf8Reader(in), valueClass);
+    }
+
+    // @NotNull
+    public AutoCloseableIterator<Map<String, Object>> readListOfMapLazy(InputStream in) {
+        if (in == null)
+            return EmptyAutoCloseableIterator.getInstance();
+        return readListOfMapLazy(utf8Reader(in));
     }
 
     // ---------- read Reader ----------
@@ -346,24 +350,6 @@ public class JsonReader {
         return apply(reader, jsonEngine -> jsonEngine.readListOfMap(reader));
     }
 
-    public AutoCloseableIterator<Object> readListLazy(Reader reader) {
-        return readListLazy(reader, Object.class);
-    }
-
-    public <V> AutoCloseableIterator<V> readListLazy(Reader reader, Class<V> valueClass) {
-        if (reader == null)
-            return null;
-
-        requireNotNullValueClass(valueClass);
-        return apply(reader, jsonEngine -> jsonEngine.readListLazy(reader, valueClass));
-    }
-
-    public AutoCloseableIterator<Map<String, Object>> readListOfMapLazy(Reader reader) {
-        if (reader == null)
-            return null;
-        return apply(reader, jsonEngine -> jsonEngine.readListOfMapLazy(reader));
-    }
-
     // @NotNull
     public Map<String, Object> readMap(Reader reader) {
         if (reader == null)
@@ -385,8 +371,28 @@ public class JsonReader {
 
         requireNotNullKeyClass(keyClass);
         requireNotNullValueClass(valueClass);
-
         return apply(reader, jsonEngine -> jsonEngine.readMap(reader, keyClass, valueClass));
+    }
+
+    // @NotNull
+    public AutoCloseableIterator<Object> readListLazy(Reader reader) {
+        return readListLazy(reader, Object.class);
+    }
+
+    // @NotNull
+    public <V> AutoCloseableIterator<V> readListLazy(Reader reader, Class<V> valueClass) {
+        if (reader == null)
+            return EmptyAutoCloseableIterator.getInstance();
+
+        requireNotNullValueClass(valueClass);
+        return apply(reader, jsonEngine -> jsonEngine.readListLazy(reader, valueClass));
+    }
+
+    // @NotNull
+    public AutoCloseableIterator<Map<String, Object>> readListOfMapLazy(Reader reader) {
+        if (reader == null)
+            return EmptyAutoCloseableIterator.getInstance();
+        return apply(reader, jsonEngine -> jsonEngine.readListOfMapLazy(reader));
     }
 
     // ---------- convert ----------
