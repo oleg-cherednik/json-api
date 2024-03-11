@@ -1638,11 +1638,11 @@ class Data {
 
 #### Write json to `OutputStream`
 
-          zxcv
+      zxv
 
 #### Write json to `Writer`
 
-zxcv
+      zxv
 
 ##### Links
 
