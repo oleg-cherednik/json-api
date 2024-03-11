@@ -738,7 +738,7 @@ public class Book {
 </p>
 </details>
 
-##### `ByteBuffer` lazy reading
+##### Read json from `ByteBuffer` lazy
 
 <details><summary><code>ByteBuffer</code> to an <code>Iterator</code> of <code>Object</code> type with lazy reading</summary>
 <p>
