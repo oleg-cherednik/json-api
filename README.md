@@ -806,7 +806,387 @@ class Data {
 
 #### Read json from `InputStream`
 
-         zxcv
+<details><summary><code>ByteBuffer</code> to a custom object type (but not a collection)</summary>
+<p>
+
+```java
+import java.nio.ByteBuffer;
+
+class Data {
+
+    int intVal;
+    String strVal;
+
+    public static void demo() {
+        String json = """
+                 {
+                    "intVal" : 666,
+                    "strVal" : "omen"
+                 }
+                """;
+        ByteBuffer buf = ByteBuffer.wrap(json.getBytes(StandardCharsets.UTF_8));
+        Data data = Json.readValue(buf, Data.class);
+    }
+
+}
+```
+
+</p>
+</details>
+
+<details><summary><code>ByteBuffer</code> to a <code>List</code> of <code>Object</code> type</summary>
+<p>
+
+```java
+class Data {
+
+    public static void demo() {
+        String json = """
+                [
+                    {
+                        "intVal" : 555,
+                        "strVal" : "victory"
+                    },
+                    {
+                        "intVal" : 666,
+                        "strVal" : "omen"
+                    }
+                ]
+                """;
+        ByteBuffer buf = ByteBuffer.wrap(json.getBytes(StandardCharsets.UTF_8));
+        List<Object> res = Json.readList(buf);
+    }
+
+}
+
+```
+
+</p>
+</details>
+
+<details><summary><code>ByteBuffer</code> to a <code>Set</code> of <code>Object</code> type</summary>
+<p>
+
+```java
+class Data {
+
+    public static void demo() {
+        String json = """
+                [
+                    {
+                        "intVal" : 555,
+                        "strVal" : "victory"
+                    },
+                    {
+                        "intVal" : 666,
+                        "strVal" : "omen"
+                    }
+                ]
+                """;
+        ByteBuffer buf = ByteBuffer.wrap(json.getBytes(StandardCharsets.UTF_8));
+        Set<Object> res = Json.readSet(buf);
+    }
+
+}
+
+```
+
+</p>
+</details>
+
+<details><summary><code>ByteBuffer</code> to a <code>List</code> of custom object type</summary>
+<p>
+
+```java
+class Data {
+
+    int intVal;
+    String strVal;
+
+    public static void demo() {
+        String json = """
+                [
+                    {
+                        "intVal" : 555,
+                        "strVal" : "victory"
+                    },
+                    {
+                        "intVal" : 666,
+                        "strVal" : "omen"
+                    }
+                ]
+                """;
+        ByteBuffer buf = ByteBuffer.wrap(json.getBytes(StandardCharsets.UTF_8));
+        List<Data> res = Json.readList(buf, Data.class);
+    }
+
+}
+
+```
+
+</p>
+</details>
+
+<details><summary><code>ByteBuffer</code> to a <code>Set</code> of custom object type</summary>
+<p>
+
+```java
+class Data {
+
+    int intVal;
+    String strVal;
+
+    public static void demo() {
+        String json = """
+                [
+                    {
+                        "intVal" : 555,
+                        "strVal" : "victory"
+                    },
+                    {
+                        "intVal" : 666,
+                        "strVal" : "omen"
+                    }
+                ]
+                """;
+        ByteBuffer buf = ByteBuffer.wrap(json.getBytes(StandardCharsets.UTF_8));
+        Set<Data> res = Json.readSet(buf, Data.class);
+    }
+
+}
+
+```
+
+</p>
+</details>
+
+<details><summary><code>ByteBuffer</code> to a <code>List</code> of <code>Map</code></summary>
+<p>
+
+```java
+class Data {
+
+    int intVal;
+    String strVal;
+
+    public static void demo() {
+        String json = """
+                [
+                    {
+                        "intVal" : 555,
+                        "strVal" : "victory"
+                    },
+                    {
+                        "intVal" : 666,
+                        "strVal" : "omen"
+                    }
+                ]
+                """;
+        ByteBuffer buf = ByteBuffer.wrap(json.getBytes(StandardCharsets.UTF_8));
+        List<Map<String, Object>> res = Json.readListOfMap(buf);
+    }
+
+}
+
+```
+
+</p>
+</details>
+
+<details><summary><code>ByteBuffer</code> to a <code>Map</code> of <code>String</code> key and <code>Object</code> value type</summary>
+<p>
+
+```java
+public class Book {
+
+    private String title;
+    private ZonedDateTime date;
+    private int year;
+    private List<String> authors;
+
+    public static void demo() {
+        String json = """
+                {
+                    "one": {
+                        "title": "Thinking in Java",
+                        "date": "2017-07-23T13:57:14.225Z",
+                        "year": 1998,
+                        "authors": [
+                            "Bruce Eckel"
+                        ]
+                    },
+                    "two": {
+                        "title": "Ready for a victory",
+                        "date": "2020-07-23T13:57:14.225Z",
+                        "year": 2020,
+                        "authors": [
+                            "Oleg Cherednik"
+                        ]
+                    }
+                }
+                """;
+        ByteBuffer buf = ByteBuffer.wrap(json.getBytes(StandardCharsets.UTF_8));
+        Map<String, Object> res = Json.readMap(buf);
+    }
+
+}
+
+```
+
+</p>
+</details>
+
+<details><summary><code>ByteBuffer</code> to a <code>Map</code> of <code>String</code> key and custom value type</summary>
+<p>
+
+```java
+public class Book {
+
+    private String title;
+    private ZonedDateTime date;
+    private int year;
+    private List<String> authors;
+
+    public static void demo() {
+        String json = """
+                {
+                    "one": {
+                        "title": "Thinking in Java",
+                        "date": "2017-07-23T13:57:14.225Z",
+                        "year": 1998,
+                        "authors": [
+                            "Bruce Eckel"
+                        ]
+                    },
+                    "two": {
+                        "title": "Ready for a victory",
+                        "date": "2020-07-23T13:57:14.225Z",
+                        "year": 2020,
+                        "authors": [
+                            "Oleg Cherednik"
+                        ]
+                    }
+                }
+                """;
+        ByteBuffer buf = ByteBuffer.wrap(json.getBytes(StandardCharsets.UTF_8));
+        Map<String, Book> res = Json.readMap(buf, Book.class);
+    }
+
+}
+
+```
+
+</p>
+</details>
+
+<details><summary><code>ByteBuffer</code> to a <code>Map</code> of custom key and value type</summary>
+<p>
+
+```java
+public class Book {
+
+    private String title;
+    private ZonedDateTime date;
+    private int year;
+    private List<String> authors;
+
+    public static void demo() {
+        String json = """
+                {
+                    "1": {
+                        "title": "Thinking in Java",
+                        "date": "2017-07-23T13:57:14.225Z",
+                        "year": 1998,
+                        "authors": [
+                            "Bruce Eckel"
+                        ]
+                    },
+                    "2": {
+                        "title": "Ready for a victory",
+                        "date": "2020-07-23T13:57:14.225Z",
+                        "year": 2020,
+                        "authors": [
+                            "Oleg Cherednik"
+                        ]
+                    }
+                }
+                """;
+        ByteBuffer buf = ByteBuffer.wrap(json.getBytes(StandardCharsets.UTF_8));
+        Map<Integer, Book> res = Json.readMap(buf, Integer.class, Book.class);
+    }
+
+}
+
+```
+
+</p>
+</details>
+
+<details><summary><code>ByteBuffer</code> to an <code>Iterator</code> of <code>Object</code> type with lazy reading</summary>
+<p>
+
+```java
+class Data {
+
+    int intVal;
+    String strVal;
+
+    public static void demo() {
+        String json = """
+                [
+                    {
+                        "intVal" : 555,
+                        "strVal" : "victory"
+                    },
+                    {
+                        "intVal" : 666,
+                        "strVal" : "omen"
+                    }
+                ]
+                """;
+        ByteBuffer buf = ByteBuffer.wrap(json.getBytes(StandardCharsets.UTF_8));
+        Iterator<Object> it = Json.readListLazy(buf);
+    }
+
+}
+
+```
+
+</p>
+</details>
+
+<details><summary><code>ByteBuffer</code> to an <code>Iterator</code> of custom object type with lazy reading</summary>
+<p>
+
+```java
+class Data {
+
+    int intVal;
+    String strVal;
+
+    public static void demo() {
+        String json = """
+                [
+                    {
+                        "intVal" : 555,
+                        "strVal" : "victory"
+                    },
+                    {
+                        "intVal" : 666,
+                        "strVal" : "omen"
+                    }
+                ]
+                """;
+        ByteBuffer buf = ByteBuffer.wrap(json.getBytes(StandardCharsets.UTF_8));
+        Iterator<Data> it = Json.readListLazy(buf, Data.class);
+    }
+
+}
+
+```
+
+</p>
+</details>
 
 #### Read json from `Reader`
 
