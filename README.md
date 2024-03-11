@@ -10,13 +10,11 @@
 [![coverage](https://app.codacy.com/project/badge/Coverage/7645235119a749c79dd1bfb22b78dc34?branch=master)](https://app.codacy.com/gh/oleg-cherednik/json-api/coverage/dashboard?branch=master)
 
 <details><summary>develop</summary>
-<p>
 
 [![github-ci](https://github.com/oleg-cherednik/json-api/actions/workflows/github-ci.yml/badge.svg?branch=develop&event=push)](https://github.com/oleg-cherednik/json-api/actions)
 [![quality](https://app.codacy.com/project/badge/Grade/7645235119a749c79dd1bfb22b78dc34?branch=develop)](https://app.codacy.com/gh/oleg-cherednik/json-api/dashboard?branch=develop)
 [![coverage](https://app.codacy.com/project/badge/Coverage/7645235119a749c79dd1bfb22b78dc34?branch=develop)](https://app.codacy.com/gh/oleg-cherednik/json-api/coverage/dashboard?branch=develop)
 
-</p>
 </details>
 
 # JSON-API
@@ -397,7 +395,6 @@ public class Book {
 #### Read json from `ByteBuffer`
 
 <details><summary><code>ByteBuffer</code> to a custom object type (but not a collection)</summary>
-<p>
 
 ```java
 class Data {
@@ -419,11 +416,9 @@ class Data {
 }
 ```
 
-</p>
 </details>
 
 <details><summary><code>ByteBuffer</code> to a <code>List</code> of <code>Object</code> type</summary>
-<p>
 
 ```java
 class Data {
@@ -448,11 +443,9 @@ class Data {
 }
 ```
 
-</p>
 </details>
 
 <details><summary><code>ByteBuffer</code> to a <code>Set</code> of <code>Object</code> type</summary>
-<p>
 
 ```java
 class Data {
@@ -477,11 +470,9 @@ class Data {
 }
 ```
 
-</p>
 </details>
 
 <details><summary><code>ByteBuffer</code> to a <code>List</code> of custom object type</summary>
-<p>
 
 ```java
 class Data {
@@ -509,11 +500,9 @@ class Data {
 }
 ```
 
-</p>
 </details>
 
 <details><summary><code>ByteBuffer</code> to a <code>Set</code> of custom object type</summary>
-<p>
 
 ```java
 class Data {
@@ -541,11 +530,9 @@ class Data {
 }
 ```
 
-</p>
 </details>
 
 <details><summary><code>ByteBuffer</code> to a <code>List</code> of <code>Map</code></summary>
-<p>
 
 ```java
 class Data {
@@ -573,11 +560,9 @@ class Data {
 }
 ```
 
-</p>
 </details>
 
 <details><summary><code>ByteBuffer</code> to a <code>Map</code> of <code>String</code> key and <code>Object</code> value type</summary>
-<p>
 
 ```java
 public class Book {
@@ -615,11 +600,9 @@ public class Book {
 }
 ```
 
-</p>
 </details>
 
 <details><summary><code>ByteBuffer</code> to a <code>Map</code> of <code>String</code> key and custom value type</summary>
-<p>
 
 ```java
 public class Book {
@@ -657,11 +640,9 @@ public class Book {
 }
 ```
 
-</p>
 </details>
 
 <details><summary><code>ByteBuffer</code> to a <code>Map</code> of custom key and value type</summary>
-<p>
 
 ```java
 public class Book {
@@ -699,13 +680,11 @@ public class Book {
 }
 ```
 
-</p>
 </details>
 
 ##### Read json from `ByteBuffer` lazy
 
 <details><summary><code>ByteBuffer</code> to an <code>Iterator</code> of <code>Object</code> type with lazy reading</summary>
-<p>
 
 ```java
 class Data {
@@ -733,11 +712,9 @@ class Data {
 }
 ```
 
-</p>
 </details>
 
 <details><summary><code>ByteBuffer</code> to an <code>Iterator</code> of custom object type with lazy reading</summary>
-<p>
 
 ```java
 class Data {
@@ -765,11 +742,9 @@ class Data {
 }
 ```
 
-</p>
 </details>
 
 <details><summary><code>ByteBuffer</code> to an <code>Iterator</code> of <code>Map</code> with lazy reading</summary>
-<p>
 
 ```java
 class Data {
@@ -797,13 +772,11 @@ class Data {
 }
 ```
 
-</p>
 </details>
 
 #### Read json from `InputStream`
 
 <details><summary><code>InputStream</code> to a custom object type (but not a collection)</summary>
-<p>
 
 ```java
 class Data {
@@ -825,11 +798,9 @@ class Data {
 }
 ```
 
-</p>
 </details>
 
 <details><summary><code>InputStream</code> to a <code>List</code> of <code>Object</code> type</summary>
-<p>
 
 ```java
 class Data {
@@ -854,11 +825,9 @@ class Data {
 }
 ```
 
-</p>
 </details>
 
 <details><summary><code>InputStream</code> to a <code>Set</code> of <code>Object</code> type</summary>
-<p>
 
 ```java
 class Data {
@@ -883,11 +852,9 @@ class Data {
 }
 ```
 
-</p>
 </details>
 
 <details><summary><code>InputStream</code> to a <code>List</code> of custom object type</summary>
-<p>
 
 ```java
 class Data {
@@ -915,11 +882,9 @@ class Data {
 }
 ```
 
-</p>
 </details>
 
 <details><summary><code>InputStream</code> to a <code>Set</code> of custom object type</summary>
-<p>
 
 ```java
 class Data {
@@ -947,11 +912,9 @@ class Data {
 }
 ```
 
-</p>
 </details>
 
 <details><summary><code>InputStream</code> to a <code>List</code> of <code>Map</code></summary>
-<p>
 
 ```java
 class Data {
@@ -979,11 +942,9 @@ class Data {
 }
 ```
 
-</p>
 </details>
 
 <details><summary><code>InputStream</code> to a <code>Map</code> of <code>String</code> key and <code>Object</code> value type</summary>
-<p>
 
 ```java
 public class Book {
@@ -1021,11 +982,9 @@ public class Book {
 }
 ```
 
-</p>
 </details>
 
 <details><summary><code>InputStream</code> to a <code>Map</code> of <code>String</code> key and custom value type</summary>
-<p>
 
 ```java
 public class Book {
@@ -1063,11 +1022,9 @@ public class Book {
 }
 ```
 
-</p>
 </details>
 
 <details><summary><code>InputStream</code> to a <code>Map</code> of custom key and value type</summary>
-<p>
 
 ```java
 public class Book {
@@ -1105,13 +1062,11 @@ public class Book {
 }
 ```
 
-</p>
 </details>
 
 ##### Read json from `InputStream` lazy
 
 <details><summary><code>InputStream</code> to an <code>Iterator</code> of <code>Object</code> type with lazy reading</summary>
-<p>
 
 ```java
 class Data {
@@ -1139,12 +1094,10 @@ class Data {
 }
 ```
 
-</p>
 </details>
 
 
 <details><summary><code>InputStream</code> to an <code>Iterator</code> of custom object type with lazy reading</summary>
-<p>
 
 ```java
 class Data {
@@ -1172,11 +1125,9 @@ class Data {
 }
 ```
 
-</p>
 </details>
 
 <details><summary><code>InputStream</code> to an <code>Iterator</code> of <code>Map</code> with lazy reading</summary>
-<p>
 
 ```java
 class Data {
@@ -1204,13 +1155,11 @@ class Data {
 }
 ```
 
-</p>
 </details>
 
 #### Read json from `Reader`
 
 <details><summary><code>Reader</code> to a custom object type (but not a collection)</summary>
-<p>
 
 ```java
 class Data {
@@ -1232,11 +1181,9 @@ class Data {
 }
 ```
 
-</p>
 </details>
 
 <details><summary><code>Reader</code> to a <code>List</code> of <code>Object</code> type</summary>
-<p>
 
 ```java
 class Data {
@@ -1261,11 +1208,9 @@ class Data {
 }
 ```
 
-</p>
 </details>
 
 <details><summary><code>Reader</code> to a <code>Set</code> of <code>Object</code> type</summary>
-<p>
 
 ```java
 class Data {
@@ -1290,11 +1235,9 @@ class Data {
 }
 ```
 
-</p>
 </details>
 
 <details><summary><code>Reader</code> to a <code>List</code> of custom object type</summary>
-<p>
 
 ```java
 class Data {
@@ -1322,11 +1265,9 @@ class Data {
 }
 ```
 
-</p>
 </details>
 
 <details><summary><code>Reader</code> to a <code>Set</code> of custom object type</summary>
-<p>
 
 ```java
 class Data {
@@ -1354,11 +1295,9 @@ class Data {
 }
 ```
 
-</p>
 </details>
 
 <details><summary><code>Reader</code> to a <code>List</code> of <code>Map</code></summary>
-<p>
 
 ```java
 class Data {
@@ -1386,11 +1325,9 @@ class Data {
 }
 ```
 
-</p>
 </details>
 
 <details><summary><code>Reader</code> to a <code>Map</code> of <code>String</code> key and <code>Object</code> value type</summary>
-<p>
 
 ```java
 public class Book {
@@ -1428,11 +1365,9 @@ public class Book {
 }
 ```
 
-</p>
 </details>
 
 <details><summary><code>Reader</code> to a <code>Map</code> of <code>String</code> key and custom value type</summary>
-<p>
 
 ```java
 public class Book {
@@ -1470,11 +1405,9 @@ public class Book {
 }
 ```
 
-</p>
 </details>
 
 <details><summary><code>Reader</code> to a <code>Map</code> of custom key and value type</summary>
-<p>
 
 ```java
 public class Book {
@@ -1512,13 +1445,11 @@ public class Book {
 }
 ```
 
-</p>
 </details>
 
 ##### Read json from `Reader` lazy
 
 <details><summary><code>Reader</code> to an <code>Iterator</code> of <code>Object</code> type with lazy reading</summary>
-<p>
 
 ```java
 class Data {
@@ -1546,12 +1477,9 @@ class Data {
 }
 ```
 
-</p>
 </details>
 
-
 <details><summary><code>Reader</code> to an <code>Iterator</code> of custom object type with lazy reading</summary>
-<p>
 
 ```java
 class Data {
@@ -1579,11 +1507,9 @@ class Data {
 }
 ```
 
-</p>
 </details>
 
 <details><summary><code>Reader</code> to an <code>Iterator</code> of <code>Map</code> with lazy reading</summary>
-<p>
 
 ```java
 class Data {
@@ -1611,7 +1537,6 @@ class Data {
 }
 ```
 
-</p>
 </details>
 
 #### Write json to `String`
