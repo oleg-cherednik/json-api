@@ -20,14 +20,13 @@
         <exclude name="CommentDefaultAccessModifier"/>
         <exclude name="LinguisticNaming"/>
         <exclude name="PackageCase"/>
-        <exclue name="ShortMethodName"/>
+        <exclude name="ShortMethodName"/>
         <exclude name="UseUnderscoresInNumericLiterals"/>
         <exclude name="FieldNamingConventions"/>
         <exclude name="ConfusingTernary"/>
         <exclude name="UselessParentheses"/>
         <exclude name="PrematureDeclaration"/>
         <exclude name="LongVariable"/>
-
         <exclude name="IdenticalCatchBranches"/>
     </rule>
     <rule ref="category/java/codestyle.xml/ShortClassName">

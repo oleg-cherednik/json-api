@@ -12,7 +12,6 @@
         <exclude name="LawOfDemeter"/>
         <exclude name="DataClass"/>
         <exclude name="AvoidCatchingGenericException"/>
-
         <exclude name="AvoidThrowingRawExceptionTypes"/>
         <exclude name="TooManyFields"/>
         <exclude name="ExcessiveMethodLength"/>
