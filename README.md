@@ -804,6 +804,39 @@ class Data {
 </p>
 </details>
 
+<details><summary><code>ByteBuffer</code> to an <code>Iterator</code> of <code>Map</code> with lazy reading</summary>
+<p>
+
+```java
+class Data {
+
+    int intVal;
+    String strVal;
+
+    public static void demo() {
+        String json = """
+                [
+                    {
+                        "intVal" : 555,
+                        "strVal" : "victory"
+                    },
+                    {
+                        "intVal" : 666,
+                        "strVal" : "omen"
+                    }
+                ]
+                """;
+        ByteBuffer buf = ByteBuffer.wrap(json.getBytes(StandardCharsets.UTF_8));
+        Iterator<Map<String, Object>> it = Json.readListOfMapLazy(buf);
+    }
+
+}
+
+```
+
+</p>
+</details>
+
 #### Read json from `InputStream`
 
 <details><summary><code>InputStream</code> to a custom object type (but not a collection)</summary>
@@ -1154,6 +1187,7 @@ class Data {
 
 </p>
 </details>
+
 
 <details><summary><code>InputStream</code> to an <code>Iterator</code> of custom object type with lazy reading</summary>
 <p>
