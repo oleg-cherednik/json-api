@@ -1157,6 +1157,8 @@ public class Book {
 </p>
 </details>
 
+##### Read json from `InputStream` lazy
+
 <details><summary><code>InputStream</code> to an <code>Iterator</code> of <code>Object</code> type with lazy reading</summary>
 <p>
 
