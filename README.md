@@ -163,7 +163,6 @@ class Data {
     }
 
 }
-
 ```
 
 </p>
@@ -192,7 +191,6 @@ class Data {
     }
 
 }
-
 ```
 
 </p>
@@ -224,7 +222,6 @@ class Data {
     }
 
 }
-
 ```
 
 </p>
@@ -256,7 +253,6 @@ class Data {
     }
 
 }
-
 ```
 
 </p>
@@ -288,7 +284,6 @@ class Data {
     }
 
 }
-
 ```
 
 </p>
@@ -330,7 +325,6 @@ public class Book {
     }
 
 }
-
 ```
 
 </p>
@@ -372,7 +366,6 @@ public class Book {
     }
 
 }
-
 ```
 
 </p>
@@ -414,7 +407,6 @@ public class Book {
     }
 
 }
-
 ```
 
 </p>
@@ -426,8 +418,6 @@ public class Book {
 <p>
 
 ```java
-import java.nio.ByteBuffer;
-
 class Data {
 
     int intVal;
@@ -474,7 +464,6 @@ class Data {
     }
 
 }
-
 ```
 
 </p>
@@ -504,7 +493,6 @@ class Data {
     }
 
 }
-
 ```
 
 </p>
@@ -537,7 +525,6 @@ class Data {
     }
 
 }
-
 ```
 
 </p>
@@ -570,7 +557,6 @@ class Data {
     }
 
 }
-
 ```
 
 </p>
@@ -603,7 +589,6 @@ class Data {
     }
 
 }
-
 ```
 
 </p>
@@ -646,7 +631,6 @@ public class Book {
     }
 
 }
-
 ```
 
 </p>
@@ -689,7 +673,6 @@ public class Book {
     }
 
 }
-
 ```
 
 </p>
@@ -732,7 +715,6 @@ public class Book {
     }
 
 }
-
 ```
 
 </p>
@@ -767,7 +749,6 @@ class Data {
     }
 
 }
-
 ```
 
 </p>
@@ -800,7 +781,6 @@ class Data {
     }
 
 }
-
 ```
 
 </p>
@@ -833,7 +813,6 @@ class Data {
     }
 
 }
-
 ```
 
 </p>
@@ -845,8 +824,6 @@ class Data {
 <p>
 
 ```java
-import java.nio.ByteBuffer;
-
 class Data {
 
     int intVal;
@@ -893,7 +870,6 @@ class Data {
     }
 
 }
-
 ```
 
 </p>
@@ -923,7 +899,6 @@ class Data {
     }
 
 }
-
 ```
 
 </p>
@@ -956,7 +931,6 @@ class Data {
     }
 
 }
-
 ```
 
 </p>
@@ -989,7 +963,6 @@ class Data {
     }
 
 }
-
 ```
 
 </p>
@@ -1022,7 +995,6 @@ class Data {
     }
 
 }
-
 ```
 
 </p>
@@ -1065,7 +1037,6 @@ public class Book {
     }
 
 }
-
 ```
 
 </p>
@@ -1108,7 +1079,6 @@ public class Book {
     }
 
 }
-
 ```
 
 </p>
@@ -1151,7 +1121,6 @@ public class Book {
     }
 
 }
-
 ```
 
 </p>
@@ -1186,7 +1155,6 @@ class Data {
     }
 
 }
-
 ```
 
 </p>
@@ -1220,7 +1188,38 @@ class Data {
     }
 
 }
+```
 
+</p>
+</details>
+
+<details><summary><code>InputStream</code> to an <code>Iterator</code> of <code>Map</code> with lazy reading</summary>
+<p>
+
+```java
+class Data {
+
+    int intVal;
+    String strVal;
+
+    public static void demo() {
+        String json = """
+                [
+                    {
+                        "intVal" : 555,
+                        "strVal" : "victory"
+                    },
+                    {
+                        "intVal" : 666,
+                        "strVal" : "omen"
+                    }
+                ]
+                """;
+        InputStream in = new ByteArrayInputStream(json.getBytes());
+        Iterator<Map<String, Object>> it = Json.readListOfMapLazy(in);
+    }
+
+}
 ```
 
 </p>
