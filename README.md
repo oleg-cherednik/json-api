@@ -116,7 +116,6 @@ There are following classes to work with json using `json-api`:
 #### Read json from `String`
 
 <details><summary><code>String</code> to a custom object type (but not a collection)</summary>
-<p>
 
 ```java
 class Data {
@@ -137,11 +136,9 @@ class Data {
 }
 ```
 
-</p>
 </details>
 
 <details><summary><code>String</code> to a <code>List</code> of <code>Object</code> type</summary>
-<p>
 
 ```java
 class Data {
@@ -165,11 +162,9 @@ class Data {
 }
 ```
 
-</p>
 </details>
 
 <details><summary><code>String</code> to a <code>Set</code> of <code>Object</code> type</summary>
-<p>
 
 ```java
 class Data {
@@ -193,11 +188,9 @@ class Data {
 }
 ```
 
-</p>
 </details>
 
 <details><summary><code>String</code> to a <code>List</code> of custom object type</summary>
-<p>
 
 ```java
 class Data {
@@ -224,11 +217,9 @@ class Data {
 }
 ```
 
-</p>
 </details>
 
 <details><summary><code>String</code> to a <code>Set</code> of custom object type</summary>
-<p>
 
 ```java
 class Data {
@@ -255,11 +246,9 @@ class Data {
 }
 ```
 
-</p>
 </details>
 
 <details><summary><code>String</code> to a <code>List</code> of <code>Map</code></summary>
-<p>
 
 ```java
 class Data {
@@ -286,11 +275,9 @@ class Data {
 }
 ```
 
-</p>
 </details>
 
 <details><summary><code>String</code> to a <code>Map</code> of <code>String</code> key and <code>Object</code> value type</summary>
-<p>
 
 ```java
 public class Book {
@@ -327,11 +314,9 @@ public class Book {
 }
 ```
 
-</p>
 </details>
 
 <details><summary><code>String</code> to a <code>Map</code> of <code>String</code> key and custom value type</summary>
-<p>
 
 ```java
 public class Book {
@@ -368,11 +353,9 @@ public class Book {
 }
 ```
 
-</p>
 </details>
 
 <details><summary><code>String</code> to a <code>Map</code> of custom key and value type</summary>
-<p>
 
 ```java
 public class Book {
@@ -409,7 +392,6 @@ public class Book {
 }
 ```
 
-</p>
 </details>
 
 #### Read json from `ByteBuffer`
