@@ -1151,7 +1151,7 @@ class Data {
                 ]
                 """;
         InputStream in = new ByteArrayInputStream(json.getBytes());
-        Iterator<Object> it = Json.readListLazy(in);
+        AutoCloseableIterator<Object> it = Json.readListLazy(in);
     }
 
 }
@@ -1184,7 +1184,7 @@ class Data {
                 ]
                 """;
         InputStream in = new ByteArrayInputStream(json.getBytes());
-        Iterator<Data> it = Json.readListLazy(in, Data.class);
+        AutoCloseableIterator<Data> it = Json.readListLazy(in, Data.class);
     }
 
 }
@@ -1216,7 +1216,7 @@ class Data {
                 ]
                 """;
         InputStream in = new ByteArrayInputStream(json.getBytes());
-        Iterator<Map<String, Object>> it = Json.readListOfMapLazy(in);
+        AutoCloseableIterator<Map<String, Object>> it = Json.readListOfMapLazy(in);
     }
 
 }
@@ -1558,7 +1558,7 @@ class Data {
                 ]
                 """;
         Reader reader = new StringReader(json);
-        Iterator<Object> it = Json.readListLazy(reader);
+        AutoCloseableIterator<Object> it = Json.readListLazy(reader);
     }
 
 }
@@ -1591,7 +1591,7 @@ class Data {
                 ]
                 """;
         Reader reader = new StringReader(json);
-        Iterator<Data> it = Json.readListLazy(reader, Data.class);
+        AutoCloseableIterator<Data> it = Json.readListLazy(reader, Data.class);
     }
 
 }
@@ -1623,7 +1623,7 @@ class Data {
                 ]
                 """;
         Reader reader = new StringReader(json);
-        Iterator<Map<String, Object>> it = Json.readListOfMapLazy(reader);
+        AutoCloseableIterator<Map<String, Object>> it = Json.readListOfMapLazy(reader);
     }
 
 }
