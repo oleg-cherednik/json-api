@@ -1642,61 +1642,7 @@ class Data {
 
 #### Write json to `Writer`
 
-##### `String` to a list of custom object type
-
-```java
-class Data {
-
-    int intVal;
-    String strVal;
-
-}
-```
-
-```java
-String json="""
-              [
-                  {
-                      "intVal" : 555,
-                      "strVal" : "victory"
-                  },
-                  {
-                      "intVal" : 666,
-                      "strVal" : "omen"
-                  }
-              ]
-              """;
-        List<Data> res=Json.readList(json,Data.class);
-```
-
-##### `String` to a map of custom object type
-
-###### `String` to a map with `String` keys and given type as value
-
-```java
-class Data {
-
-    int intVal;
-    String strVal;
-
-}
-```
-
-```java
-String json="""
-              {
-                  "victory" : {
-                      "intVal" : 555,
-                      "strVal" : "victory"
-                  },
-                  "omen" : {
-                      "intVal" : 666,
-                      "strVal" : "omen"
-                  }
-              }
-              """;
-        Map<String, Data> map=Json.readMap(json,Data.class);
-```
+zxcv
 
 ##### Links
 
