@@ -35,6 +35,8 @@ import java.util.stream.Collectors;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class JsonEngineFactoryProvider {
 
+    private static final int ONE = 1;
+
     public static JsonEngineFactory findJsonEngineFactory() {
         try {
             requireExactlyOneJsonImpl();
@@ -48,11 +50,10 @@ public final class JsonEngineFactoryProvider {
         }
     }
 
-    @SuppressWarnings("PMD.AvoidLiteralsInIfCondition")
     private static void requireExactlyOneJsonImpl() {
         Set<String> files = findJsonEngineFactoryFiles();
 
-        if (files.size() == 1)
+        if (files.size() == ONE)
             return;
 
         log.error("[json-api]: Class path contains multiple {}", JsonEngineFactory.class.getSimpleName());
@@ -60,7 +61,7 @@ public final class JsonEngineFactoryProvider {
         for (String file : files)
             log.error("[json-api]: found {} in [{}]", JsonEngineFactory.class.getSimpleName(), file);
 
-        throw new JsonException("Class path contains multiple %s", JsonEngineFactory.class.getSimpleName());
+        throw new JsonException("Class path contains multiple '%s'", JsonEngineFactory.class.getSimpleName());
     }
 
     private static Class<? extends JsonEngineFactory> loadJsonEngineFactoryClass() throws ClassNotFoundException {
