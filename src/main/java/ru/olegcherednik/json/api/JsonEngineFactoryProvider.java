@@ -75,12 +75,7 @@ public final class JsonEngineFactoryProvider {
 
     private static void requireMainClassExist(Class<? extends JsonEngineFactory> cls) throws Exception {
         String mainClass = (String) cls.getMethod("getMainClass").invoke(null);
-        Pattern pattern = Pattern.compile("([\\p{L}_$][\\p{L}\\p{N}_$]*\\.)*[\\p{L}_$][\\p{L}\\p{N}_$]*");
-
-        if (!pattern.matcher(mainClass).matches())
-            throw new JsonException("'getMainClass()' should retrieve full qualified class name: %s", mainClass);
-
-        Class.forName(mainClass, false, JsonEngineFactory.class.getClassLoader());
+        JsonEngineFactory.class.getClassLoader().loadClass(mainClass);
     }
 
     private static Set<String> findJsonEngineFactoryFiles() {
