@@ -74,7 +74,7 @@ public final class JsonEngineFactoryProvider {
 
     private static void requireMainClassExist(Class<? extends JsonEngineFactory> cls) throws Exception {
         String mainClass = (String) cls.getMethod("getMainClass").invoke(null);
-        JsonEngineFactory.class.getClassLoader().loadClass(mainClass);
+        Thread.currentThread().getContextClassLoader().loadClass(mainClass);
     }
 
     private static Set<String> findJsonEngineFactoryFiles() {
