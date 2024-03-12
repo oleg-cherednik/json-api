@@ -25,6 +25,7 @@ import java.net.URL;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Set;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
@@ -60,8 +61,7 @@ public final class JsonEngineFactoryProvider {
         for (String file : files)
             log.error("[json-api]: found {} in [{}]", JsonEngineFactory.class.getSimpleName(), file);
 
-        throw new JsonException(String.format("Class path contains multiple %s",
-                                              JsonEngineFactory.class.getSimpleName()));
+        throw new JsonException("Class path contains multiple %s", JsonEngineFactory.class.getSimpleName());
     }
 
     private static Class<? extends JsonEngineFactory> loadJsonEngineFactoryClass() throws ClassNotFoundException {
@@ -75,6 +75,11 @@ public final class JsonEngineFactoryProvider {
 
     private static void requireMainClassExist(Class<? extends JsonEngineFactory> cls) throws Exception {
         String mainClass = (String) cls.getMethod("getMainClass").invoke(null);
+        Pattern pattern = Pattern.compile("([\\p{L}_$][\\p{L}\\p{N}_$]*\\.)*[\\p{L}_$][\\p{L}\\p{N}_$]*");
+
+        if (!pattern.matcher(mainClass).matches())
+            throw new JsonException("'getMainClass()' should retrieve full qualified class name: %s", mainClass);
+
         Class.forName(mainClass, false, JsonEngineFactory.class.getClassLoader());
     }
 
