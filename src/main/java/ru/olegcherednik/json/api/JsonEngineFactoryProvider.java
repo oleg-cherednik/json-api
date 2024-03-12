@@ -25,7 +25,6 @@ import java.net.URL;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Set;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
