@@ -1542,6 +1542,7 @@ class Data {
 #### Write json to `String`
 
       zxv
+==zxcv=
 
 #### Write json to `OutputStream`
 

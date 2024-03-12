@@ -38,7 +38,6 @@ public final class JsonEngineFactoryProvider {
     public static JsonEngineFactory findJsonEngineFactory() {
         try {
             requireExactlyOneJsonImpl();
-
             Class<? extends JsonEngineFactory> cls = loadJsonEngineFactoryClass();
             requireMainClassExist(cls);
             return getInstance(cls);
@@ -76,7 +75,7 @@ public final class JsonEngineFactoryProvider {
 
     private static void requireMainClassExist(Class<? extends JsonEngineFactory> cls) throws Exception {
         String mainClass = (String) cls.getMethod("getMainClass").invoke(null);
-        Class.forName(mainClass);
+        Class.forName(mainClass, false, JsonEngineFactory.class.getClassLoader());
     }
 
     private static Set<String> findJsonEngineFactoryFiles() {
