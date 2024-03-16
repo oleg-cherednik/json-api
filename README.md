@@ -114,6 +114,7 @@ There are following classes to work with json using `json-api`:
         *   [Read json from `InputStream` lazy](#read-json-from-inputstream-lazy) - read json from `InputStream` lazy;
     *   [Read json from `Reader`](#read-json-from-reader) - read json from `Reader`;
         *   [Read json from `Reader` lazy](#read-json-from-reader-lazy) - read json from `Reader` lazy;
+    *   [Write json](#write-json) - write json to `String`, `OutputStream` or `Writer`;
 *   [EnumId](#work-with-enum) - advanced enum serialization support.
 
 ### Json class
