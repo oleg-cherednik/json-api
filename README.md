@@ -107,6 +107,7 @@ implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.16.1'
 There are following classes to work with json using `json-api`:
 
 *   [Json](#json-class) - utility class with set of methods to use json transformation;
+    *   [Read json from String](#read-json-from-string) - read json from `String`;
 *   [EnumId](#work-with-enum) - advanced enum serialization support.
 
 ### Json class
