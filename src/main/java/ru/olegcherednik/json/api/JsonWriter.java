@@ -23,6 +23,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.function.Supplier;
 
 /**
@@ -37,9 +38,9 @@ public class JsonWriter {
     protected final Supplier<JsonEngine> supplier;
 
     public <V> String writeValue(V obj) {
-        if (obj == null)
-            return null;
-        return apply(jsonEngine -> jsonEngine.writeValue(obj));
+        return Optional.ofNullable(obj)
+                       .map(o -> apply(jsonEngine -> jsonEngine.writeValue(o)))
+                       .orElse(null);
     }
 
     public <V> void writeValue(V obj, OutputStream out) {

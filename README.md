@@ -1539,18 +1539,67 @@ class Data {
 
 </details>
 
-#### Write json to `String`
+#### Write json
 
-      zxv
-==zxcv=
+<details><summary>Write to <code>String</code></summary>
 
-#### Write json to `OutputStream`
+```java
+class Data {
 
-      zxv
+    int intVal;
+    String strVal;
 
-#### Write json to `Writer`
+    public static void demo() {
+        Data data = new Data(666, "omen");
+        String json = Json.writeValue(data);
+    }
 
-      zxv
+}
+```
+
+</details>
+
+<details><summary>Write to <code>OutputStream</code></summary>
+
+```java
+class Data {
+
+    int intVal;
+    String strVal;
+
+    public static void demo() {
+        Data data = new Data(666, "omen");
+
+        try (OutputStream out = new ByteArrayOutputStream()) {
+            Json.writeValue(data, out);
+        }
+    }
+
+}
+```
+
+</details>
+
+<details><summary>Write to <code>Writer</code></summary>
+
+```java
+class Data {
+
+    int intVal;
+    String strVal;
+
+    public static void demo() {
+        Data data = new Data(666, "omen");
+
+        try (Writer out = new StringWriter()) {
+            Json.writeValue(data, out);
+        }
+    }
+
+}
+```
+
+</details>
 
 ##### Links
 
