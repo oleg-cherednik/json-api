@@ -24,6 +24,7 @@ import java.io.OutputStream;
 import java.io.Reader;
 import java.io.Writer;
 import java.nio.ByteBuffer;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -43,25 +44,64 @@ public final class Json {
 
     // ---------- read String ----------
 
+    /**
+     * Transform given {@code json} string into an object represented by {@code valueClass}.
+     *
+     * @param json       source json string
+     * @param valueClass class object of the required result value
+     * @param <V>        type of the result value
+     * @return Either instance of {@code valueClass} with data from the given {@code json} string, or {@literal null}
+     * in case of given {@code json} is blank
+     * @throws JsonException        in case of given {@code valueClass} is {@link Collection} or {@link Map}
+     * @throws NullPointerException in case of given {@code valueClass} is {@literal null}
+     */
     public static <V> V readValue(String json, Class<V> valueClass) {
         return reader().readValue(json, valueClass);
     }
 
+    /**
+     * Transform given {@code json} string into a {@link List} of {@link Object}.
+     *
+     * @param json source json string
+     * @return not {@literal null} {@link List} of {@link Object} elements
+     */
     // @NotNull
     public static List<Object> readList(String json) {
         return reader().readList(json);
     }
 
+    /**
+     * Transform give {@code json} string into a {@link List} of an objects represented by {@code valueClass}.
+     *
+     * @param json       source json string
+     * @param valueClass class object of the required result value
+     * @param <V>        type of tАhe list's element of result value
+     * @return not {@literal  null} {@link List} of {@code valueClass} elements
+     */
     // @NotNull
     public static <V> List<V> readList(String json, Class<V> valueClass) {
         return reader().readList(json, valueClass);
     }
 
+    /**
+     * Transform given {@code json} string into a {@link Set} of {@link Object}.
+     *
+     * @param json source json string
+     * @return not {@literal null} {@link Set} of {@link Object} elements
+     */
     // @NotNull
     public static Set<Object> readSet(String json) {
         return reader().readSet(json);
     }
 
+    /**
+     * Transform give {@code json} string into a {@link Set} of an objects represented by {@code valueClass}.
+     *
+     * @param json       source json string
+     * @param valueClass class object of the required result value
+     * @param <V>        type of tАhe list's element of result value
+     * @return not {@literal  null} {@link Set} of {@code valueClass} elements
+     */
     // @NotNull
     public static <V> Set<V> readSet(String json, Class<V> valueClass) {
         return reader().readSet(json, valueClass);
