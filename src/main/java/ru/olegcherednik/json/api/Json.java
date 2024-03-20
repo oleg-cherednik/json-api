@@ -107,21 +107,48 @@ public final class Json {
         return reader().readSet(json, valueClass);
     }
 
+    /**
+     * Transform given {@code json} string into a {@link List} of {@link Map} with {@link String} key and
+     * {@link Object} value.
+     *
+     * @param json source json string
+     * @return not {@literal null} {@link List} of {@link Map}
+     */
     // @NotNull
     public static List<Map<String, Object>> readListOfMap(String json) {
         return reader().readListOfMap(json);
     }
 
+    /**
+     * Transform given {@code json} string into a {@link Map} with {@link String} key and {@link Object} value.
+     *
+     * @param json source json string
+     * @return not {@literal null} {@link Map} of {@link String} key and {@link Object} values
+     */
     // @NotNull
     public static Map<String, Object> readMap(String json) {
         return reader().readMap(json);
     }
 
+    /**
+     * Transform given {@code json} string into a {@link Map} with {@link String} key and a value represented by
+     * {@code valueClass}.
+     *
+     * @param json source json string
+     * @return not {@literal null} {@link Map} of {@link String} key and {@code valueClass} value
+     */
     // @NotNull
     public static <V> Map<String, V> readMap(String json, Class<V> valueClass) {
         return reader().readMap(json, valueClass);
     }
 
+    /**
+     * Transform given {@code json} string into a {@link Map} with a key represented by {@code keyClass} and
+     * a value represented by {@code valueClass}.
+     *
+     * @param json source json string
+     * @return not {@literal null} {@link Map} of {@link String} key and {@code valueClass} values
+     */
     // @NotNull
     public static <K, V> Map<K, V> readMap(String json, Class<K> keyClass, Class<V> valueClass) {
         return reader().readMap(json, keyClass, valueClass);
