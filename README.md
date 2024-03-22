@@ -1611,8 +1611,8 @@ class Data {
 
 ##### Links
 
-*   Home page: https://github.com/oleg-cherednik/jackson-utils
+*   Home page: https://github.com/oleg-cherednik/json-api
 
 *   Maven:
-    *   __central:__ https://mvnrepository.com/artifact/ru.oleg-cherednik.jackson/jackson-utils
-    *   __download:__ https://repo1.maven.org/maven2/ru/oleg-cherednik/jackson/jackson-utils
+    *   __central:__ https://mvnrepository.com/artifact/ru.oleg-cherednik.json/json-api
+    *   __download:__ https://repo1.maven.org/maven2/ru/oleg-cherednik/json/json-api
