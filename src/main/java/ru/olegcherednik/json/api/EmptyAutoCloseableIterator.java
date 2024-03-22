@@ -59,6 +59,6 @@ public final class EmptyAutoCloseableIterator<E> implements AutoCloseableIterato
 
     @Override
     public void close() throws Exception {
-        // 
+        // ignore
     }
 }

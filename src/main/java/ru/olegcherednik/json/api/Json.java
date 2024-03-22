@@ -644,14 +644,40 @@ public final class Json {
     // ***   write   ***
     // *****************
 
+    /**
+     * Convert given {@code obj} to the json string.
+     *
+     * @param obj any single {@link Object}, including {@link Collection} and {@link Map} that should be converted to
+     *            json string
+     * @param <V> type of the obj
+     * @return {@link String} json sting or {@literal null} in case of given {@code obj} is {@literal null}
+     */
     public static <V> String writeValue(V obj) {
         return writer().writeValue(obj);
     }
 
+    /**
+     * Convert given {@code obj} to the json string and write it to the given {@link OutputStream}. Nothing will be
+     * sent to the {@code out} in case of {@code obj} is {@literal null}. After all, given {@link OutputStream} will
+     * not be closed (the client should do it explicitly).
+     *
+     * @param obj any single {@link Object}, including {@link Collection} and {@link Map}
+     * @param out destination {@literal OutputStream}; will not be closed after all
+     * @param <V> type of the obj
+     */
     public static <V> void writeValue(V obj, OutputStream out) {
         writer().writeValue(obj, out);
     }
 
+    /**
+     * Convert given {@code obj} to the json string and write it to the given {@link Writer}. Nothing will be
+     * sent to the {@code writer} in case of {@code obj} is {@literal null}. After all, given {@link Writer} will
+     * not be closed (the client should do it explicitly).
+     *
+     * @param obj    any single {@link Object}, including {@link Collection} and {@link Map}
+     * @param writer destination {@literal Writer}; will not be closed after all
+     * @param <V>    type of the obj
+     */
     public static <V> void writeValue(V obj, Writer writer) {
         writer().writeValue(obj, writer);
     }
@@ -660,14 +686,36 @@ public final class Json {
     // ***   print   ***
     // *****************
 
+    /**
+     * Retrieves default {@link JsonReader} instance (instance with current default settings), that is used by all
+     * {@link Json} class.
+     *
+     * @return not {@literal null} default instance of {@link JsonReader}
+     */
+    // @NotNull
     public static JsonReader reader() {
         return JSON_READER;
     }
 
+    /**
+     * Retrieves default {@link JsonWriter} instance (instance with current default settings), that is used by all
+     * {@link Json} class.
+     *
+     * @return not {@literal null} default instance of {@link JsonWriter}
+     */
+    // @NotNull
     public static JsonWriter writer() {
         return JSON_WRITER;
     }
 
+    /**
+     * Retrieves default {@link JsonWriter} instance (instance with current default settings) with enabled
+     * <tt>pretty-print</tt> option. This is the only one difference between this {@link JsonWriter} and instance, that
+     * is retrieved by {@link Json#writer()}.
+     *
+     * @return not {@literal null} default instance of {@link JsonWriter} with enabled <tt>pretty-print</tt> option
+     */
+    // @NotNull
     public static JsonWriter prettyPrint() {
         return PRETTY_PRINT_JSON_WRITER;
     }

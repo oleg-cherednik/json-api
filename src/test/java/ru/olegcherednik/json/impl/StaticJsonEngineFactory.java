@@ -46,7 +46,7 @@ public final class StaticJsonEngineFactory implements JsonEngineFactory {
     }
 
     public static String getMainClass() {
-        return "com.google.gson.Gson";
+        return Gson.class.getName();
     }
 
     // ---------- JsonEngineFactory ----------
