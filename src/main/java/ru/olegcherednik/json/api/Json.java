@@ -42,7 +42,9 @@ public final class Json {
     private static final JsonWriter JSON_WRITER = new JsonWriter(JsonHelper::getJsonEngine);
     private static final JsonWriter PRETTY_PRINT_JSON_WRITER = new JsonWriter(JsonHelper::getPrettyPrintJsonEngine);
 
-    // ---------- read String ----------
+    // ***********************
+    // ***   read String   ***
+    // ***********************
 
     /**
      * Transform given {@code json} string into an elements represented by {@code valueClass}.
@@ -158,7 +160,9 @@ public final class Json {
         return reader().readMap(json, keyClass, valueClass);
     }
 
-    // ---------- read ByteBuffer ----------
+    // ***************************
+    // ***   read ByteBuffer   ***
+    // ***************************
 
     /**
      * Transform data from the given {@link ByteBuffer} into an elements represented by {@code valueClass}.
@@ -316,129 +320,329 @@ public final class Json {
         return reader().readListOfMapLazy(buf);
     }
 
-    // ---------- read InputStream ----------
+    // ****************************
+    // ***   read InputStream   ***
+    // ****************************
 
+    /**
+     * Transform data from the given {@link InputStream} into an elements represented by {@code valueClass}.
+     *
+     * @param in         source data
+     * @param valueClass class object of the required result value
+     * @param <V>        type of the result value
+     * @return Either instance of {@code valueClass} with data from the given {@link InputStream} or {@literal null}
+     * in case of given {@code buf} is {@literal null}
+     * @throws NullPointerException in case of given {@code valueClass} is {@literal null}
+     */
     public static <V> V readValue(InputStream in, Class<V> valueClass) {
         return reader().readValue(in, valueClass);
     }
 
+    /**
+     * Transform data from the given {@link InputStream} into a {@link List} of {@link Object} elements.
+     *
+     * @param in source data
+     * @return not {@literal null} {@link List} of {@link Object} elements
+     */
     // @NotNull
     public static List<Object> readList(InputStream in) {
         return reader().readList(in);
     }
 
+    /**
+     * Transform data from the given {@link InputStream} into a {@link List} of an elements represented by
+     * {@code valueClass}.
+     *
+     * @param in         source data
+     * @param valueClass class object of the required result value
+     * @param <V>        type of the list's element of result value
+     * @return not {@literal  null} {@link List} of {@code valueClass} elements
+     * @throws NullPointerException in case of given {@code valueClass} is {@literal null}
+     */
     // @NotNull
     public static <V> List<V> readList(InputStream in, Class<V> valueClass) {
         return reader().readList(in, valueClass);
     }
 
+    /**
+     * Transform data from the given {@link InputStream} into a {@link Set} of {@link Object} elements.
+     *
+     * @param in source data
+     * @return not {@literal null} {@link Set} of {@link Object} elements
+     */
     // @NotNull
     public static Set<Object> readSet(InputStream in) {
         return reader().readSet(in);
     }
 
+    /**
+     * Transform data from the given {@link InputStream} into a {@link Set} of an elements represented by
+     * {@code valueClass}.
+     *
+     * @param in         source data
+     * @param valueClass class object of the required result value
+     * @param <V>        type of the set's element of result value
+     * @return not {@literal  null} {@link Set} of {@code valueClass} elements
+     * @throws NullPointerException in case of given {@code valueClass} is {@literal null}
+     */
     // @NotNull
     public static <V> Set<V> readSet(InputStream in, Class<V> valueClass) {
         return reader().readSet(in, valueClass);
     }
 
+    /**
+     * Transform data from the given {@link InputStream} into a {@link List} of {@link Map} with {@link String} key and
+     * {@link Object} value.
+     *
+     * @param in source data
+     * @return not {@literal null} {@link List} of {@link Map}
+     */
     // @NotNull
     public static List<Map<String, Object>> readListOfMap(InputStream in) {
         return reader().readListOfMap(in);
     }
 
+    /**
+     * Transform data from the given {@link InputStream} into a {@link Map} with {@link String} key and {@link Object}
+     * value.
+     *
+     * @param in source data
+     * @return not {@literal null} {@link Map} of {@link String} key and {@link Object} values
+     */
     // @NotNull
     public static Map<String, Object> readMap(InputStream in) {
         return reader().readMap(in);
     }
 
+    /**
+     * Transform data from the given {@link InputStream} into a {@link Map} with {@link String} key and a value
+     * represented by {@code valueClass}.
+     *
+     * @param in source data
+     * @return not {@literal null} {@link Map} of {@link String} key and {@code valueClass} value
+     * @throws NullPointerException in case of given {@code valueClass} is {@literal null}
+     */
     // @NotNull
     public static <V> Map<String, V> readMap(InputStream in, Class<V> valueClass) {
         return reader().readMap(in, valueClass);
     }
 
+    /**
+     * Transform data from the given {@link InputStream} into a {@link Map} with a key represented by {@code keyClass}
+     * and a value represented by {@code valueClass}.
+     *
+     * @param in source data
+     * @return not {@literal null} {@link Map} of {@code keyClass} key and {@code valueClass} values
+     * @throws NullPointerException in case of given {@code keyClass} or {@code valueClass} is {@literal null}
+     */
     // @NotNull
     public static <K, V> Map<K, V> readMap(InputStream in, Class<K> keyClass, Class<V> valueClass) {
         return reader().readMap(in, keyClass, valueClass);
     }
 
+    /**
+     * Transform data from the given {@link InputStream} into a {@link Iterator} of {@link Object} elements with lazy
+     * reading. I.e. in case of large {@code buf}, next portion of data will be read only when {@link Iterator#next()}
+     * is invoked.
+     *
+     * @param in source data
+     * @return not {@literal null} {@link Iterator} of {@link Object} elements
+     */
     // @NotNull
     public static AutoCloseableIterator<Object> readListLazy(InputStream in) {
         return reader().readListLazy(in);
     }
 
+    /**
+     * Transform data from the given {@link InputStream} into a {@link Iterator} of an elements represented by
+     * {@code valueClass} elements with lazy reading. I.e. in case of large {@code buf}, next portion of data will be
+     * read only when {@link Iterator#next()} is invoked.
+     *
+     * @param in source data
+     * @return not {@literal null} {@link Iterator} of {@code valueClass} elements
+     * @throws NullPointerException in case of given {@code valueClass} is {@literal null}
+     */
     // @NotNull
     public static <V> AutoCloseableIterator<V> readListLazy(InputStream in, Class<V> valueClass) {
         return reader().readListLazy(in, valueClass);
     }
 
+    /**
+     * Transform data from the given {@link InputStream} into a {@link List} of {@link Map} with {@link String} key and
+     * {@link Object} value with lazy reading. I.e. in case of large {@code buf}, next portion of data will be read only
+     * when {@link Iterator#next()} is invoked.
+     *
+     * @param in source data
+     * @return not {@literal null} {@link Iterator} of {@link List} of {@link Map}
+     */
     // @NotNull
     public static AutoCloseableIterator<Map<String, Object>> readListOfMapLazy(InputStream in) {
         return reader().readListOfMapLazy(in);
     }
 
-    // ---------- read Reader ----------
+    // ***********************
+    // ***   read Reader   ***
+    // ***********************
 
+    /**
+     * Transform data from the given {@link Reader} into an elements represented by {@code valueClass}.
+     *
+     * @param reader     source data
+     * @param valueClass class object of the required result value
+     * @param <V>        type of the result value
+     * @return Either instance of {@code valueClass} with data from the given {@link Reader} or {@literal null}
+     * in case of given {@code buf} is {@literal null}
+     * @throws NullPointerException in case of given {@code valueClass} is {@literal null}
+     */
     public static <V> V readValue(Reader reader, Class<V> valueClass) {
         return reader().readValue(reader, valueClass);
     }
 
+    /**
+     * Transform data from the given {@link Reader} into a {@link List} of {@link Object} elements.
+     *
+     * @param reader source data
+     * @return not {@literal null} {@link List} of {@link Object} elements
+     */
     // @NotNull
     public static List<Object> readList(Reader reader) {
         return reader().readList(reader);
     }
 
+    /**
+     * Transform data from the given {@link Reader} into a {@link List} of an elements represented by
+     * {@code valueClass}.
+     *
+     * @param reader     source data
+     * @param valueClass class object of the required result value
+     * @param <V>        type of the list's element of result value
+     * @return not {@literal  null} {@link List} of {@code valueClass} elements
+     * @throws NullPointerException in case of given {@code valueClass} is {@literal null}
+     */
     // @NotNull
     public static <V> List<V> readList(Reader reader, Class<V> valueClass) {
         return reader().readList(reader, valueClass);
     }
 
+    /**
+     * Transform data from the given {@link Reader} into a {@link Set} of {@link Object} elements.
+     *
+     * @param reader source data
+     * @return not {@literal null} {@link Set} of {@link Object} elements
+     */
     // @NotNull
     public static Set<Object> readSet(Reader reader) {
         return reader().readSet(reader);
     }
 
+    /**
+     * Transform data from the given {@link Reader} into a {@link Set} of an elements represented by
+     * {@code valueClass}.
+     *
+     * @param reader     source data
+     * @param valueClass class object of the required result value
+     * @param <V>        type of the set's element of result value
+     * @return not {@literal  null} {@link Set} of {@code valueClass} elements
+     * @throws NullPointerException in case of given {@code valueClass} is {@literal null}
+     */
     // @NotNull
     public static <V> Set<V> readSet(Reader reader, Class<V> valueClass) {
         return reader().readSet(reader, valueClass);
     }
 
+    /**
+     * Transform data from the given {@link Reader} into a {@link List} of {@link Map} with {@link String} key and
+     * {@link Object} value.
+     *
+     * @param reader source data
+     * @return not {@literal null} {@link List} of {@link Map}
+     */
     // @NotNull
     public static List<Map<String, Object>> readListOfMap(Reader reader) {
         return reader().readListOfMap(reader);
     }
 
+    /**
+     * Transform data from the given {@link Reader} into a {@link Map} with {@link String} key and {@link Object}
+     * value.
+     *
+     * @param reader source data
+     * @return not {@literal null} {@link Map} of {@link String} key and {@link Object} values
+     */
     // @NotNull
     public static Map<String, Object> readMap(Reader reader) {
         return reader().readMap(reader);
     }
 
+    /**
+     * Transform data from the given {@link Reader} into a {@link Map} with {@link String} key and a value
+     * represented by {@code valueClass}.
+     *
+     * @param reader source data
+     * @return not {@literal null} {@link Map} of {@link String} key and {@code valueClass} value
+     * @throws NullPointerException in case of given {@code valueClass} is {@literal null}
+     */
     // @NotNull
     public static <V> Map<String, V> readMap(Reader reader, Class<V> valueClass) {
         return reader().readMap(reader, valueClass);
     }
 
+    /**
+     * Transform data from the given {@link Reader} into a {@link Map} with a key represented by {@code keyClass}
+     * and a value represented by {@code valueClass}.
+     *
+     * @param reader source data
+     * @return not {@literal null} {@link Map} of {@code keyClass} key and {@code valueClass} values
+     * @throws NullPointerException in case of given {@code keyClass} or {@code valueClass} is {@literal null}
+     */
     // @NotNull
     public static <K, V> Map<K, V> readMap(Reader reader, Class<K> keyClass, Class<V> valueClass) {
         return reader().readMap(reader, keyClass, valueClass);
     }
 
+    /**
+     * Transform data from the given {@link Reader} into a {@link Iterator} of {@link Object} elements with lazy
+     * reading. I.e. in case of large {@code buf}, next portion of data will be read only when {@link Iterator#next()}
+     * is invoked.
+     *
+     * @param reader source data
+     * @return not {@literal null} {@link Iterator} of {@link Object} elements
+     */
     // @NotNull
     public static AutoCloseableIterator<Object> readListLazy(Reader reader) {
         return reader().readListLazy(reader);
     }
 
+    /**
+     * Transform data from the given {@link Reader} into a {@link Iterator} of an elements represented by
+     * {@code valueClass} elements with lazy reading. I.e. in case of large {@code buf}, next portion of data will be
+     * read only when {@link Iterator#next()} is invoked.
+     *
+     * @param reader source data
+     * @return not {@literal null} {@link Iterator} of {@code valueClass} elements
+     * @throws NullPointerException in case of given {@code valueClass} is {@literal null}
+     */
     // @NotNull
     public static <V> AutoCloseableIterator<V> readListLazy(Reader reader, Class<V> valueClass) {
         return reader().readListLazy(reader, valueClass);
     }
 
+    /**
+     * Transform data from the given {@link Reader} into a {@link List} of {@link Map} with {@link String} key and
+     * {@link Object} value with lazy reading. I.e. in case of large {@code buf}, next portion of data will be read only
+     * when {@link Iterator#next()} is invoked.
+     *
+     * @param reader source data
+     * @return not {@literal null} {@link Iterator} of {@link List} of {@link Map}
+     */
     // @NotNull
     public static AutoCloseableIterator<Map<String, Object>> readListOfMapLazy(Reader reader) {
         return reader().readListOfMapLazy(reader);
     }
 
-    // ---------- write ----------
+    // *****************
+    // ***   write   ***
+    // *****************
 
     public static <V> String writeValue(V obj) {
         return writer().writeValue(obj);
@@ -452,7 +656,9 @@ public final class Json {
         writer().writeValue(obj, writer);
     }
 
-    // ---------- print ----------
+    // *****************
+    // ***   print   ***
+    // *****************
 
     public static JsonReader reader() {
         return JSON_READER;
@@ -466,7 +672,9 @@ public final class Json {
         return PRETTY_PRINT_JSON_WRITER;
     }
 
-    // ---------- decorators ----------
+    // **********************
+    // ***   decorators   ***
+    // **********************
 
     public static JsonReader createReader() {
         return createReader(null);
@@ -480,7 +688,9 @@ public final class Json {
         return new JsonWriter(JsonHelper::getPrettyPrintJsonEngine);
     }
 
-    // ---------- settings ----------
+    // ********************
+    // ***   settings   ***
+    // ********************
 
     public static JsonReader createReader(JsonSettings settings) {
         JsonEngine engine = JsonHelper.createJsonEngine(settings);
@@ -497,7 +707,9 @@ public final class Json {
         return new JsonWriter(() -> engine);
     }
 
-    // ---------- convert ----------
+    // *******************
+    // ***   convert   ***
+    // *******************
 
     public static <V> Map<String, Object> convertToMap(V obj) {
         return reader().convertToMap(obj);
