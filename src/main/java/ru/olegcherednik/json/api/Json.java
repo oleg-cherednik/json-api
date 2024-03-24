@@ -682,9 +682,9 @@ public final class Json {
         writer().writeValue(obj, writer);
     }
 
-    // *****************
-    // ***   print   ***
-    // *****************
+    // **********************************
+    // ***   get default decorators   ***
+    // **********************************
 
     /**
      * Retrieves default {@link JsonReader} instance (instance with current default settings), that is used by all
@@ -720,18 +720,44 @@ public final class Json {
         return PRETTY_PRINT_JSON_WRITER;
     }
 
-    // **********************
-    // ***   decorators   ***
-    // **********************
+    // *********************************************
+    // ***   create copy of default decorators   ***
+    // *********************************************
 
+    /**
+     * Creates and retrieves a new instance of the {@link JsonReader} with current default settings. I.e. the
+     * {@link JsonReader} from {@link Json#reader()} and this one are the two different instances of the identical
+     * objects.
+     *
+     * @return not {@literal null} a new instance of {@link JsonReader} with default settings
+     */
+    // @NotNull
     public static JsonReader createReader() {
         return createReader(null);
     }
 
+    /**
+     * Creates and retrieves a new instance of the {@link JsonWriter} with current default settings. I.e. the
+     * {@link JsonWriter} from {@link Json#writer()} and this one are the two different instances of the identical
+     * objects.
+     *
+     * @return not {@literal null} a new instance of {@link JsonWriter} with default settings
+     */
+    // @NotNull
     public static JsonWriter createWriter() {
         return createWriter(null);
     }
 
+    /**
+     * Creates and retrieves a new instance of the {@link JsonWriter} with current default settings and enabled
+     * <tt>pretty-print</tt> option. This is the only one difference between this {@link JsonWriter} and instance, that
+     * is retrieved by {@link Json#createWriter()}. I.e. the {@link JsonWriter} from {@link Json#prettyPrint()} and
+     * this one are the two different instances of the identical objects.
+     *
+     * @return not {@literal null} a new instance of {@link JsonWriter} with default settings and enabled
+     * <tt>pretty-print</tt> option
+     */
+    // @NotNull
     public static JsonWriter createPrettyPrint() {
         return new JsonWriter(JsonHelper::getPrettyPrintJsonEngine);
     }

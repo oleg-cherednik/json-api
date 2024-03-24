@@ -50,7 +50,9 @@ public class JsonReader {
 
     protected final Supplier<JsonEngine> supplier;
 
-    // ---------- read String----------
+    // ***********************
+    // ***   read String   ***
+    // ***********************
 
     public <V> V readValue(String json, Class<V> valueClass) {
         if (isBlank(json))
@@ -116,7 +118,9 @@ public class JsonReader {
         return apply(jsonEngine -> jsonEngine.readMap(json, keyClass, valueClass));
     }
 
-    // ---------- read ByteBuffer----------
+    // ***************************
+    // ***   read ByteBuffer   ***
+    // ***************************
 
     public <V> V readValue(ByteBuffer buf, Class<V> valueClass) {
         if (buf == null)
@@ -215,7 +219,9 @@ public class JsonReader {
         return readListOfMapLazy(utf8Reader(buf));
     }
 
-    // ---------- read InputStream ----------
+    // ****************************
+    // ***   read InputStream   ***
+    // ****************************
 
     public <V> V readValue(InputStream in, Class<V> valueClass) {
         if (in == null)
@@ -304,7 +310,9 @@ public class JsonReader {
         return readListOfMapLazy(utf8Reader(in));
     }
 
-    // ---------- read Reader ----------
+    // ***********************
+    // ***   read Reader   ***
+    // ***********************
 
     public <V> V readValue(Reader reader, Class<V> valueClass) {
         if (reader == null)

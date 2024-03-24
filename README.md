@@ -32,6 +32,13 @@
     with it (indeed, some specific feature of the concrete __json framework__
     will be ignored).
 
+*   __json engine__ is an abstraction of all __json framework__. The main
+    idea is to provide a unified API over all __json frameworks__. I.e. using
+    this unified API (i.e. __json engine__), the client is able to use some
+    specific logic of concrete __json framework__, and use common way to work
+    with it (indeed, some specific feature of the concrete __json framework__
+    will be ignored).
+
 *   __JSON-API__ is a wrapper over various __json engines__. It provides a
     simple way to do the most common actions of json manipulations. Moreover, it
     provides the way of single point configuration and exception handling.
@@ -72,8 +79,7 @@ E.g. you would like to use [jackson 2.16.1](https://github.com/FasterXML/jackson
 as a json framework in your application. In this case, you have several options:
 
 *   Add [jackson](https://github.com/FasterXML/jackson) dependencies directly;
-*   Or use [json-api](https://github.com/oleg-cherednik/json-api) with
-    [jackson-json-api](https://github.com/oleg-cherednik/json-jackson-impl)
+*   Or use [json-api](https://github.com/oleg-cherednik/json-api) with [jackson-json-api](https://github.com/oleg-cherednik/json-jackson-impl)
     implementation.
 
 If you choose 2nd option, you should add following dependencies.
@@ -115,6 +121,7 @@ There are following classes to work with json using `json-api`:
     *   [Read json from `Reader`](#read-json-from-reader) - read json from `Reader`;
         *   [Read json from `Reader` lazy](#read-json-from-reader-lazy) - read json from `Reader` lazy;
     *   [Write json](#write-json) - write json to `String`, `OutputStream` or `Writer`;
+    *   [Get default decorators](#get-default-decorators) - get current instances of `JsonReader` and `JsonWriter`;
 *   [EnumId](#work-with-enum) - advanced enum serialization support.
 
 ### Json class
@@ -1602,6 +1609,75 @@ class Data {
         try (Writer out = new StringWriter()) {
             Json.writeValue(data, out);
         }
+    }
+
+}
+```
+
+</details>
+
+#### Get default decorators`
+
+<details><summary>Get current default instance of <code>JsonReader</code></summary>
+
+```java
+class Data {
+
+    public static void demo() {
+        String json = """
+                 {
+                    "intVal" : 666,
+                    "strVal" : "omen"
+                 }
+                """;
+
+        // using static method
+        Data data1 = Json.readValue(json, Data.class);
+
+        // alternative: using JsonReader instance
+        JsonReader reader = Json.reader();
+        Data data2 = reader.readValue(json, Data.class);
+    }
+
+}
+```
+
+</details>
+
+<details><summary>Get current default instance of <code>JsonWriter</code></summary>
+
+```java
+class Data {
+
+    public static void demo() {
+        Data data = new Data(666, "omen");
+
+        // using static method
+        String json1 = Json.writeValue(data);
+
+        // alternative: using JsonWriter instance
+        JsonWriter writer = Json.writer();
+        String json2 = writer.writeValue(data);
+    }
+
+}
+```
+
+</details>
+
+<details><summary>Get current default instance of <code>JsonWriter</code> with enabled <code>pretty-print</code> option</summary>
+
+```java
+class Data {
+
+    public static void demo() {
+        Data data = new Data(666, "omen");
+
+        // there is no way for pretty-print using static method
+
+        // using JsonWriter instance with pretty-print option
+        JsonWriter writer = Json.prettyPrint();
+        String json = writer.writeValue(data);
     }
 
 }

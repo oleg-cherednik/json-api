@@ -38,12 +38,17 @@ public final class JsonHelper {
     private static JsonEngine prettyPrintJsonEngine = createPrettyPrintJsonEngine(JsonSettings.DEFAULT);
     private static JsonSettings defaultSettings = JsonSettings.DEFAULT;
 
+    /**
+     * Reset current settings to the initial values. I.e. no matter, what was changed in the
+     * {@link JsonHelper#defaultSettings}. Invoking this method will reset all settings to the
+     * {@link JsonSettings#DEFAULT}
+     */
     public static synchronized void reset() {
         setDefaultSettings(JsonSettings.DEFAULT);
     }
 
     public static synchronized void setDefaultSettings(JsonSettings settings) {
-        defaultSettings = settings;
+        defaultSettings = Optional.ofNullable(settings).orElse(JsonSettings.DEFAULT);
         jsonEngine = JSON_ENGINE_FACTORY.createJsonEngine(defaultSettings);
         prettyPrintJsonEngine = JSON_ENGINE_FACTORY.createPrettyPrintJsonEngine(defaultSettings);
     }
