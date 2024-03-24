@@ -32,16 +32,14 @@
     with it (indeed, some specific feature of the concrete __json framework__
     will be ignored).
 
-*   __json engine__ is an abstraction of all __json framework__. The main
-    idea is to provide a unified API over all __json frameworks__. I.e. using
-    this unified API (i.e. __json engine__), the client is able to use some
-    specific logic of concrete __json framework__, and use common way to work
-    with it (indeed, some specific feature of the concrete __json framework__
-    will be ignored).
+*   __json decorator__ is a decorator over __json engine__. There are __read__
+    and __write__ decorators that contain the complete set of not static methods
+    for json manipulation. You can use default __decorators__ or create custom
+    once with required settings.
 
-*   __JSON-API__ is a wrapper over various __json engines__. It provides a
-    simple way to do the most common actions of json manipulations. Moreover, it
-    provides the way of single point configuration and exception handling.
+*   __JSON-API__ is an abstraction over various __json decorators__. It provides
+    a simple way to do the most common actions of json manipulations. Moreover,
+    it provides the way of single point configuration and exception handling.
 
 ## Features
 
