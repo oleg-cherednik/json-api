@@ -733,7 +733,7 @@ public final class Json {
      */
     // @NotNull
     public static JsonReader createReader() {
-        return createReader(null);
+        return createReader(JsonSettings.DEFAULT);
     }
 
     /**
@@ -745,7 +745,7 @@ public final class Json {
      */
     // @NotNull
     public static JsonWriter createWriter() {
-        return createWriter(null);
+        return createWriter(JsonSettings.DEFAULT);
     }
 
     /**
@@ -762,20 +762,44 @@ public final class Json {
         return new JsonWriter(JsonHelper::getPrettyPrintJsonEngine);
     }
 
-    // ********************
-    // ***   settings   ***
-    // ********************
+    // ************************************
+    // ***   create custom decorators   ***
+    // ************************************
 
+    /**
+     * Creates and retrieves a new instance of the {@link JsonReader} with given settings.
+     *
+     * @param settings not {@literal null} instance of {@link JsonSettings}
+     * @return not {@literal null} a new instance of {@link JsonReader} with default settings
+     */
+    // @NotNull
     public static JsonReader createReader(JsonSettings settings) {
         JsonEngine engine = JsonHelper.createJsonEngine(settings);
         return new JsonReader(() -> engine);
     }
 
+    /**
+     * Creates and retrieves a new instance of the {@link JsonWriter} with given settings.
+     *
+     * @param settings not {@literal null} instance of {@link JsonSettings}
+     * @return not {@literal null} a new instance of {@link JsonWriter} with default settings
+     */
+    // @NotNull
     public static JsonWriter createWriter(JsonSettings settings) {
         JsonEngine engine = JsonHelper.createJsonEngine(settings);
         return new JsonWriter(() -> engine);
     }
 
+    /**
+     * Creates and retrieves a new instance of the {@link JsonWriter} with given settings and enabled
+     * <tt>pretty-print</tt> option. This is the only one difference between this {@link JsonWriter} and instance, that
+     * is retrieved by {@link Json#createWriter(JsonSettings)}..
+     *
+     * @param settings not {@literal null} instance of {@link JsonSettings}
+     * @return not {@literal null} a new instance of {@link JsonWriter} with default settings and enabled
+     * <tt>pretty-print</tt> option
+     */
+    // @NotNull
     public static JsonWriter createPrettyPrint(JsonSettings settings) {
         JsonEngine engine = JsonHelper.createPrettyPrintJsonEngine(settings);
         return new JsonWriter(() -> engine);
@@ -785,6 +809,7 @@ public final class Json {
     // ***   convert   ***
     // *******************
 
+    // @NotNull
     public static <V> Map<String, Object> convertToMap(V obj) {
         return reader().convertToMap(obj);
     }

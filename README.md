@@ -120,6 +120,10 @@ There are following classes to work with json using `json-api`:
         *   [Read json from `Reader` lazy](#read-json-from-reader-lazy) - read json from `Reader` lazy;
     *   [Write json](#write-json) - write json to `String`, `OutputStream` or `Writer`;
     *   [Get default decorators](#get-default-decorators) - get current instances of `JsonReader` and `JsonWriter`;
+    *   [Create copy of default decorators](#create-copy-of-default-decorators) - create a new
+        instance of `JsonReader` and `JsonWriter` with default setting;
+    *   [Create custom decorators](#create-custom-decorators) - create an instance of `JsonReader`
+        and `JsonWriter` with custom setting;
 *   [EnumId](#work-with-enum) - advanced enum serialization support.
 
 ### Json class
@@ -1614,7 +1618,7 @@ class Data {
 
 </details>
 
-#### Get default decorators`
+#### Get default decorators
 
 <details><summary>Get current default instance of <code>JsonReader</code></summary>
 
@@ -1675,6 +1679,147 @@ class Data {
 
         // using JsonWriter instance with pretty-print option
         JsonWriter writer = Json.prettyPrint();
+        String json = writer.writeValue(data);
+    }
+
+}
+```
+
+</details>
+
+#### Create copy of default decorators
+
+<details><summary>Create a new instance of <code>JsonReader</code> with default settings</summary>
+
+```java
+class Data {
+
+    public static void demo() {
+        String json = """
+                 {
+                    "intVal" : 666,
+                    "strVal" : "omen"
+                 }
+                """;
+
+        // using static method
+        Data data1 = Json.readValue(json, Data.class);
+
+        // alternative: using new JsonReader instance
+        JsonReader reader = Json.createReader();
+        Data data2 = reader.readValue(json, Data.class);
+    }
+
+}
+```
+
+</details>
+
+<details><summary>Create a new instance of <code>JsonWriter</code> with default settings</summary>
+
+```java
+class Data {
+
+    public static void demo() {
+        Data data = new Data(666, "omen");
+
+        // using static method
+        String json1 = Json.writeValue(data);
+
+        // alternative: using new JsonWriter instance
+        JsonWriter writer = Json.createWriter();
+        String json2 = writer.writeValue(data);
+    }
+
+}
+```
+
+</details>
+
+<details><summary>Create a new instance of <code>JsonWriter</code> with default settings and enabled
+<code>pretty-print</code> option</summary>
+
+```java
+class Data {
+
+    public static void demo() {
+        Data data = new Data(666, "omen");
+
+        // there is no way for pretty-print using static method
+
+        // using new JsonWriter instance with pretty-print option
+        JsonWriter writer = Json.createPrettyPrint();
+        String json = writer.writeValue(data);
+    }
+
+}
+```
+
+</details>
+
+#### Create custom decorators
+
+<details><summary>Create a new instance of <code>JsonReader</code> with custom settings</summary>
+
+```java
+class Data {
+
+    public static void demo() {
+        String json = """
+                 {
+                    "intVal" : 666,
+                    "strVal" : "omen"
+                 }
+                """;
+
+        // there is no way for pretty-print using static method
+
+        // using new JsonReader instance with custom settings
+        JsonSettings settings = new JsonSettings();
+        JsonReader reader = Json.createReader(settings);
+        Data data = reader.readValue(json, Data.class);
+    }
+
+}
+```
+
+</details>
+
+<details><summary>Create a new instance of <code>JsonWriter</code> with custom settings</summary>
+
+```java
+class Data {
+
+    public static void demo() {
+        Data data = new Data(666, "omen");
+
+        // there is no way for pretty-print using static method
+
+        // using new JsonWriter instance with custom settings
+        JsonSettings settings = new JsonSettings();
+        JsonWriter writer = Json.createWriter(settings);
+        String json = writer.writeValue(data);
+    }
+
+}
+```
+
+</details>
+
+<details><summary>Create a new instance of <code>JsonWriter</code> with custom settings and enabled
+<code>pretty-print</code> option</summary>
+
+```java
+class Data {
+
+    public static void demo() {
+        Data data = new Data(666, "omen");
+
+        // there is no way for pretty-print using static method
+
+        // using new JsonWriter instance with custom settings and pretty-print option
+        JsonSettings settings = new JsonSettings();
+        JsonWriter writer = Json.createPrettyPrint(settings);
         String json = writer.writeValue(data);
     }
 

@@ -54,11 +54,18 @@ public final class JsonHelper {
     }
 
     public static JsonEngine createJsonEngine(JsonSettings settings) {
-        return JSON_ENGINE_FACTORY.createJsonEngine(Optional.ofNullable(settings).orElse(defaultSettings));
+        requireNotNull(settings);
+        return JSON_ENGINE_FACTORY.createJsonEngine(settings);
     }
 
     public static JsonEngine createPrettyPrintJsonEngine(JsonSettings settings) {
-        return JSON_ENGINE_FACTORY.createPrettyPrintJsonEngine(Optional.ofNullable(settings).orElse(defaultSettings));
+        requireNotNull(settings);
+        return JSON_ENGINE_FACTORY.createPrettyPrintJsonEngine(settings);
+    }
+
+    private static void requireNotNull(JsonSettings settings) {
+        if (settings == null)
+            throw new JsonException("'settings' should not be a null");
     }
 
 }
