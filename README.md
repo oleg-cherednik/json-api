@@ -1849,38 +1849,6 @@ class Data {
 
 </details>
 
-### JsonHelper class
-
-<code>zip4jvm</code> contains actual settings, that is used when you invoke any
-static method from <code>Json</code>. In case you want to use another settings
-with you have several options. First one is to use [Create custom decorators](#create-custom-decorators)
-
-
-
-
-<details><summary>Reset current setting to <code>zip4jvm</code> default</summary>
-
-The default <code>zip4jvm</code> settings is <code>JsonSettings.DEFAULT</code>
-
-```java
-class Data {
-
-    public static void demo() {
-        Data data = new Data(666, "omen");
-
-        // there is no way for pretty-print using static method
-
-        // using new JsonWriter instance with custom settings
-        JsonSettings settings = new JsonSettings();
-        JsonWriter writer = Json.createWriter(settings);
-        String json = writer.writeValue(data);
-    }
-
-}
-```
-
-</details>
-
 ##### Links
 
 *   Home page: https://github.com/oleg-cherednik/json-api
