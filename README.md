@@ -123,7 +123,10 @@ There are following classes to work with json using `json-api`:
     *   [Create copy of default decorators](#create-copy-of-default-decorators) - create a new
         instance of `JsonReader` and `JsonWriter` with default setting;
     *   [Create custom decorators](#create-custom-decorators) - create an instance of `JsonReader`
-        and `JsonWriter` with custom setting;
+        and `JsonWriter` with custom setting.
+
+*   [JsonHelper](#jsonhelper-class) - utility class with set of methods to update actual settings;
+    *   [Reset actual settings to default](#read-json-from-string) - read json from `String`;
 *   [EnumId](#work-with-enum) - advanced enum serialization support.
 
 ### Json class
@@ -1809,7 +1812,7 @@ class Data {
 <details><summary>Create a new instance of <code>JsonWriter</code> with custom settings and enabled
 <code>pretty-print</code> option</summary>
 
-```java
+```java=
 class Data {
 
     public static void demo() {
@@ -1820,6 +1823,38 @@ class Data {
         // using new JsonWriter instance with custom settings and pretty-print option
         JsonSettings settings = new JsonSettings();
         JsonWriter writer = Json.createPrettyPrint(settings);
+        String json = writer.writeValue(data);
+    }
+
+}
+```
+
+</details>
+
+### JsonHelper class
+
+<code>zip4jvm</code> contains actual settings, that is used when you invoke any
+static method from <code>Json</code>. In case you want to use another settings
+with you have several options. First one is to use [Create custom decorators](#create-custom-decorators)
+
+
+
+
+<details><summary>Reset current setting to <code>zip4jvm</code> default</summary>
+
+The default <code>zip4jvm</code> settings is <code>JsonSettings.DEFAULT</code>
+
+```java
+class Data {
+
+    public static void demo() {
+        Data data = new Data(666, "omen");
+
+        // there is no way for pretty-print using static method
+
+        // using new JsonWriter instance with custom settings
+        JsonSettings settings = new JsonSettings();
+        JsonWriter writer = Json.createWriter(settings);
         String json = writer.writeValue(data);
     }
 

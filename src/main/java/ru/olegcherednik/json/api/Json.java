@@ -809,6 +809,14 @@ public final class Json {
     // ***   convert   ***
     // *******************
 
+    /**
+     * Converts given {@code obj} to the not {@literal null} {@link Map}. In case given {@code obj} is {@literal null},
+     * then empty map will be retrieved.
+     *
+     * @param obj any object that should be converted to the {@link Map}
+     * @param <V> type of the obj
+     * @return not {@literal null} instance of {@link Map}
+     */
     // @NotNull
     public static <V> Map<String, Object> convertToMap(V obj) {
         return reader().convertToMap(obj);

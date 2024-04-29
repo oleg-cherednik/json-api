@@ -35,9 +35,9 @@ import java.util.function.Function;
 public final class EnumIdSupport {
 
     public static final Class<? extends Annotation> JSON_CREATOR_CLASS = EnumIdJsonCreator.class;
+    private static final int SIZE_ONE = 1;
 
     // @NotNull
-    @SuppressWarnings("PMD.AvoidLiteralsInIfCondition")
     public static <T> Function<String, T> createFactory(Class<T> rawType) {
         List<Method> methods = getJsonCreatorMethods(rawType);
 
@@ -48,7 +48,7 @@ public final class EnumIdSupport {
             };
         }
 
-        if (methods.size() == 1)
+        if (methods.size() == SIZE_ONE)
             return createFunc(methods.get(0));
 
         Method method = getParseIdMethod(rawType);
@@ -113,7 +113,7 @@ public final class EnumIdSupport {
     private static boolean isValidFactoryMethod(Method method) {
         return Modifier.isStatic(method.getModifiers())
                 && method.isAnnotationPresent(JSON_CREATOR_CLASS)
-                && method.getParameterCount() == 1
+                && method.getParameterCount() == SIZE_ONE
                 && method.getParameterTypes()[0] == String.class;
     }
 }
