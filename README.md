@@ -124,6 +124,7 @@ There are following classes to work with json using `json-api`:
         instance of `JsonReader` and `JsonWriter` with default setting;
     *   [Create custom decorators](#create-custom-decorators) - create an instance of `JsonReader`
         and `JsonWriter` with custom setting.
+    *   [Convert object to Map](#convert-object-to-map) - create `Map` from any `Object`.
 
 *   [JsonHelper](#jsonhelper-class) - utility class with set of methods to update actual settings;
     *   [Reset actual settings to default](#read-json-from-string) - read json from `String`;
@@ -1824,6 +1825,23 @@ class Data {
         JsonSettings settings = new JsonSettings();
         JsonWriter writer = Json.createPrettyPrint(settings);
         String json = writer.writeValue(data);
+    }
+
+}
+```
+
+</details>
+
+#### Convert object to Map
+
+<details><summary>Convert any <code>Object</code> instance to <code>Map</code></summary>
+
+```java=
+class Data {
+
+    public static void demo() {
+        Data data = new Data(666, "omen");
+        Map<String, Object> map = Json.convertToMap(data);
     }
 
 }
