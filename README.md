@@ -124,7 +124,7 @@ There are following classes to work with json using `json-api`:
         instance of `JsonReader` and `JsonWriter` with default setting;
     *   [Create custom decorators](#create-custom-decorators) - create an instance of `JsonReader`
         and `JsonWriter` with custom setting.
-    *   [Convert object to Map](#convert-object-to-map) - create `Map` from any `Object`.
+    *   [Convert object](#convert-object) - convert given `Object` to another object.
 
 *   [JsonHelper](#jsonhelper-class) - utility class with set of methods to update actual settings;
     *   [Reset actual settings to default](#read-json-from-string) - read json from `String`;
@@ -1832,7 +1832,7 @@ class Data {
 
 </details>
 
-#### Convert object to Map
+#### Convert object
 
 <details><summary>Convert any <code>Object</code> instance to <code>Map</code></summary>
 
