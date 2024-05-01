@@ -69,7 +69,13 @@ _* additionally an engine implementation should be added_
 
 _* additionally an engine implementation should be added_
 
-## Usage
+[![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&pause=1000&random=false&width=435&lines=The+five+boxing+wizards+jump+quickly)](https://git.io/typing-svg)
+
+## Table of contest
+
+*   [Json](#json-class) - utility class with set of methods to use json transformation;
+*   [Json](#json-class) - utility class with set of methods to use json transformation;
+*   [Json](#json-class) - utility class with set of methods to use json transformation;
 
 ### Add dependency with required engine
 
