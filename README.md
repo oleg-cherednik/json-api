@@ -17,38 +17,20 @@
 
 </details>
 
+[![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&pause=1000&random=false&width=435&lines=One+json-api+to+rule+them+all)](https://git.io/typing-svg)
+
 # JSON-API
 
-*   __json framework__ is a framework for working with json files like
-    [jackson](https://github.com/FasterXML/jackson) or
-    [gson](https://github.com/google/gson). Usually we use __json framework__
-    in the application directly by adding dependencies required for it. In
-    general all these __json frameworks__ have its own API and style of coding.
 
-*   __json engine__ is an abstraction of all __json framework__. The main
-    idea is to provide a unified API over all __json frameworks__. I.e. using
-    this unified API (i.e. __json engine__), the client is able to use some
-    specific logic of concrete __json framework__, and use common way to work
-    with it (indeed, some specific feature of the concrete __json framework__
-    will be ignored).
 
-*   __json decorator__ is a decorator over __json engine__. There are __read__
-    and __write__ decorators that contain the complete set of not static methods
-    for json manipulation. You can use default __decorators__ or create custom
-    once with required settings.
-
-*   __JSON-API__ is an abstraction over various __json decorators__. It provides
-    a simple way to do the most common actions of json manipulations. Moreover,
-    it provides the way of single point configuration and exception handling.
-
-## Features
+# Features
 
 *   Single file API for all json actions;
 *   Give an easy way to provide custom engine implementation;
 *   It's free of any engine's specific code;
 *   It's fully open-source and does not depend on any limited licenses.
 
-## Gradle
+# Gradle
 
 ```groovy
 implementation 'ru.oleg-cherednik.json:json-api:3.0'
@@ -56,7 +38,7 @@ implementation 'ru.oleg-cherednik.json:json-api:3.0'
 
 _* additionally an engine implementation should be added_
 
-## Maven
+# Maven
 
 ```xml
 
@@ -69,13 +51,52 @@ _* additionally an engine implementation should be added_
 
 _* additionally an engine implementation should be added_
 
-[![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&pause=1000&random=false&width=435&lines=The+five+boxing+wizards+jump+quickly)](https://git.io/typing-svg)
+# Table of contest
 
-## Table of contest
+*   [Glossary](#glossary)
+*   [Features](#features)
+*   [Requirements](#requirements)
+*   [Usage](#usage)
+    *   [Json](#json-class) - utility class with set of methods to use json transformation;
+        *   [Read json from `String`](#read-json-from-string) - read json from `String`;
+        *   [Read json from `ByteBuffer`](#read-json-from-bytebuffer) - read json from `ByteBuffer`;
+            *   [Read json from `ByteBuffer` lazy](#read-json-from-bytebuffer-lazy) - read json from `ByteBuffer` lazy;
+        *   [Read json from `InputStream`](#read-json-from-inputstream) - read json from `InputStream`;
+            *   [Read json from `InputStream` lazy](#read-json-from-inputstream-lazy) - read json from `InputStream` lazy;
+        *   [Read json from `Reader`](#read-json-from-reader) - read json from `Reader`;
+            *   [Read json from `Reader` lazy](#read-json-from-reader-lazy) - read json from `Reader` lazy;
+        *   [Write json](#write-json) - write json to `String`, `OutputStream` or `Writer`;
+        *   [Get default decorators](#get-default-decorators) - get current instances of `JsonReader` and `JsonWriter`;
+        *   [Create copy of default decorators](#create-copy-of-default-decorators) - create a new
+            instance of `JsonReader` and `JsonWriter` with default setting;
+        *   [Create custom decorators](#create-custom-decorators) - create an instance of `JsonReader`
+            and `JsonWriter` with custom setting.
+        *   [Convert object](#convert-object) - convert given `Object` to another object.
+    *   [JsonHelper](#jsonhelper-class) - utility class with set of methods to update actual settings;
+    *   [EnumId](#work-with-enum) - advanced enum serialization support.
+*   [Links](#links)
 
-*   [Json](#json-class) - utility class with set of methods to use json transformation;
-*   [Json](#json-class) - utility class with set of methods to use json transformation;
-*   [Json](#json-class) - utility class with set of methods to use json transformation;
+---
+
+# Glossary
+
+*   `json framework` is a framework for working with json files like [jackson](https://github.com/FasterXML/jackson),
+    [gson](https://github.com/google/gson), [json-simple](https://github.com/fangyidong/json-simple) etc. Usually we use
+    `json framework` in the application directly by adding required dependencies. In general all these `json frameworks`
+    have its own API and style of coding.
+
+*   `json engine` is an abstraction above all `json framework`. The main  idea is to provide a unified API over all
+    `json frameworks`. I.e. using this unified API (i.e. `json engine`), the client is not able to use some specific
+    logic of concrete `json framework`, but the most common actions are available.
+
+*   `json decorator` is a decorator over `json engine`. There are `read` and `write` decorators that contain the
+    complete set of not static methods for json manipulation. You can use default `decorators` or create custom once
+    with required settings.
+
+*   `JSON-API` is an abstraction over various `json decorators`. It provides a simple way to do the most common actions
+    of json manipulations. Moreover, it provides the way of single point configuration and exception handling. Using
+    this `json-api` you are able to not depend on the specific `json framework` directly and use any of the via given
+   `json engine`.
 
 ### Add dependency with required engine
 
@@ -115,26 +136,6 @@ implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.16.1'
 ### Main classes
 
 There are following classes to work with json using `json-api`:
-
-*   [Json](#json-class) - utility class with set of methods to use json transformation;
-    *   [Read json from `String`](#read-json-from-string) - read json from `String`;
-    *   [Read json from `ByteBuffer`](#read-json-from-bytebuffer) - read json from `ByteBuffer`;
-        *   [Read json from `ByteBuffer` lazy](#read-json-from-bytebuffer-lazy) - read json from `ByteBuffer` lazy;
-    *   [Read json from `InputStream`](#read-json-from-inputstream) - read json from `InputStream`;
-        *   [Read json from `InputStream` lazy](#read-json-from-inputstream-lazy) - read json from `InputStream` lazy;
-    *   [Read json from `Reader`](#read-json-from-reader) - read json from `Reader`;
-        *   [Read json from `Reader` lazy](#read-json-from-reader-lazy) - read json from `Reader` lazy;
-    *   [Write json](#write-json) - write json to `String`, `OutputStream` or `Writer`;
-    *   [Get default decorators](#get-default-decorators) - get current instances of `JsonReader` and `JsonWriter`;
-    *   [Create copy of default decorators](#create-copy-of-default-decorators) - create a new
-        instance of `JsonReader` and `JsonWriter` with default setting;
-    *   [Create custom decorators](#create-custom-decorators) - create an instance of `JsonReader`
-        and `JsonWriter` with custom setting.
-    *   [Convert object](#convert-object) - convert given `Object` to another object.
-
-*   [JsonHelper](#jsonhelper-class) - utility class with set of methods to update actual settings;
-    *   [Reset actual settings to default](#read-json-from-string) - read json from `String`;
-*   [EnumId](#work-with-enum) - advanced enum serialization support.
 
 ### Json class
 
