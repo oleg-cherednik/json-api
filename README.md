@@ -19,42 +19,11 @@
 
 [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&pause=1000&random=false&width=435&lines=One+json-api+to+rule+them+all)](https://git.io/typing-svg)
 
-# JSON-API
-
-
-
-# Features
-
-*   Single file API for all json actions;
-*   Give an easy way to provide custom engine implementation;
-*   It's free of any engine's specific code;
-*   It's fully open-source and does not depend on any limited licenses.
-
-# Gradle
-
-```groovy
-implementation 'ru.oleg-cherednik.json:json-api:3.0'
-```
-
-_* additionally an engine implementation should be added_
-
-# Maven
-
-```xml
-
-<dependency>
-    <groupId>ru.oleg-cherednik.json</groupId>
-    <artifactId>json-api</artifactId>
-    <version>3.0</version>
-</dependency>
-```
-
-_* additionally an engine implementation should be added_
-
 # Table of contest
 
-*   [Glossary](#glossary)
+*   [Getting Started](#getting-started)
 *   [Features](#features)
+*   [Glossary](#glossary)
 *   [Requirements](#requirements)
 *   [Usage](#usage)
     *   [Json](#json-class) - utility class with set of methods to use json transformation;
@@ -74,68 +43,83 @@ _* additionally an engine implementation should be added_
         *   [Convert object](#convert-object) - convert given `Object` to another object.
     *   [JsonHelper](#jsonhelper-class) - utility class with set of methods to update actual settings;
     *   [EnumId](#work-with-enum) - advanced enum serialization support.
+*   [Custom `json-api` implementation](#custom-json-api-implementation)
 *   [Links](#links)
 
 ---
 
-# Glossary
+# Getting Started
 
-*   `json framework` is a framework for working with json files like [jackson](https://github.com/FasterXML/jackson),
-    [gson](https://github.com/google/gson), [json-simple](https://github.com/fangyidong/json-simple) etc. Usually we use
-    `json framework` in the application directly by adding required dependencies. In general all these `json frameworks`
-    have its own API and style of coding.
+E.g. you would like to use [jackson 2.16.1](https://github.com/FasterXML/jackson) as a **json framework** in your
+application. In this case, you have several options:
 
-*   `json engine` is an abstraction above all `json framework`. The main  idea is to provide a unified API over all
-    `json frameworks`. I.e. using this unified API (i.e. `json engine`), the client is not able to use some specific
-    logic of concrete `json framework`, but the most common actions are available.
+1.   Add [jackson](https://github.com/FasterXML/jackson) dependencies and use it directly;
+2.   Along with [jackson](https://github.com/FasterXML/jackson) dependencies add
+     [jackson-json-api](https://github.com/oleg-cherednik/json-jackson-impl) and use Jackson via  **json-api**.
 
-*   `json decorator` is a decorator over `json engine`. There are `read` and `write` decorators that contain the
-    complete set of not static methods for json manipulation. You can use default `decorators` or create custom once
-    with required settings.
+If you choose 2nd option, you should add **json-api implementation** for [jackson](https://github.com/FasterXML/jackson)
+(which is [json-jackson-impl](https://github.com/oleg-cherednik/json-jackson-impl)) along with existed jackson
+dependencies, because **json-api implementation** does not contain concrete version of the **json framework**. The
+version should be additionally specified. I.e. version of **json-api implementation** does not depend on the version of
+the **json framework**.
 
-*   `JSON-API` is an abstraction over various `json decorators`. It provides a simple way to do the most common actions
-    of json manipulations. Moreover, it provides the way of single point configuration and exception handling. Using
-    this `json-api` you are able to not depend on the specific `json framework` directly and use any of the via given
-   `json engine`.
-
-### Add dependency with required engine
-
-E.g. you would like to use [jackson 2.16.1](https://github.com/FasterXML/jackson)
-as a json framework in your application. In this case, you have several options:
-
-*   Add [jackson](https://github.com/FasterXML/jackson) dependencies directly;
-*   Or use [json-api](https://github.com/oleg-cherednik/json-api) with [jackson-json-api](https://github.com/oleg-cherednik/json-jackson-impl)
-    implementation.
-
-If you choose 2nd option, you should add following dependencies.
-
-#### Gradle
+### Gradle
 
 ```groovy
 implementation 'ru.oleg-cherednik.json:json-jackson-impl:3.0'
+implementation 'com.fasterxml.jackson.core:jackson-databind:2.16.0'
 ```
 
-__Note:__ `jackson-utils` does not contain dependency to the specific
-`Jackson Project` version, so you have to add any version additionally
+### Maven
 
-```groovy
-implementation 'com.fasterxml.jackson.core:jackson-databind:2.16.1'
+```xml
+<dependencies>
+    <dependency>
+        <groupId>ru.oleg-cherednik.json</groupId>
+        <artifactId>json-jackson-impl</artifactId>
+        <version>3.0</version>
+    </dependency>
+    <dependency>
+        <groupId>ru.oleg-cherednik.json</groupId>
+        <artifactId>json-jackson-impl</artifactId>
+        <version>3.0</version>
+    </dependency>
+</dependencies>
 ```
 
-In case you want to use additional features of the framework, e.g. work with
-jdk8 data-types, you have to add additional dependencies. `json-api` detects it
-and these features will be added to it's configuration as well.
+# Features
 
-```groovy
-implementation 'com.fasterxml.jackson.module:jackson-module-afterburner:2.16.1'
-implementation 'com.fasterxml.jackson.module:jackson-module-parameter-names:2.16.1'
-implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.16.1'
-implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.16.1'
-```
+*   Single file API for all json actions;
+*   Give an easy way to provide custom engine implementation;
+*   It's free of any engine's specific code;
+*   It's fully open-source and does not depend on any limited licenses.
 
-### Main classes
+# Glossary
 
-There are following classes to work with json using `json-api`:
+*   `json framework` is a framework for working with json files like [jackson](https://github.com/FasterXML/jackson),
+    [gson](https://github.com/google/gson), [json-simple](https://github.com/fangyidong/json-simple), etc. Usually we
+    use **json framework** in the application directly by adding required dependencies. In general all these
+    **json frameworks** have its own API and style of coding.
+*   `json engine` is an abstraction above all **json framework**. The main idea is to provide a unified API over all
+    **json frameworks**. I.e. using this unified API (i.e. **json engine**), the client is not able to use some specific
+    logic of concrete **json framework**, but the most common use-cases are available.
+*   `json decorator` is a decorator over **json engine**. There are **read** and **write** decorators that contain the
+    complete set of not static methods for json manipulation. You can use default **decorators** or create custom once
+    with required settings. The decorator is used to work with **json engine** with given settings.
+*   `JSON-API` is an abstraction over various **json decorators**. It provides a simple way to do the most common
+    use-cases of json manipulations. Moreover, it provides the way of single point configuration and exception handling.
+    Using this **json-api** you are able to not depend on the specific **json framework** directly and use any of them
+    via given **json engine**.
+*   `json-api-impl` is a concreted implementation of **json-api** for given **json framework**. E.g. an implementation
+    of **json-api** for [jackson](https://github.com/FasterXML/jackson) called
+    [json-jackson-impl](https://github.com/oleg-cherednik/json-jackson-impl) and contains instance of **json engine**
+    called `JacksonEngine`.
+
+# Requirements
+
+# Usage
+
+**json-api** provides set of classes to work with json. You should use only these classes for any json manipulations.
 
 ### Json class
 
