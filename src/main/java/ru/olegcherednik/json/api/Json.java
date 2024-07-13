@@ -53,7 +53,7 @@ public final class Json {
      * @param valueClass class object of the required result value
      * @param <V>        type of the result value
      * @return Either instance of {@code valueClass} with data from the given {@code json} string or {@literal null}
-     * in case of given {@code json} is blank
+     *         in case of given {@code json} is blank
      * @throws JsonException        in case of given {@code valueClass} is {@link Collection} or {@link Map}
      * @throws NullPointerException in case of given {@code valueClass} is {@literal null}
      */
@@ -171,7 +171,7 @@ public final class Json {
      * @param valueClass class object of the required result value
      * @param <V>        type of the result value
      * @return Either instance of {@code valueClass} with data from the given {@link ByteBuffer} or {@literal null}
-     * in case of given {@code buf} is {@literal null}
+     *         in case of given {@code buf} is {@literal null}
      * @throws NullPointerException in case of given {@code valueClass} is {@literal null}
      */
     public static <V> V readValue(ByteBuffer buf, Class<V> valueClass) {
@@ -331,7 +331,7 @@ public final class Json {
      * @param valueClass class object of the required result value
      * @param <V>        type of the result value
      * @return Either instance of {@code valueClass} with data from the given {@link InputStream} or {@literal null}
-     * in case of given {@code buf} is {@literal null}
+     *         in case of given {@code buf} is {@literal null}
      * @throws NullPointerException in case of given {@code valueClass} is {@literal null}
      */
     public static <V> V readValue(InputStream in, Class<V> valueClass) {
@@ -491,7 +491,7 @@ public final class Json {
      * @param valueClass class object of the required result value
      * @param <V>        type of the result value
      * @return Either instance of {@code valueClass} with data from the given {@link Reader} or {@literal null}
-     * in case of given {@code buf} is {@literal null}
+     *         in case of given {@code buf} is {@literal null}
      * @throws NullPointerException in case of given {@code valueClass} is {@literal null}
      */
     public static <V> V readValue(Reader reader, Class<V> valueClass) {
@@ -745,7 +745,8 @@ public final class Json {
      */
     // @NotNull
     public static JsonWriter createWriter() {
-        return createWriter(JsonSettings.DEFAULT);
+        JsonEngine engine = JsonHelper.createJsonEngine();
+        return new JsonWriter(() -> engine);
     }
 
     /**
@@ -755,7 +756,7 @@ public final class Json {
      * this one are the two different instances of the identical objects.
      *
      * @return not {@literal null} a new instance of {@link JsonWriter} with default settings and enabled
-     * <tt>pretty-print</tt> option
+     *         <tt>pretty-print</tt> option
      */
     // @NotNull
     public static JsonWriter createPrettyPrint() {
@@ -797,7 +798,7 @@ public final class Json {
      *
      * @param settings not {@literal null} instance of {@link JsonSettings}
      * @return not {@literal null} a new instance of {@link JsonWriter} with default settings and enabled
-     * <tt>pretty-print</tt> option
+     *         <tt>pretty-print</tt> option
      */
     // @NotNull
     public static JsonWriter createPrettyPrint(JsonSettings settings) {

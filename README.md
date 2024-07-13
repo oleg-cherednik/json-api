@@ -50,18 +50,17 @@
 
 # Getting Started
 
-E.g. you would like to use [jackson 2.16.1](https://github.com/FasterXML/jackson) as a **json framework** in your
-application. In this case, you have several options:
+Imagine you would like to use [jackson 2.16.1](https://github.com/FasterXML/jackson) as a **json framework** in your application. In this case, you have
+several options:
 
 1.   Add [jackson](https://github.com/FasterXML/jackson) dependencies and use it directly;
 2.   Along with [jackson](https://github.com/FasterXML/jackson) dependencies add
-     [jackson-json-api](https://github.com/oleg-cherednik/json-jackson-impl) and use Jackson via  **json-api**.
+     [jackson-json-api](https://github.com/oleg-cherednik/json-jackson-impl) and use Jackson via **json-api**.
 
-If you choose 2nd option, you should add **json-api implementation** for [jackson](https://github.com/FasterXML/jackson)
-(which is [json-jackson-impl](https://github.com/oleg-cherednik/json-jackson-impl)) along with existed jackson
-dependencies, because **json-api implementation** does not contain concrete version of the **json framework**. The
-version should be additionally specified. I.e. version of **json-api implementation** does not depend on the version of
-the **json framework**.
+If you choose 2<sup>nd</sup> option, you should add **json-api implementation** for [jackson](https://github.com/FasterXML/jackson)
+(which is [json-jackson-impl](https://github.com/oleg-cherednik/json-jackson-impl)) along with existed Jackson dependencies, because **json-api implementation** does not
+contain concrete version of the **json framework**. The version should be additionally specified. I.e. version of
+**json-api implementation** does not depend on the version of the **json framework**.
 
 ### Gradle
 
@@ -97,11 +96,11 @@ implementation 'com.fasterxml.jackson.core:jackson-databind:2.16.0'
 # Glossary
 
 *   `json framework` is a framework for working with json files like [jackson](https://github.com/FasterXML/jackson),
-    [gson](https://github.com/google/gson), [json-simple](https://github.com/fangyidong/json-simple), etc. Usually we
-    use **json framework** in the application directly by adding required dependencies. In general all these
+    [gson](https://github.com/google/gson), [json-simple](https://github.com/fangyidong/json-simple), etc. Usually, we
+    use **json framework** in the application directly by adding required dependencies. In general, all these
     **json frameworks** have its own API and style of coding.
 *   `json engine` is an abstraction above all **json framework**. The main idea is to provide a unified API over all
-    **json frameworks**. I.e. using this unified API (i.e. **json engine**), the client is not able to use some specific
+    **json frameworks**. I.e., using this unified API (**json engine**), the client is not able to use some specific
     logic of concrete **json framework**, but the most common use-cases are available.
 *   `json decorator` is a decorator over **json engine**. There are **read** and **write** decorators that contain the
     complete set of not static methods for json manipulation. You can use default **decorators** or create custom once
@@ -110,7 +109,7 @@ implementation 'com.fasterxml.jackson.core:jackson-databind:2.16.0'
     use-cases of json manipulations. Moreover, it provides the way of single point configuration and exception handling.
     Using this **json-api** you are able to not depend on the specific **json framework** directly and use any of them
     via given **json engine**.
-*   `json-api-impl` is a concreted implementation of **json-api** for given **json framework**. E.g. an implementation
+*   `json-api-impl` is a concreted implementation of **json-api** for given **json framework**. E.g., an implementation
     of **json-api** for [jackson](https://github.com/FasterXML/jackson) called
     [json-jackson-impl](https://github.com/oleg-cherednik/json-jackson-impl) and contains instance of **json engine**
     called `JacksonEngine`.
@@ -125,7 +124,7 @@ implementation 'com.fasterxml.jackson.core:jackson-databind:2.16.0'
 
 #### Read json from `String`
 
-<details><summary><code>String</code> to a custom object type (but not a collection)</summary>
+<details><summary><code>String</code> to a custom object type (except a collection)</summary>
 
 ```java
 class Data {
@@ -406,7 +405,7 @@ public class Book {
 
 #### Read json from `ByteBuffer`
 
-<details><summary><code>ByteBuffer</code> to a custom object type (but not a collection)</summary>
+<details><summary><code>ByteBuffer</code> to a custom object type (except a collection)</summary>
 
 ```java
 class Data {
@@ -788,7 +787,7 @@ class Data {
 
 #### Read json from `InputStream`
 
-<details><summary><code>InputStream</code> to a custom object type (but not a collection)</summary>
+<details><summary><code>InputStream</code> to a custom object type (except a collection)</summary>
 
 ```java
 class Data {
@@ -1171,7 +1170,7 @@ class Data {
 
 #### Read json from `Reader`
 
-<details><summary><code>Reader</code> to a custom object type (but not a collection)</summary>
+<details><summary><code>Reader</code> to a custom object type (except a collection)</summary>
 
 ```java
 class Data {

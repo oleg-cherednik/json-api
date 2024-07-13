@@ -53,6 +53,10 @@ public final class JsonHelper {
         prettyPrintJsonEngine = JSON_ENGINE_FACTORY.createPrettyPrintJsonEngine(defaultSettings);
     }
 
+    public static JsonEngine createJsonEngine() {
+        return createJsonEngine(defaultSettings);
+    }
+
     public static JsonEngine createJsonEngine(JsonSettings settings) {
         requireNotNull(settings);
         return JSON_ENGINE_FACTORY.createJsonEngine(settings);

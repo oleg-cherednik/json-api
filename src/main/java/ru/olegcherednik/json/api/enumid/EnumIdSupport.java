@@ -41,7 +41,7 @@ public final class EnumIdSupport {
     public static <T> Function<String, T> createFactory(Class<T> rawType) {
         List<Method> methods = getJsonCreatorMethods(rawType);
 
-        if (methods.size() > 1) {
+        if (methods.size() > SIZE_ONE) {
             return id -> {
                 throw new JsonException("Multiple methods with '%s' annotation was found in '%s' class",
                                         JSON_CREATOR_CLASS.getSimpleName(), rawType.getSimpleName());
