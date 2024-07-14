@@ -24,6 +24,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
  * @author Oleg Cherednik
@@ -36,7 +37,7 @@ public class JsonHelperTest {
 
     @AfterMethod
     public void cleanup() {
-        JsonHelper.setDefaultSettings(JsonSettings.builder().zoneId(LocalZoneId.ASIA_SINGAPORE).build());
+        JsonHelper.reset();
     }
 
     @SuppressWarnings("PMD.AvoidDuplicateLiterals")
@@ -63,6 +64,16 @@ public class JsonHelperTest {
         JsonHelper.reset();
         assertThat(Json.writeValue(data)).isEqualTo("[\"2017-07-23T13:57:14.225Z\"]");
         assertThat(Json.createWriter().writeValue(data)).isEqualTo("[\"2017-07-23T13:57:14.225Z\"]");
+    }
+
+    public void shouldThrowExceptionWhenSettingsNull() {
+        assertThatThrownBy(() -> JsonHelper.createJsonEngine(null))
+                .isExactlyInstanceOf(JsonException.class)
+                .hasMessage("'settings' should not be a null");
+
+        assertThatThrownBy(() -> JsonHelper.createPrettyPrintJsonEngine(null))
+                .isExactlyInstanceOf(JsonException.class)
+                .hasMessage("'settings' should not be a null");
     }
 
 }

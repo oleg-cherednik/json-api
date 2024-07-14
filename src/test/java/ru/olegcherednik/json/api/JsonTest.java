@@ -19,6 +19,7 @@ package ru.olegcherednik.json.api;
 import org.testng.annotations.Test;
 import ru.olegcherednik.json.api.data.Data;
 
+import java.time.ZonedDateTime;
 import java.util.Collections;
 import java.util.List;
 
@@ -31,6 +32,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Test
 @SuppressWarnings("NewClassNamingConvention")
 public class JsonTest {
+
+    private static final ZonedDateTime ZONED_DATE_TIME = ZonedDateTime.parse("2019-09-23T13:57:14.225Z");
 
     public void shouldCreateSeparateReaderWhenCreateReader() {
         JsonReader one = Json.createReader();
@@ -45,6 +48,18 @@ public class JsonTest {
 
         List<Data> data = Collections.singletonList(Data.TOM_CRUISE);
         assertThat(one.writeValue(data)).isEqualTo(two.writeValue(data));
+    }
+
+    public void shouldCreateSeparateWriterWithCustomSettingsWhenCreateWriter() {
+        JsonSettings settings = JsonSettings.builder().zoneId(LocalZoneId.ASIA_SINGAPORE).build();
+
+        JsonWriter one = Json.createWriter(settings);
+        JsonWriter two = Json.createWriter(settings);
+        assertThat(one).isNotSameAs(two);
+
+        List<ZonedDateTime> data = Collections.singletonList(ZONED_DATE_TIME);
+        assertThat(one.writeValue(data)).isEqualTo("[\"2019-09-23T21:57:14.225+08:00[Asia/Singapore]\"]");
+        assertThat(two.writeValue(data)).isEqualTo("[\"2019-09-23T21:57:14.225+08:00[Asia/Singapore]\"]");
     }
 
     public void shouldCreateSeparatePrettyPrintWriterWhenCreatePrettyPrint() {

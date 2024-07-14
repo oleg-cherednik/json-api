@@ -20,8 +20,6 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 import java.util.NoSuchElementException;
-import java.util.Objects;
-import java.util.function.Consumer;
 
 /**
  * @param <E> Type of the value object
@@ -50,11 +48,6 @@ public final class EmptyAutoCloseableIterator<E> implements AutoCloseableIterato
     @Override
     public void remove() {
         throw new IllegalStateException();
-    }
-
-    @Override
-    public void forEachRemaining(Consumer<? super E> action) {
-        Objects.requireNonNull(action);
     }
 
     @Override
