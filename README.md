@@ -21,31 +21,31 @@
 
 # Table of contest
 
-*   [Getting Started](#getting-started)
-*   [Features](#features)
-*   [Glossary](#glossary)
-*   [Requirements](#requirements)
-*   [Usage](#usage)
-    *   [Json](#json-class) - utility class with set of methods to use json transformation;
-        *   [Read json from `String`](#read-json-from-string) - read json from `String`;
-        *   [Read json from `ByteBuffer`](#read-json-from-bytebuffer) - read json from `ByteBuffer`;
-            *   [Read json from `ByteBuffer` lazy](#read-json-from-bytebuffer-lazy)
+* [Getting Started](#getting-started)
+* [Features](#features)
+* [Glossary](#glossary)
+* [Requirements](#requirements)
+* [Usage](#usage)
+    * [Json](#json-class) - utility class with set of methods to use json transformation;
+        * [Read json from `String`](#read-json-from-string) - read json from `String`;
+        * [Read json from `ByteBuffer`](#read-json-from-bytebuffer) - read json from `ByteBuffer`;
+            * [Read json from `ByteBuffer` lazy](#read-json-from-bytebuffer-lazy)
                 - read json from `ByteBuffer` lazy;
-        *   [Read json from `InputStream`](#read-json-from-inputstream) - read json from `InputStream`;
+        * [Read json from `InputStream`](#read-json-from-inputstream) - read json from `InputStream`;
             *   [Read json from `InputStream` lazy](#read-json-from-inputstream-lazy) - read json from `InputStream` lazy;
-        *   [Read json from `Reader`](#read-json-from-reader) - read json from `Reader`;
-            *   [Read json from `Reader` lazy](#read-json-from-reader-lazy) - read json from `Reader` lazy;
-        *   [Write json](#write-json) - write json to `String`, `OutputStream` or `Writer`;
-        *   [Get default decorators](#get-default-decorators) - get current instances of `JsonReader` and `JsonWriter`;
-        *   [Create copy of default decorators](#create-copy-of-default-decorators) - create a new
-            instance of `JsonReader` and `JsonWriter` with default setting;
-        *   [Create custom decorators](#create-custom-decorators) - create an instance of `JsonReader`
-            and `JsonWriter` with custom setting.
-        *   [Convert object](#convert-object) - convert given `Object` to another object.
-    *   [JsonHelper](#jsonhelper-class) - utility class with set of methods to update actual settings;
-    *   [EnumId](#work-with-enum) - advanced enum serialization support.
-*   [Custom `json-api` implementation](#custom-json-api-implementation)
-*   [Links](#links)
+        * [Read json from `Reader`](#read-json-from-reader) - read json from `Reader`;
+            * [Read json from `Reader` lazy](#read-json-from-reader-lazy) - read json from `Reader` lazy;
+        * [Write json](#write-json) - write json to `String`, `OutputStream` or `Writer`;
+        * [Get default decorators](#get-default-decorators) - get current instances of `JsonReader` and `JsonWriter`;
+        * [Create copy of default decorators](#create-copy-of-default-decorators) - create a new
+          instance of `JsonReader` and `JsonWriter` with default setting;
+        * [Create custom decorators](#create-custom-decorators) - create an instance of `JsonReader`
+          and `JsonWriter` with custom setting.
+        * [Convert object](#convert-object) - convert given `Object` to another object.
+    * [JsonHelper](#jsonhelper-class) - utility class with set of methods to update actual settings;
+    * [EnumId](#work-with-enum) - advanced enum serialization support.
+* [Custom `json-api` implementation](#custom-json-api-implementation)
+* [Links](#links)
 
 ---
 
