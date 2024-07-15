@@ -961,7 +961,8 @@ class Data {
 
 </details>
 
-<details><summary><code>InputStream</code> to a <code>Map</code> of <code>String</code> key and <code>Object</code> value type</summary>
+<details><summary><code>InputStream</code> to a <code>Map</code> of <code>String</code> key
+and <code>Object</code> value type</summary>
 
 ```java
 public class Book {
