@@ -31,7 +31,7 @@
     * [Read json from `ByteBuffer`](#read-json-from-bytebuffer) - read json from `ByteBuffer`;
       * [Read json from `ByteBuffer` lazy](#read-json-from-bytebuffer-lazy) - read json from `ByteBuffer` lazy;
     * [Read json from `InputStream`](#read-json-from-inputstream) - read json from `InputStream`;
-      *   [Read json from `InputStream` lazy](#read-json-from-inputstream-lazy) - read json from `InputStream` lazy;
+      * [Read json from `InputStream` lazy](#read-json-from-inputstream-lazy) - read json from `InputStream` lazy;
     * [Read json from `Reader`](#read-json-from-reader) - read json from `Reader`;
       * [Read json from `Reader` lazy](#read-json-from-reader-lazy) - read json from `Reader` lazy;
     * [Write json](#write-json) - write json to `String`, `OutputStream` or `Writer`;
@@ -41,9 +41,9 @@
     * [Create custom decorators](#create-custom-decorators) - create an instance of `JsonReader`
       and `JsonWriter` with custom setting.
     * [Convert object](#convert-object) - convert given `Object` to another object.
-    * [JsonHelper](#jsonhelper-class) - utility class with set of methods to
-      update actual settings;
-    * [EnumId](#work-with-enum) - advanced enum serialization support.
+  * [JsonHelper](#jsonhelper-class) - utility class with set of methods to
+    update actual settings;
+  * [EnumId](#work-with-enum) - advanced enum serialization support.
 * [Custom `json-api` implementation](#custom-json-api-implementation)
 * [Links](#links)
 
@@ -66,14 +66,14 @@ implementation** does not
 contain concrete version of the **json framework**. The version should be additionally specified. I.e. version of
 **json-api implementation** does not depend on the version of the **json framework**.
 
-### Gradle
+## Gradle
 
 ```groovy
 implementation 'ru.oleg-cherednik.json:json-jackson-impl:3.0'
 implementation 'com.fasterxml.jackson.core:jackson-databind:2.16.0'
 ```
 
-### Maven
+## Maven
 
 ```xml
 
@@ -125,9 +125,9 @@ implementation 'com.fasterxml.jackson.core:jackson-databind:2.16.0'
 
 **json-api** provides set of classes to work with json. You should use only these classes for any json manipulations.
 
-### Json class
+## Json class
 
-#### Read json from `String`
+### Read json from `String`
 
 <details><summary><code>String</code> to a custom object type (except a collection)</summary>
 
@@ -408,7 +408,7 @@ public class Book {
 
 </details>
 
-#### Read json from `ByteBuffer`
+### Read json from `ByteBuffer`
 
 <details><summary><code>ByteBuffer</code> to a custom object type (except a collection)</summary>
 
@@ -698,7 +698,7 @@ public class Book {
 
 </details>
 
-##### Read json from `ByteBuffer` lazy
+#### Read json from `ByteBuffer` lazy
 
 <details><summary><code>ByteBuffer</code> to an <code>Iterator</code> of <code>Object</code> type with lazy reading</summary>
 
@@ -790,7 +790,7 @@ class Data {
 
 </details>
 
-#### Read json from `InputStream`
+### Read json from `InputStream`
 
 <details><summary><code>InputStream</code> to a custom object type (except a collection)</summary>
 
@@ -1080,7 +1080,7 @@ public class Book {
 
 </details>
 
-##### Read json from `InputStream` lazy
+#### Read json from `InputStream` lazy
 
 <details><summary><code>InputStream</code> to an <code>Iterator</code> of <code>Object</code> type with lazy reading</summary>
 
@@ -1173,7 +1173,7 @@ class Data {
 
 </details>
 
-#### Read json from `Reader`
+### Read json from `Reader`
 
 <details><summary><code>Reader</code> to a custom object type (except a collection)</summary>
 
@@ -1463,7 +1463,7 @@ public class Book {
 
 </details>
 
-##### Read json from `Reader` lazy
+#### Read json from `Reader` lazy
 
 <details><summary><code>Reader</code> to an <code>Iterator</code> of <code>Object</code> type with lazy reading</summary>
 
@@ -1555,7 +1555,7 @@ class Data {
 
 </details>
 
-#### Write json
+### Write json
 
 <details><summary>Write to <code>String</code></summary>
 
@@ -1617,7 +1617,7 @@ class Data {
 
 </details>
 
-#### Get default decorators
+### Get default decorators
 
 <details><summary>Get current default instance of <code>JsonReader</code></summary>
 
@@ -1686,7 +1686,7 @@ class Data {
 
 </details>
 
-#### Create copy of default decorators
+### Create copy of default decorators
 
 <details><summary>Create a new instance of <code>JsonReader</code> with default settings</summary>
 
@@ -1756,7 +1756,7 @@ class Data {
 
 </details>
 
-#### Create custom decorators
+### Create custom decorators
 
 <details><summary>Create a new instance of <code>JsonReader</code> with custom settings</summary>
 
@@ -1808,26 +1808,26 @@ class Data {
 <details><summary>Create a new instance of <code>JsonWriter</code> with custom settings and enabled
 <code>pretty-print</code> option</summary>
 
-```java=
+```java
 class Data {
 
-    public static void demo() {
-        Data data = new Data(666, "omen");
+  public static void demo() {
+    Data data = new Data(666, "omen");
 
-        // there is no way for pretty-print using static method
+    // there is no way for pretty-print using static method
 
-        // using new JsonWriter instance with custom settings and pretty-print option
-        JsonSettings settings = new JsonSettings();
-        JsonWriter writer = Json.createPrettyPrint(settings);
-        String json = writer.writeValue(data);
-    }
+    // using new JsonWriter instance with custom settings and pretty-print option
+    JsonSettings settings = new JsonSettings();
+    JsonWriter writer = Json.createPrettyPrint(settings);
+    String json = writer.writeValue(data);
+  }
 
 }
 ```
 
 </details>
 
-#### Convert object
+### Convert object
 
 <details><summary>Convert any <code>Object</code> instance to <code>Map</code></summary>
 
