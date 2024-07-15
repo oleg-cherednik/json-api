@@ -29,8 +29,7 @@
     * [Json](#json-class) - utility class with set of methods to use json transformation;
         * [Read json from `String`](#read-json-from-string) - read json from `String`;
         * [Read json from `ByteBuffer`](#read-json-from-bytebuffer) - read json from `ByteBuffer`;
-            * [Read json from `ByteBuffer` lazy](#read-json-from-bytebuffer-lazy)
-                - read json from `ByteBuffer` lazy;
+            * [Read json from `ByteBuffer` lazy](#read-json-from-bytebuffer-lazy) - read json from `ByteBuffer` lazy;
         * [Read json from `InputStream`](#read-json-from-inputstream) - read json from `InputStream`;
             *   [Read json from `InputStream` lazy](#read-json-from-inputstream-lazy) - read json from `InputStream` lazy;
         * [Read json from `Reader`](#read-json-from-reader) - read json from `Reader`;
