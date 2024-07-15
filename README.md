@@ -578,7 +578,8 @@ class Data {
 
 </details>
 
-<details><summary><code>ByteBuffer</code> to a <code>Map</code> of <code>String</code> key and <code>Object</code> value type</summary>
+<details><summary><code>ByteBuffer</code> to a <code>Map</code> of <code>String</code> key and
+<code>Object</code> value type</summary>
 
 ```java
 public class Book {
@@ -1942,5 +1943,5 @@ or [json-gson-impl](https://github.com/oleg-cherednik/json-gson-impl).
 
 * Home page: https://github.com/oleg-cherednik/json-api
 * Maven:
-  * __central:__ https://mvnrepository.com/artifact/ru.oleg-cherednik.json/json-api
-  * __download:__ https://repo1.maven.org/maven2/ru/oleg-cherednik/json/json-api
+  * **central:** https://mvnrepository.com/artifact/ru.oleg-cherednik.json/json-api
+  * **download:** https://repo1.maven.org/maven2/ru/oleg-cherednik/json/json-api
