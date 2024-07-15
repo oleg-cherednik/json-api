@@ -1941,7 +1941,7 @@ or [json-gson-impl](https://github.com/oleg-cherednik/json-gson-impl).
 
 # Links
 
-* Home page: https://github.com/oleg-cherednik/json-api
+* Home page: <https://github.com/oleg-cherednik/json-api>
 * Maven:
-  * **central:** https://mvnrepository.com/artifact/ru.oleg-cherednik.json/json-api
-  * **download:** https://repo1.maven.org/maven2/ru/oleg-cherednik/json/json-api
+  * **central:** <https://mvnrepository.com/artifact/ru.oleg-cherednik.json/json-api>
+  * **download:** <https://repo1.maven.org/maven2/ru/oleg-cherednik/json/json-api>
