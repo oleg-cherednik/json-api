@@ -1866,13 +1866,13 @@ This class is responsible
 // TODO my recommendation to keep the package like this
 package ru.olegcherednik.json.impl;
 
-/**
+/*
  * The class is responsible to create two instances of `JsonEngine`:
  * normal and pretty print using given settings.
  */
 final class JacksonFactory {
 
-    /**
+    /*
      * Retrieves a new instance of `JsonEngine` based on the give settings.
      * The instance should be completely new (not cached).
      *
@@ -1882,7 +1882,7 @@ final class JacksonFactory {
     public static JacksonEngine createJsonEngine(JsonSettings settings) {
     }
 
-    /**
+    /*
      * Retrieves a new instance of `JsonEngine` with pretty print option based
      * on the given settings. The instance should be completely new (not cached).
      *
@@ -1909,22 +1909,26 @@ public final class StaticJsonEngineFactory implements JsonEngineFactory {
 
     private static final StaticJsonEngineFactory INSTANCE = new StaticJsonEngineFactory();
 
-    /**
+    /*
      * Mandatory method.
+     *
      * Retrieves a singleton instance of the factory. The method must have the
      * signature like this. Do not change it!
+     *
      * @return not `null` singleton instance of the factory
      */
     public static StaticJsonEngineFactory getInstance() {
         return INSTANCE;
     }
 
-    /**
+    /*
      * Mandatory method.
+     *
      * Retrieves a full name of the main class of the json framework. You should
      * not use class' declaration like ёObjectMapper.class.getName()`. You should
      * use only simple string instead. This is very important not to load the
      * class instance at this step.
+     *
      * @return not `null` string containing the full name of the main class of
      * the json framework
      */
