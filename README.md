@@ -26,21 +26,21 @@
 * [Glossary](#glossary)
 * [Requirements](#requirements)
 * [Usage](#usage)
-    * [Json](#json-class) - utility class with set of methods to use json transformation;
-        * [Read json from `String`](#read-json-from-string) - read json from `String`;
-        * [Read json from `ByteBuffer`](#read-json-from-bytebuffer) - read json from `ByteBuffer`;
-            * [Read json from `ByteBuffer` lazy](#read-json-from-bytebuffer-lazy) - read json from `ByteBuffer` lazy;
-        * [Read json from `InputStream`](#read-json-from-inputstream) - read json from `InputStream`;
-            *   [Read json from `InputStream` lazy](#read-json-from-inputstream-lazy) - read json from `InputStream` lazy;
-        * [Read json from `Reader`](#read-json-from-reader) - read json from `Reader`;
-            * [Read json from `Reader` lazy](#read-json-from-reader-lazy) - read json from `Reader` lazy;
-        * [Write json](#write-json) - write json to `String`, `OutputStream` or `Writer`;
-        * [Get default decorators](#get-default-decorators) - get current instances of `JsonReader` and `JsonWriter`;
-        * [Create copy of default decorators](#create-copy-of-default-decorators) - create a new
-          instance of `JsonReader` and `JsonWriter` with default setting;
-        * [Create custom decorators](#create-custom-decorators) - create an instance of `JsonReader`
-          and `JsonWriter` with custom setting.
-        * [Convert object](#convert-object) - convert given `Object` to another object.
+  * [Json](#json-class) - utility class with set of methods to use json transformation;
+    * [Read json from `String`](#read-json-from-string) - read json from `String`;
+    * [Read json from `ByteBuffer`](#read-json-from-bytebuffer) - read json from `ByteBuffer`;
+      * [Read json from `ByteBuffer` lazy](#read-json-from-bytebuffer-lazy) - read json from `ByteBuffer` lazy;
+    * [Read json from `InputStream`](#read-json-from-inputstream) - read json from `InputStream`;
+      *   [Read json from `InputStream` lazy](#read-json-from-inputstream-lazy) - read json from `InputStream` lazy;
+    * [Read json from `Reader`](#read-json-from-reader) - read json from `Reader`;
+      * [Read json from `Reader` lazy](#read-json-from-reader-lazy) - read json from `Reader` lazy;
+    * [Write json](#write-json) - write json to `String`, `OutputStream` or `Writer`;
+    * [Get default decorators](#get-default-decorators) - get current instances of `JsonReader` and `JsonWriter`;
+    * [Create copy of default decorators](#create-copy-of-default-decorators) - create a new
+      instance of `JsonReader` and `JsonWriter` with default setting;
+    * [Create custom decorators](#create-custom-decorators) - create an instance of `JsonReader`
+      and `JsonWriter` with custom setting.
+    * [Convert object](#convert-object) - convert given `Object` to another object.
     * [JsonHelper](#jsonhelper-class) - utility class with set of methods to
       update actual settings;
     * [EnumId](#work-with-enum) - advanced enum serialization support.
@@ -58,8 +58,10 @@ application. In this case, you have several options:
 2. Along with [jackson](https://github.com/FasterXML/jackson) dependencies add
    [jackson-json-api](https://github.com/oleg-cherednik/json-jackson-impl) and use Jackson via **json-api**.
 
-If you choose 2<sup>nd</sup> option, you should add **json-api implementation** for [jackson](https://github.com/FasterXML/jackson)
-(which is [json-jackson-impl](https://github.com/oleg-cherednik/json-jackson-impl)) along with existed Jackson dependencies, because **json-api
+If you choose 2<sup>nd</sup> option, you should add **json-api implementation**
+for [jackson](https://github.com/FasterXML/jackson)
+(which is [json-jackson-impl](https://github.com/oleg-cherednik/json-jackson-impl)) along with existed Jackson
+dependencies, because **json-api
 implementation** does not
 contain concrete version of the **json framework**. The version should be additionally specified. I.e. version of
 **json-api implementation** does not depend on the version of the **json framework**.
@@ -76,16 +78,16 @@ implementation 'com.fasterxml.jackson.core:jackson-databind:2.16.0'
 ```xml
 
 <dependencies>
-    <dependency>
-        <groupId>ru.oleg-cherednik.json</groupId>
-        <artifactId>json-jackson-impl</artifactId>
-        <version>3.0</version>
-    </dependency>
-    <dependency>
-        <groupId>ru.oleg-cherednik.json</groupId>
-        <artifactId>json-jackson-impl</artifactId>
-        <version>3.0</version>
-    </dependency>
+  <dependency>
+    <groupId>ru.oleg-cherednik.json</groupId>
+    <artifactId>json-jackson-impl</artifactId>
+    <version>3.0</version>
+  </dependency>
+  <dependency>
+    <groupId>ru.oleg-cherednik.json</groupId>
+    <artifactId>json-jackson-impl</artifactId>
+    <version>3.0</version>
+  </dependency>
 </dependencies>
 ```
 
@@ -132,18 +134,18 @@ implementation 'com.fasterxml.jackson.core:jackson-databind:2.16.0'
 ```java
 class Data {
 
-    int intVal;
-    String strVal;
+  int intVal;
+  String strVal;
 
-    public static void demo() {
-        String json = """
-                 {
-                    "intVal" : 666,
-                    "strVal" : "omen"
-                 }
-                """;
-        Data data = Json.readValue(json, Data.class);
-    }
+  public static void demo() {
+    String json = """
+         {
+            "intVal" : 666,
+            "strVal" : "omen"
+         }
+        """;
+    Data data = Json.readValue(json, Data.class);
+  }
 
 }
 ```
@@ -155,21 +157,21 @@ class Data {
 ```java
 class Data {
 
-    public static void demo() {
-        String json = """
-                [
-                    {
-                        "intVal" : 555,
-                        "strVal" : "victory"
-                    },
-                    {
-                        "intVal" : 666,
-                        "strVal" : "omen"
-                    }
-                ]
-                """;
-        List<Object> res = Json.readList(json);
-    }
+  public static void demo() {
+    String json = """
+        [
+            {
+                "intVal" : 555,
+                "strVal" : "victory"
+            },
+            {
+                "intVal" : 666,
+                "strVal" : "omen"
+            }
+        ]
+        """;
+    List<Object> res = Json.readList(json);
+  }
 
 }
 ```
@@ -181,21 +183,21 @@ class Data {
 ```java
 class Data {
 
-    public static void demo() {
-        String json = """
-                [
-                    {
-                        "intVal" : 555,
-                        "strVal" : "victory"
-                    },
-                    {
-                        "intVal" : 666,
-                        "strVal" : "omen"
-                    }
-                ]
-                """;
-        Set<Object> res = Json.readSet(json);
-    }
+  public static void demo() {
+    String json = """
+        [
+            {
+                "intVal" : 555,
+                "strVal" : "victory"
+            },
+            {
+                "intVal" : 666,
+                "strVal" : "omen"
+            }
+        ]
+        """;
+    Set<Object> res = Json.readSet(json);
+  }
 
 }
 ```
@@ -207,24 +209,24 @@ class Data {
 ```java
 class Data {
 
-    int intVal;
-    String strVal;
+  int intVal;
+  String strVal;
 
-    public static void demo() {
-        String json = """
-                [
-                    {
-                        "intVal" : 555,
-                        "strVal" : "victory"
-                    },
-                    {
-                        "intVal" : 666,
-                        "strVal" : "omen"
-                    }
-                ]
-                """;
-        List<Data> res = Json.readList(json, Data.class);
-    }
+  public static void demo() {
+    String json = """
+        [
+            {
+                "intVal" : 555,
+                "strVal" : "victory"
+            },
+            {
+                "intVal" : 666,
+                "strVal" : "omen"
+            }
+        ]
+        """;
+    List<Data> res = Json.readList(json, Data.class);
+  }
 
 }
 ```
@@ -236,24 +238,24 @@ class Data {
 ```java
 class Data {
 
-    int intVal;
-    String strVal;
+  int intVal;
+  String strVal;
 
-    public static void demo() {
-        String json = """
-                [
-                    {
-                        "intVal" : 555,
-                        "strVal" : "victory"
-                    },
-                    {
-                        "intVal" : 666,
-                        "strVal" : "omen"
-                    }
-                ]
-                """;
-        Set<Data> res = Json.readSet(json, Data.class);
-    }
+  public static void demo() {
+    String json = """
+        [
+            {
+                "intVal" : 555,
+                "strVal" : "victory"
+            },
+            {
+                "intVal" : 666,
+                "strVal" : "omen"
+            }
+        ]
+        """;
+    Set<Data> res = Json.readSet(json, Data.class);
+  }
 
 }
 ```
@@ -265,24 +267,24 @@ class Data {
 ```java
 class Data {
 
-    int intVal;
-    String strVal;
+  int intVal;
+  String strVal;
 
-    public static void demo() {
-        String json = """
-                [
-                    {
-                        "intVal" : 555,
-                        "strVal" : "victory"
-                    },
-                    {
-                        "intVal" : 666,
-                        "strVal" : "omen"
-                    }
-                ]
-                """;
-        List<Map<String, Object>> res = Json.readListOfMap(json);
-    }
+  public static void demo() {
+    String json = """
+        [
+            {
+                "intVal" : 555,
+                "strVal" : "victory"
+            },
+            {
+                "intVal" : 666,
+                "strVal" : "omen"
+            }
+        ]
+        """;
+    List<Map<String, Object>> res = Json.readListOfMap(json);
+  }
 
 }
 ```
@@ -294,34 +296,34 @@ class Data {
 ```java
 public class Book {
 
-    private String title;
-    private ZonedDateTime date;
-    private int year;
-    private List<String> authors;
+  private String title;
+  private ZonedDateTime date;
+  private int year;
+  private List<String> authors;
 
-    public static void demo() {
-        String json = """
-                {
-                    "one": {
-                        "title": "Thinking in Java",
-                        "date": "2017-07-23T13:57:14.225Z",
-                        "year": 1998,
-                        "authors": [
-                            "Bruce Eckel"
-                        ]
-                    },
-                    "two": {
-                        "title": "Ready for a victory",
-                        "date": "2020-07-23T13:57:14.225Z",
-                        "year": 2020,
-                        "authors": [
-                            "Oleg Cherednik"
-                        ]
-                    }
-                }
-                """;
-        Map<String, Object> res = Json.readMap(json);
-    }
+  public static void demo() {
+    String json = """
+        {
+            "one": {
+                "title": "Thinking in Java",
+                "date": "2017-07-23T13:57:14.225Z",
+                "year": 1998,
+                "authors": [
+                    "Bruce Eckel"
+                ]
+            },
+            "two": {
+                "title": "Ready for a victory",
+                "date": "2020-07-23T13:57:14.225Z",
+                "year": 2020,
+                "authors": [
+                    "Oleg Cherednik"
+                ]
+            }
+        }
+        """;
+    Map<String, Object> res = Json.readMap(json);
+  }
 
 }
 ```
@@ -333,34 +335,34 @@ public class Book {
 ```java
 public class Book {
 
-    private String title;
-    private ZonedDateTime date;
-    private int year;
-    private List<String> authors;
+  private String title;
+  private ZonedDateTime date;
+  private int year;
+  private List<String> authors;
 
-    public static void demo() {
-        String json = """
-                {
-                    "one": {
-                        "title": "Thinking in Java",
-                        "date": "2017-07-23T13:57:14.225Z",
-                        "year": 1998,
-                        "authors": [
-                            "Bruce Eckel"
-                        ]
-                    },
-                    "two": {
-                        "title": "Ready for a victory",
-                        "date": "2020-07-23T13:57:14.225Z",
-                        "year": 2020,
-                        "authors": [
-                            "Oleg Cherednik"
-                        ]
-                    }
-                }
-                """;
-        Map<String, Book> res = Json.readMap(json, Book.class);
-    }
+  public static void demo() {
+    String json = """
+        {
+            "one": {
+                "title": "Thinking in Java",
+                "date": "2017-07-23T13:57:14.225Z",
+                "year": 1998,
+                "authors": [
+                    "Bruce Eckel"
+                ]
+            },
+            "two": {
+                "title": "Ready for a victory",
+                "date": "2020-07-23T13:57:14.225Z",
+                "year": 2020,
+                "authors": [
+                    "Oleg Cherednik"
+                ]
+            }
+        }
+        """;
+    Map<String, Book> res = Json.readMap(json, Book.class);
+  }
 
 }
 ```
@@ -372,34 +374,34 @@ public class Book {
 ```java
 public class Book {
 
-    private String title;
-    private ZonedDateTime date;
-    private int year;
-    private List<String> authors;
+  private String title;
+  private ZonedDateTime date;
+  private int year;
+  private List<String> authors;
 
-    public static void demo() {
-        String json = """
-                {
-                    "1": {
-                        "title": "Thinking in Java",
-                        "date": "2017-07-23T13:57:14.225Z",
-                        "year": 1998,
-                        "authors": [
-                            "Bruce Eckel"
-                        ]
-                    },
-                    "2": {
-                        "title": "Ready for a victory",
-                        "date": "2020-07-23T13:57:14.225Z",
-                        "year": 2020,
-                        "authors": [
-                            "Oleg Cherednik"
-                        ]
-                    }
-                }
-                """;
-        Map<Integer, Book> res = Json.readMap(json, Integer.class, Book.class);
-    }
+  public static void demo() {
+    String json = """
+        {
+            "1": {
+                "title": "Thinking in Java",
+                "date": "2017-07-23T13:57:14.225Z",
+                "year": 1998,
+                "authors": [
+                    "Bruce Eckel"
+                ]
+            },
+            "2": {
+                "title": "Ready for a victory",
+                "date": "2020-07-23T13:57:14.225Z",
+                "year": 2020,
+                "authors": [
+                    "Oleg Cherednik"
+                ]
+            }
+        }
+        """;
+    Map<Integer, Book> res = Json.readMap(json, Integer.class, Book.class);
+  }
 
 }
 ```
@@ -413,19 +415,19 @@ public class Book {
 ```java
 class Data {
 
-    int intVal;
-    String strVal;
+  int intVal;
+  String strVal;
 
-    public static void demo() {
-        String json = """
-                 {
-                    "intVal" : 666,
-                    "strVal" : "omen"
-                 }
-                """;
-        ByteBuffer buf = ByteBuffer.wrap(json.getBytes(StandardCharsets.UTF_8));
-        Data data = Json.readValue(buf, Data.class);
-    }
+  public static void demo() {
+    String json = """
+         {
+            "intVal" : 666,
+            "strVal" : "omen"
+         }
+        """;
+    ByteBuffer buf = ByteBuffer.wrap(json.getBytes(StandardCharsets.UTF_8));
+    Data data = Json.readValue(buf, Data.class);
+  }
 
 }
 ```
@@ -437,22 +439,22 @@ class Data {
 ```java
 class Data {
 
-    public static void demo() {
-        String json = """
-                [
-                    {
-                        "intVal" : 555,
-                        "strVal" : "victory"
-                    },
-                    {
-                        "intVal" : 666,
-                        "strVal" : "omen"
-                    }
-                ]
-                """;
-        ByteBuffer buf = ByteBuffer.wrap(json.getBytes(StandardCharsets.UTF_8));
-        List<Object> res = Json.readList(buf);
-    }
+  public static void demo() {
+    String json = """
+        [
+            {
+                "intVal" : 555,
+                "strVal" : "victory"
+            },
+            {
+                "intVal" : 666,
+                "strVal" : "omen"
+            }
+        ]
+        """;
+    ByteBuffer buf = ByteBuffer.wrap(json.getBytes(StandardCharsets.UTF_8));
+    List<Object> res = Json.readList(buf);
+  }
 
 }
 ```
@@ -464,22 +466,22 @@ class Data {
 ```java
 class Data {
 
-    public static void demo() {
-        String json = """
-                [
-                    {
-                        "intVal" : 555,
-                        "strVal" : "victory"
-                    },
-                    {
-                        "intVal" : 666,
-                        "strVal" : "omen"
-                    }
-                ]
-                """;
-        ByteBuffer buf = ByteBuffer.wrap(json.getBytes(StandardCharsets.UTF_8));
-        Set<Object> res = Json.readSet(buf);
-    }
+  public static void demo() {
+    String json = """
+        [
+            {
+                "intVal" : 555,
+                "strVal" : "victory"
+            },
+            {
+                "intVal" : 666,
+                "strVal" : "omen"
+            }
+        ]
+        """;
+    ByteBuffer buf = ByteBuffer.wrap(json.getBytes(StandardCharsets.UTF_8));
+    Set<Object> res = Json.readSet(buf);
+  }
 
 }
 ```
@@ -491,25 +493,25 @@ class Data {
 ```java
 class Data {
 
-    int intVal;
-    String strVal;
+  int intVal;
+  String strVal;
 
-    public static void demo() {
-        String json = """
-                [
-                    {
-                        "intVal" : 555,
-                        "strVal" : "victory"
-                    },
-                    {
-                        "intVal" : 666,
-                        "strVal" : "omen"
-                    }
-                ]
-                """;
-        ByteBuffer buf = ByteBuffer.wrap(json.getBytes(StandardCharsets.UTF_8));
-        List<Data> res = Json.readList(buf, Data.class);
-    }
+  public static void demo() {
+    String json = """
+        [
+            {
+                "intVal" : 555,
+                "strVal" : "victory"
+            },
+            {
+                "intVal" : 666,
+                "strVal" : "omen"
+            }
+        ]
+        """;
+    ByteBuffer buf = ByteBuffer.wrap(json.getBytes(StandardCharsets.UTF_8));
+    List<Data> res = Json.readList(buf, Data.class);
+  }
 
 }
 ```
@@ -521,25 +523,25 @@ class Data {
 ```java
 class Data {
 
-    int intVal;
-    String strVal;
+  int intVal;
+  String strVal;
 
-    public static void demo() {
-        String json = """
-                [
-                    {
-                        "intVal" : 555,
-                        "strVal" : "victory"
-                    },
-                    {
-                        "intVal" : 666,
-                        "strVal" : "omen"
-                    }
-                ]
-                """;
-        ByteBuffer buf = ByteBuffer.wrap(json.getBytes(StandardCharsets.UTF_8));
-        Set<Data> res = Json.readSet(buf, Data.class);
-    }
+  public static void demo() {
+    String json = """
+        [
+            {
+                "intVal" : 555,
+                "strVal" : "victory"
+            },
+            {
+                "intVal" : 666,
+                "strVal" : "omen"
+            }
+        ]
+        """;
+    ByteBuffer buf = ByteBuffer.wrap(json.getBytes(StandardCharsets.UTF_8));
+    Set<Data> res = Json.readSet(buf, Data.class);
+  }
 
 }
 ```
@@ -551,25 +553,25 @@ class Data {
 ```java
 class Data {
 
-    int intVal;
-    String strVal;
+  int intVal;
+  String strVal;
 
-    public static void demo() {
-        String json = """
-                [
-                    {
-                        "intVal" : 555,
-                        "strVal" : "victory"
-                    },
-                    {
-                        "intVal" : 666,
-                        "strVal" : "omen"
-                    }
-                ]
-                """;
-        ByteBuffer buf = ByteBuffer.wrap(json.getBytes(StandardCharsets.UTF_8));
-        List<Map<String, Object>> res = Json.readListOfMap(buf);
-    }
+  public static void demo() {
+    String json = """
+        [
+            {
+                "intVal" : 555,
+                "strVal" : "victory"
+            },
+            {
+                "intVal" : 666,
+                "strVal" : "omen"
+            }
+        ]
+        """;
+    ByteBuffer buf = ByteBuffer.wrap(json.getBytes(StandardCharsets.UTF_8));
+    List<Map<String, Object>> res = Json.readListOfMap(buf);
+  }
 
 }
 ```
@@ -581,35 +583,35 @@ class Data {
 ```java
 public class Book {
 
-    private String title;
-    private ZonedDateTime date;
-    private int year;
-    private List<String> authors;
+  private String title;
+  private ZonedDateTime date;
+  private int year;
+  private List<String> authors;
 
-    public static void demo() {
-        String json = """
-                {
-                    "one": {
-                        "title": "Thinking in Java",
-                        "date": "2017-07-23T13:57:14.225Z",
-                        "year": 1998,
-                        "authors": [
-                            "Bruce Eckel"
-                        ]
-                    },
-                    "two": {
-                        "title": "Ready for a victory",
-                        "date": "2020-07-23T13:57:14.225Z",
-                        "year": 2020,
-                        "authors": [
-                            "Oleg Cherednik"
-                        ]
-                    }
-                }
-                """;
-        ByteBuffer buf = ByteBuffer.wrap(json.getBytes(StandardCharsets.UTF_8));
-        Map<String, Object> res = Json.readMap(buf);
-    }
+  public static void demo() {
+    String json = """
+        {
+            "one": {
+                "title": "Thinking in Java",
+                "date": "2017-07-23T13:57:14.225Z",
+                "year": 1998,
+                "authors": [
+                    "Bruce Eckel"
+                ]
+            },
+            "two": {
+                "title": "Ready for a victory",
+                "date": "2020-07-23T13:57:14.225Z",
+                "year": 2020,
+                "authors": [
+                    "Oleg Cherednik"
+                ]
+            }
+        }
+        """;
+    ByteBuffer buf = ByteBuffer.wrap(json.getBytes(StandardCharsets.UTF_8));
+    Map<String, Object> res = Json.readMap(buf);
+  }
 
 }
 ```
@@ -621,35 +623,35 @@ public class Book {
 ```java
 public class Book {
 
-    private String title;
-    private ZonedDateTime date;
-    private int year;
-    private List<String> authors;
+  private String title;
+  private ZonedDateTime date;
+  private int year;
+  private List<String> authors;
 
-    public static void demo() {
-        String json = """
-                {
-                    "one": {
-                        "title": "Thinking in Java",
-                        "date": "2017-07-23T13:57:14.225Z",
-                        "year": 1998,
-                        "authors": [
-                            "Bruce Eckel"
-                        ]
-                    },
-                    "two": {
-                        "title": "Ready for a victory",
-                        "date": "2020-07-23T13:57:14.225Z",
-                        "year": 2020,
-                        "authors": [
-                            "Oleg Cherednik"
-                        ]
-                    }
-                }
-                """;
-        ByteBuffer buf = ByteBuffer.wrap(json.getBytes(StandardCharsets.UTF_8));
-        Map<String, Book> res = Json.readMap(buf, Book.class);
-    }
+  public static void demo() {
+    String json = """
+        {
+            "one": {
+                "title": "Thinking in Java",
+                "date": "2017-07-23T13:57:14.225Z",
+                "year": 1998,
+                "authors": [
+                    "Bruce Eckel"
+                ]
+            },
+            "two": {
+                "title": "Ready for a victory",
+                "date": "2020-07-23T13:57:14.225Z",
+                "year": 2020,
+                "authors": [
+                    "Oleg Cherednik"
+                ]
+            }
+        }
+        """;
+    ByteBuffer buf = ByteBuffer.wrap(json.getBytes(StandardCharsets.UTF_8));
+    Map<String, Book> res = Json.readMap(buf, Book.class);
+  }
 
 }
 ```
@@ -661,35 +663,35 @@ public class Book {
 ```java
 public class Book {
 
-    private String title;
-    private ZonedDateTime date;
-    private int year;
-    private List<String> authors;
+  private String title;
+  private ZonedDateTime date;
+  private int year;
+  private List<String> authors;
 
-    public static void demo() {
-        String json = """
-                {
-                    "1": {
-                        "title": "Thinking in Java",
-                        "date": "2017-07-23T13:57:14.225Z",
-                        "year": 1998,
-                        "authors": [
-                            "Bruce Eckel"
-                        ]
-                    },
-                    "2": {
-                        "title": "Ready for a victory",
-                        "date": "2020-07-23T13:57:14.225Z",
-                        "year": 2020,
-                        "authors": [
-                            "Oleg Cherednik"
-                        ]
-                    }
-                }
-                """;
-        ByteBuffer buf = ByteBuffer.wrap(json.getBytes(StandardCharsets.UTF_8));
-        Map<Integer, Book> res = Json.readMap(buf, Integer.class, Book.class);
-    }
+  public static void demo() {
+    String json = """
+        {
+            "1": {
+                "title": "Thinking in Java",
+                "date": "2017-07-23T13:57:14.225Z",
+                "year": 1998,
+                "authors": [
+                    "Bruce Eckel"
+                ]
+            },
+            "2": {
+                "title": "Ready for a victory",
+                "date": "2020-07-23T13:57:14.225Z",
+                "year": 2020,
+                "authors": [
+                    "Oleg Cherednik"
+                ]
+            }
+        }
+        """;
+    ByteBuffer buf = ByteBuffer.wrap(json.getBytes(StandardCharsets.UTF_8));
+    Map<Integer, Book> res = Json.readMap(buf, Integer.class, Book.class);
+  }
 
 }
 ```
@@ -703,25 +705,25 @@ public class Book {
 ```java
 class Data {
 
-    int intVal;
-    String strVal;
+  int intVal;
+  String strVal;
 
-    public static void demo() {
-        String json = """
-                [
-                    {
-                        "intVal" : 555,
-                        "strVal" : "victory"
-                    },
-                    {
-                        "intVal" : 666,
-                        "strVal" : "omen"
-                    }
-                ]
-                """;
-        ByteBuffer buf = ByteBuffer.wrap(json.getBytes(StandardCharsets.UTF_8));
-        Iterator<Object> it = Json.readListLazy(buf);
-    }
+  public static void demo() {
+    String json = """
+        [
+            {
+                "intVal" : 555,
+                "strVal" : "victory"
+            },
+            {
+                "intVal" : 666,
+                "strVal" : "omen"
+            }
+        ]
+        """;
+    ByteBuffer buf = ByteBuffer.wrap(json.getBytes(StandardCharsets.UTF_8));
+    Iterator<Object> it = Json.readListLazy(buf);
+  }
 
 }
 ```
@@ -733,25 +735,25 @@ class Data {
 ```java
 class Data {
 
-    int intVal;
-    String strVal;
+  int intVal;
+  String strVal;
 
-    public static void demo() {
-        String json = """
-                [
-                    {
-                        "intVal" : 555,
-                        "strVal" : "victory"
-                    },
-                    {
-                        "intVal" : 666,
-                        "strVal" : "omen"
-                    }
-                ]
-                """;
-        ByteBuffer buf = ByteBuffer.wrap(json.getBytes(StandardCharsets.UTF_8));
-        Iterator<Data> it = Json.readListLazy(buf, Data.class);
-    }
+  public static void demo() {
+    String json = """
+        [
+            {
+                "intVal" : 555,
+                "strVal" : "victory"
+            },
+            {
+                "intVal" : 666,
+                "strVal" : "omen"
+            }
+        ]
+        """;
+    ByteBuffer buf = ByteBuffer.wrap(json.getBytes(StandardCharsets.UTF_8));
+    Iterator<Data> it = Json.readListLazy(buf, Data.class);
+  }
 
 }
 ```
@@ -763,25 +765,25 @@ class Data {
 ```java
 class Data {
 
-    int intVal;
-    String strVal;
+  int intVal;
+  String strVal;
 
-    public static void demo() {
-        String json = """
-                [
-                    {
-                        "intVal" : 555,
-                        "strVal" : "victory"
-                    },
-                    {
-                        "intVal" : 666,
-                        "strVal" : "omen"
-                    }
-                ]
-                """;
-        ByteBuffer buf = ByteBuffer.wrap(json.getBytes(StandardCharsets.UTF_8));
-        Iterator<Map<String, Object>> it = Json.readListOfMapLazy(buf);
-    }
+  public static void demo() {
+    String json = """
+        [
+            {
+                "intVal" : 555,
+                "strVal" : "victory"
+            },
+            {
+                "intVal" : 666,
+                "strVal" : "omen"
+            }
+        ]
+        """;
+    ByteBuffer buf = ByteBuffer.wrap(json.getBytes(StandardCharsets.UTF_8));
+    Iterator<Map<String, Object>> it = Json.readListOfMapLazy(buf);
+  }
 
 }
 ```
@@ -795,19 +797,19 @@ class Data {
 ```java
 class Data {
 
-    int intVal;
-    String strVal;
+  int intVal;
+  String strVal;
 
-    public static void demo() {
-        String json = """
-                 {
-                    "intVal" : 666,
-                    "strVal" : "omen"
-                 }
-                """;
-        InputStream in = new ByteArrayInputStream(json.getBytes());
-        Data data = Json.readValue(in, Data.class);
-    }
+  public static void demo() {
+    String json = """
+         {
+            "intVal" : 666,
+            "strVal" : "omen"
+         }
+        """;
+    InputStream in = new ByteArrayInputStream(json.getBytes());
+    Data data = Json.readValue(in, Data.class);
+  }
 
 }
 ```
@@ -819,22 +821,22 @@ class Data {
 ```java
 class Data {
 
-    public static void demo() {
-        String json = """
-                [
-                    {
-                        "intVal" : 555,
-                        "strVal" : "victory"
-                    },
-                    {
-                        "intVal" : 666,
-                        "strVal" : "omen"
-                    }
-                ]
-                """;
-        InputStream in = new ByteArrayInputStream(json.getBytes());
-        List<Object> res = Json.readList(in);
-    }
+  public static void demo() {
+    String json = """
+        [
+            {
+                "intVal" : 555,
+                "strVal" : "victory"
+            },
+            {
+                "intVal" : 666,
+                "strVal" : "omen"
+            }
+        ]
+        """;
+    InputStream in = new ByteArrayInputStream(json.getBytes());
+    List<Object> res = Json.readList(in);
+  }
 
 }
 ```
@@ -846,22 +848,22 @@ class Data {
 ```java
 class Data {
 
-    public static void demo() {
-        String json = """
-                [
-                    {
-                        "intVal" : 555,
-                        "strVal" : "victory"
-                    },
-                    {
-                        "intVal" : 666,
-                        "strVal" : "omen"
-                    }
-                ]
-                """;
-        InputStream in = new ByteArrayInputStream(json.getBytes());
-        Set<Object> res = Json.readSet(in);
-    }
+  public static void demo() {
+    String json = """
+        [
+            {
+                "intVal" : 555,
+                "strVal" : "victory"
+            },
+            {
+                "intVal" : 666,
+                "strVal" : "omen"
+            }
+        ]
+        """;
+    InputStream in = new ByteArrayInputStream(json.getBytes());
+    Set<Object> res = Json.readSet(in);
+  }
 
 }
 ```
@@ -873,25 +875,25 @@ class Data {
 ```java
 class Data {
 
-    int intVal;
-    String strVal;
+  int intVal;
+  String strVal;
 
-    public static void demo() {
-        String json = """
-                [
-                    {
-                        "intVal" : 555,
-                        "strVal" : "victory"
-                    },
-                    {
-                        "intVal" : 666,
-                        "strVal" : "omen"
-                    }
-                ]
-                """;
-        InputStream in = new ByteArrayInputStream(json.getBytes());
-        List<Data> res = Json.readList(in, Data.class);
-    }
+  public static void demo() {
+    String json = """
+        [
+            {
+                "intVal" : 555,
+                "strVal" : "victory"
+            },
+            {
+                "intVal" : 666,
+                "strVal" : "omen"
+            }
+        ]
+        """;
+    InputStream in = new ByteArrayInputStream(json.getBytes());
+    List<Data> res = Json.readList(in, Data.class);
+  }
 
 }
 ```
@@ -903,25 +905,25 @@ class Data {
 ```java
 class Data {
 
-    int intVal;
-    String strVal;
+  int intVal;
+  String strVal;
 
-    public static void demo() {
-        String json = """
-                [
-                    {
-                        "intVal" : 555,
-                        "strVal" : "victory"
-                    },
-                    {
-                        "intVal" : 666,
-                        "strVal" : "omen"
-                    }
-                ]
-                """;
-        InputStream in = new ByteArrayInputStream(json.getBytes());
-        Set<Data> res = Json.readSet(in, Data.class);
-    }
+  public static void demo() {
+    String json = """
+        [
+            {
+                "intVal" : 555,
+                "strVal" : "victory"
+            },
+            {
+                "intVal" : 666,
+                "strVal" : "omen"
+            }
+        ]
+        """;
+    InputStream in = new ByteArrayInputStream(json.getBytes());
+    Set<Data> res = Json.readSet(in, Data.class);
+  }
 
 }
 ```
@@ -933,25 +935,25 @@ class Data {
 ```java
 class Data {
 
-    int intVal;
-    String strVal;
+  int intVal;
+  String strVal;
 
-    public static void demo() {
-        String json = """
-                [
-                    {
-                        "intVal" : 555,
-                        "strVal" : "victory"
-                    },
-                    {
-                        "intVal" : 666,
-                        "strVal" : "omen"
-                    }
-                ]
-                """;
-        InputStream in = new ByteArrayInputStream(json.getBytes());
-        List<Map<String, Object>> res = Json.readListOfMap(in);
-    }
+  public static void demo() {
+    String json = """
+        [
+            {
+                "intVal" : 555,
+                "strVal" : "victory"
+            },
+            {
+                "intVal" : 666,
+                "strVal" : "omen"
+            }
+        ]
+        """;
+    InputStream in = new ByteArrayInputStream(json.getBytes());
+    List<Map<String, Object>> res = Json.readListOfMap(in);
+  }
 
 }
 ```
@@ -963,35 +965,35 @@ class Data {
 ```java
 public class Book {
 
-    private String title;
-    private ZonedDateTime date;
-    private int year;
-    private List<String> authors;
+  private String title;
+  private ZonedDateTime date;
+  private int year;
+  private List<String> authors;
 
-    public static void demo() {
-        String json = """
-                {
-                    "one": {
-                        "title": "Thinking in Java",
-                        "date": "2017-07-23T13:57:14.225Z",
-                        "year": 1998,
-                        "authors": [
-                            "Bruce Eckel"
-                        ]
-                    },
-                    "two": {
-                        "title": "Ready for a victory",
-                        "date": "2020-07-23T13:57:14.225Z",
-                        "year": 2020,
-                        "authors": [
-                            "Oleg Cherednik"
-                        ]
-                    }
-                }
-                """;
-        InputStream in = new ByteArrayInputStream(json.getBytes());
-        Map<String, Object> res = Json.readMap(in);
-    }
+  public static void demo() {
+    String json = """
+        {
+            "one": {
+                "title": "Thinking in Java",
+                "date": "2017-07-23T13:57:14.225Z",
+                "year": 1998,
+                "authors": [
+                    "Bruce Eckel"
+                ]
+            },
+            "two": {
+                "title": "Ready for a victory",
+                "date": "2020-07-23T13:57:14.225Z",
+                "year": 2020,
+                "authors": [
+                    "Oleg Cherednik"
+                ]
+            }
+        }
+        """;
+    InputStream in = new ByteArrayInputStream(json.getBytes());
+    Map<String, Object> res = Json.readMap(in);
+  }
 
 }
 ```
@@ -1003,35 +1005,35 @@ public class Book {
 ```java
 public class Book {
 
-    private String title;
-    private ZonedDateTime date;
-    private int year;
-    private List<String> authors;
+  private String title;
+  private ZonedDateTime date;
+  private int year;
+  private List<String> authors;
 
-    public static void demo() {
-        String json = """
-                {
-                    "one": {
-                        "title": "Thinking in Java",
-                        "date": "2017-07-23T13:57:14.225Z",
-                        "year": 1998,
-                        "authors": [
-                            "Bruce Eckel"
-                        ]
-                    },
-                    "two": {
-                        "title": "Ready for a victory",
-                        "date": "2020-07-23T13:57:14.225Z",
-                        "year": 2020,
-                        "authors": [
-                            "Oleg Cherednik"
-                        ]
-                    }
-                }
-                """;
-        InputStream in = new ByteArrayInputStream(json.getBytes());
-        Map<String, Book> res = Json.readMap(in, Book.class);
-    }
+  public static void demo() {
+    String json = """
+        {
+            "one": {
+                "title": "Thinking in Java",
+                "date": "2017-07-23T13:57:14.225Z",
+                "year": 1998,
+                "authors": [
+                    "Bruce Eckel"
+                ]
+            },
+            "two": {
+                "title": "Ready for a victory",
+                "date": "2020-07-23T13:57:14.225Z",
+                "year": 2020,
+                "authors": [
+                    "Oleg Cherednik"
+                ]
+            }
+        }
+        """;
+    InputStream in = new ByteArrayInputStream(json.getBytes());
+    Map<String, Book> res = Json.readMap(in, Book.class);
+  }
 
 }
 ```
@@ -1043,35 +1045,35 @@ public class Book {
 ```java
 public class Book {
 
-    private String title;
-    private ZonedDateTime date;
-    private int year;
-    private List<String> authors;
+  private String title;
+  private ZonedDateTime date;
+  private int year;
+  private List<String> authors;
 
-    public static void demo() {
-        String json = """
-                {
-                    "1": {
-                        "title": "Thinking in Java",
-                        "date": "2017-07-23T13:57:14.225Z",
-                        "year": 1998,
-                        "authors": [
-                            "Bruce Eckel"
-                        ]
-                    },
-                    "2": {
-                        "title": "Ready for a victory",
-                        "date": "2020-07-23T13:57:14.225Z",
-                        "year": 2020,
-                        "authors": [
-                            "Oleg Cherednik"
-                        ]
-                    }
-                }
-                """;
-        InputStream in = new ByteArrayInputStream(json.getBytes());
-        Map<Integer, Book> res = Json.readMap(in, Integer.class, Book.class);
-    }
+  public static void demo() {
+    String json = """
+        {
+            "1": {
+                "title": "Thinking in Java",
+                "date": "2017-07-23T13:57:14.225Z",
+                "year": 1998,
+                "authors": [
+                    "Bruce Eckel"
+                ]
+            },
+            "2": {
+                "title": "Ready for a victory",
+                "date": "2020-07-23T13:57:14.225Z",
+                "year": 2020,
+                "authors": [
+                    "Oleg Cherednik"
+                ]
+            }
+        }
+        """;
+    InputStream in = new ByteArrayInputStream(json.getBytes());
+    Map<Integer, Book> res = Json.readMap(in, Integer.class, Book.class);
+  }
 
 }
 ```
@@ -1085,25 +1087,25 @@ public class Book {
 ```java
 class Data {
 
-    int intVal;
-    String strVal;
+  int intVal;
+  String strVal;
 
-    public static void demo() {
-        String json = """
-                [
-                    {
-                        "intVal" : 555,
-                        "strVal" : "victory"
-                    },
-                    {
-                        "intVal" : 666,
-                        "strVal" : "omen"
-                    }
-                ]
-                """;
-        InputStream in = new ByteArrayInputStream(json.getBytes());
-        AutoCloseableIterator<Object> it = Json.readListLazy(in);
-    }
+  public static void demo() {
+    String json = """
+        [
+            {
+                "intVal" : 555,
+                "strVal" : "victory"
+            },
+            {
+                "intVal" : 666,
+                "strVal" : "omen"
+            }
+        ]
+        """;
+    InputStream in = new ByteArrayInputStream(json.getBytes());
+    AutoCloseableIterator<Object> it = Json.readListLazy(in);
+  }
 
 }
 ```
@@ -1116,25 +1118,25 @@ class Data {
 ```java
 class Data {
 
-    int intVal;
-    String strVal;
+  int intVal;
+  String strVal;
 
-    public static void demo() {
-        String json = """
-                [
-                    {
-                        "intVal" : 555,
-                        "strVal" : "victory"
-                    },
-                    {
-                        "intVal" : 666,
-                        "strVal" : "omen"
-                    }
-                ]
-                """;
-        InputStream in = new ByteArrayInputStream(json.getBytes());
-        AutoCloseableIterator<Data> it = Json.readListLazy(in, Data.class);
-    }
+  public static void demo() {
+    String json = """
+        [
+            {
+                "intVal" : 555,
+                "strVal" : "victory"
+            },
+            {
+                "intVal" : 666,
+                "strVal" : "omen"
+            }
+        ]
+        """;
+    InputStream in = new ByteArrayInputStream(json.getBytes());
+    AutoCloseableIterator<Data> it = Json.readListLazy(in, Data.class);
+  }
 
 }
 ```
@@ -1146,25 +1148,25 @@ class Data {
 ```java
 class Data {
 
-    int intVal;
-    String strVal;
+  int intVal;
+  String strVal;
 
-    public static void demo() {
-        String json = """
-                [
-                    {
-                        "intVal" : 555,
-                        "strVal" : "victory"
-                    },
-                    {
-                        "intVal" : 666,
-                        "strVal" : "omen"
-                    }
-                ]
-                """;
-        InputStream in = new ByteArrayInputStream(json.getBytes());
-        AutoCloseableIterator<Map<String, Object>> it = Json.readListOfMapLazy(in);
-    }
+  public static void demo() {
+    String json = """
+        [
+            {
+                "intVal" : 555,
+                "strVal" : "victory"
+            },
+            {
+                "intVal" : 666,
+                "strVal" : "omen"
+            }
+        ]
+        """;
+    InputStream in = new ByteArrayInputStream(json.getBytes());
+    AutoCloseableIterator<Map<String, Object>> it = Json.readListOfMapLazy(in);
+  }
 
 }
 ```
@@ -1178,19 +1180,19 @@ class Data {
 ```java
 class Data {
 
-    int intVal;
-    String strVal;
+  int intVal;
+  String strVal;
 
-    public static void demo() {
-        String json = """
-                 {
-                    "intVal" : 666,
-                    "strVal" : "omen"
-                 }
-                """;
-        Reader reader = new ByteArrayInputStream(json.getBytes());
-        Data data = Json.readValue(reader, Data.class);
-    }
+  public static void demo() {
+    String json = """
+         {
+            "intVal" : 666,
+            "strVal" : "omen"
+         }
+        """;
+    Reader reader = new ByteArrayInputStream(json.getBytes());
+    Data data = Json.readValue(reader, Data.class);
+  }
 
 }
 ```
@@ -1202,22 +1204,22 @@ class Data {
 ```java
 class Data {
 
-    public static void demo() {
-        String json = """
-                [
-                    {
-                        "intVal" : 555,
-                        "strVal" : "victory"
-                    },
-                    {
-                        "intVal" : 666,
-                        "strVal" : "omen"
-                    }
-                ]
-                """;
-        Reader reader = new StringReader(json);
-        List<Object> res = Json.readList(reader);
-    }
+  public static void demo() {
+    String json = """
+        [
+            {
+                "intVal" : 555,
+                "strVal" : "victory"
+            },
+            {
+                "intVal" : 666,
+                "strVal" : "omen"
+            }
+        ]
+        """;
+    Reader reader = new StringReader(json);
+    List<Object> res = Json.readList(reader);
+  }
 
 }
 ```
@@ -1229,22 +1231,22 @@ class Data {
 ```java
 class Data {
 
-    public static void demo() {
-        String json = """
-                [
-                    {
-                        "intVal" : 555,
-                        "strVal" : "victory"
-                    },
-                    {
-                        "intVal" : 666,
-                        "strVal" : "omen"
-                    }
-                ]
-                """;
-        Reader reader = new StringReader(json);
-        Set<Object> res = Json.readSet(reader);
-    }
+  public static void demo() {
+    String json = """
+        [
+            {
+                "intVal" : 555,
+                "strVal" : "victory"
+            },
+            {
+                "intVal" : 666,
+                "strVal" : "omen"
+            }
+        ]
+        """;
+    Reader reader = new StringReader(json);
+    Set<Object> res = Json.readSet(reader);
+  }
 
 }
 ```
@@ -1256,25 +1258,25 @@ class Data {
 ```java
 class Data {
 
-    int intVal;
-    String strVal;
+  int intVal;
+  String strVal;
 
-    public static void demo() {
-        String json = """
-                [
-                    {
-                        "intVal" : 555,
-                        "strVal" : "victory"
-                    },
-                    {
-                        "intVal" : 666,
-                        "strVal" : "omen"
-                    }
-                ]
-                """;
-        Reader reader = new StringReader(json);
-        List<Data> res = Json.readList(reader, Data.class);
-    }
+  public static void demo() {
+    String json = """
+        [
+            {
+                "intVal" : 555,
+                "strVal" : "victory"
+            },
+            {
+                "intVal" : 666,
+                "strVal" : "omen"
+            }
+        ]
+        """;
+    Reader reader = new StringReader(json);
+    List<Data> res = Json.readList(reader, Data.class);
+  }
 
 }
 ```
@@ -1286,25 +1288,25 @@ class Data {
 ```java
 class Data {
 
-    int intVal;
-    String strVal;
+  int intVal;
+  String strVal;
 
-    public static void demo() {
-        String json = """
-                [
-                    {
-                        "intVal" : 555,
-                        "strVal" : "victory"
-                    },
-                    {
-                        "intVal" : 666,
-                        "strVal" : "omen"
-                    }
-                ]
-                """;
-        Reader reader = new StringReader(json);
-        Set<Data> res = Json.readSet(reader, Data.class);
-    }
+  public static void demo() {
+    String json = """
+        [
+            {
+                "intVal" : 555,
+                "strVal" : "victory"
+            },
+            {
+                "intVal" : 666,
+                "strVal" : "omen"
+            }
+        ]
+        """;
+    Reader reader = new StringReader(json);
+    Set<Data> res = Json.readSet(reader, Data.class);
+  }
 
 }
 ```
@@ -1316,25 +1318,25 @@ class Data {
 ```java
 class Data {
 
-    int intVal;
-    String strVal;
+  int intVal;
+  String strVal;
 
-    public static void demo() {
-        String json = """
-                [
-                    {
-                        "intVal" : 555,
-                        "strVal" : "victory"
-                    },
-                    {
-                        "intVal" : 666,
-                        "strVal" : "omen"
-                    }
-                ]
-                """;
-        Reader reader = new StringReader(json);
-        List<Map<String, Object>> res = Json.readListOfMap(reader);
-    }
+  public static void demo() {
+    String json = """
+        [
+            {
+                "intVal" : 555,
+                "strVal" : "victory"
+            },
+            {
+                "intVal" : 666,
+                "strVal" : "omen"
+            }
+        ]
+        """;
+    Reader reader = new StringReader(json);
+    List<Map<String, Object>> res = Json.readListOfMap(reader);
+  }
 
 }
 ```
@@ -1346,35 +1348,35 @@ class Data {
 ```java
 public class Book {
 
-    private String title;
-    private ZonedDateTime date;
-    private int year;
-    private List<String> authors;
+  private String title;
+  private ZonedDateTime date;
+  private int year;
+  private List<String> authors;
 
-    public static void demo() {
-        String json = """
-                {
-                    "one": {
-                        "title": "Thinking in Java",
-                        "date": "2017-07-23T13:57:14.225Z",
-                        "year": 1998,
-                        "authors": [
-                            "Bruce Eckel"
-                        ]
-                    },
-                    "two": {
-                        "title": "Ready for a victory",
-                        "date": "2020-07-23T13:57:14.225Z",
-                        "year": 2020,
-                        "authors": [
-                            "Oleg Cherednik"
-                        ]
-                    }
-                }
-                """;
-        Reader reader = new StringReader(json);
-        Map<String, Object> res = Json.readMap(reader);
-    }
+  public static void demo() {
+    String json = """
+        {
+            "one": {
+                "title": "Thinking in Java",
+                "date": "2017-07-23T13:57:14.225Z",
+                "year": 1998,
+                "authors": [
+                    "Bruce Eckel"
+                ]
+            },
+            "two": {
+                "title": "Ready for a victory",
+                "date": "2020-07-23T13:57:14.225Z",
+                "year": 2020,
+                "authors": [
+                    "Oleg Cherednik"
+                ]
+            }
+        }
+        """;
+    Reader reader = new StringReader(json);
+    Map<String, Object> res = Json.readMap(reader);
+  }
 
 }
 ```
@@ -1386,35 +1388,35 @@ public class Book {
 ```java
 public class Book {
 
-    private String title;
-    private ZonedDateTime date;
-    private int year;
-    private List<String> authors;
+  private String title;
+  private ZonedDateTime date;
+  private int year;
+  private List<String> authors;
 
-    public static void demo() {
-        String json = """
-                {
-                    "one": {
-                        "title": "Thinking in Java",
-                        "date": "2017-07-23T13:57:14.225Z",
-                        "year": 1998,
-                        "authors": [
-                            "Bruce Eckel"
-                        ]
-                    },
-                    "two": {
-                        "title": "Ready for a victory",
-                        "date": "2020-07-23T13:57:14.225Z",
-                        "year": 2020,
-                        "authors": [
-                            "Oleg Cherednik"
-                        ]
-                    }
-                }
-                """;
-        Reader reader = new StringReader(json);
-        Map<String, Book> res = Json.readMap(reader, Book.class);
-    }
+  public static void demo() {
+    String json = """
+        {
+            "one": {
+                "title": "Thinking in Java",
+                "date": "2017-07-23T13:57:14.225Z",
+                "year": 1998,
+                "authors": [
+                    "Bruce Eckel"
+                ]
+            },
+            "two": {
+                "title": "Ready for a victory",
+                "date": "2020-07-23T13:57:14.225Z",
+                "year": 2020,
+                "authors": [
+                    "Oleg Cherednik"
+                ]
+            }
+        }
+        """;
+    Reader reader = new StringReader(json);
+    Map<String, Book> res = Json.readMap(reader, Book.class);
+  }
 
 }
 ```
@@ -1426,35 +1428,35 @@ public class Book {
 ```java
 public class Book {
 
-    private String title;
-    private ZonedDateTime date;
-    private int year;
-    private List<String> authors;
+  private String title;
+  private ZonedDateTime date;
+  private int year;
+  private List<String> authors;
 
-    public static void demo() {
-        String json = """
-                {
-                    "1": {
-                        "title": "Thinking in Java",
-                        "date": "2017-07-23T13:57:14.225Z",
-                        "year": 1998,
-                        "authors": [
-                            "Bruce Eckel"
-                        ]
-                    },
-                    "2": {
-                        "title": "Ready for a victory",
-                        "date": "2020-07-23T13:57:14.225Z",
-                        "year": 2020,
-                        "authors": [
-                            "Oleg Cherednik"
-                        ]
-                    }
-                }
-                """;
-        Reader reader = new StringReader(json);
-        Map<Integer, Book> res = Json.readMap(reader, Integer.class, Book.class);
-    }
+  public static void demo() {
+    String json = """
+        {
+            "1": {
+                "title": "Thinking in Java",
+                "date": "2017-07-23T13:57:14.225Z",
+                "year": 1998,
+                "authors": [
+                    "Bruce Eckel"
+                ]
+            },
+            "2": {
+                "title": "Ready for a victory",
+                "date": "2020-07-23T13:57:14.225Z",
+                "year": 2020,
+                "authors": [
+                    "Oleg Cherednik"
+                ]
+            }
+        }
+        """;
+    Reader reader = new StringReader(json);
+    Map<Integer, Book> res = Json.readMap(reader, Integer.class, Book.class);
+  }
 
 }
 ```
@@ -1468,25 +1470,25 @@ public class Book {
 ```java
 class Data {
 
-    int intVal;
-    String strVal;
+  int intVal;
+  String strVal;
 
-    public static void demo() {
-        String json = """
-                [
-                    {
-                        "intVal" : 555,
-                        "strVal" : "victory"
-                    },
-                    {
-                        "intVal" : 666,
-                        "strVal" : "omen"
-                    }
-                ]
-                """;
-        Reader reader = new StringReader(json);
-        AutoCloseableIterator<Object> it = Json.readListLazy(reader);
-    }
+  public static void demo() {
+    String json = """
+        [
+            {
+                "intVal" : 555,
+                "strVal" : "victory"
+            },
+            {
+                "intVal" : 666,
+                "strVal" : "omen"
+            }
+        ]
+        """;
+    Reader reader = new StringReader(json);
+    AutoCloseableIterator<Object> it = Json.readListLazy(reader);
+  }
 
 }
 ```
@@ -1498,25 +1500,25 @@ class Data {
 ```java
 class Data {
 
-    int intVal;
-    String strVal;
+  int intVal;
+  String strVal;
 
-    public static void demo() {
-        String json = """
-                [
-                    {
-                        "intVal" : 555,
-                        "strVal" : "victory"
-                    },
-                    {
-                        "intVal" : 666,
-                        "strVal" : "omen"
-                    }
-                ]
-                """;
-        Reader reader = new StringReader(json);
-        AutoCloseableIterator<Data> it = Json.readListLazy(reader, Data.class);
-    }
+  public static void demo() {
+    String json = """
+        [
+            {
+                "intVal" : 555,
+                "strVal" : "victory"
+            },
+            {
+                "intVal" : 666,
+                "strVal" : "omen"
+            }
+        ]
+        """;
+    Reader reader = new StringReader(json);
+    AutoCloseableIterator<Data> it = Json.readListLazy(reader, Data.class);
+  }
 
 }
 ```
@@ -1528,25 +1530,25 @@ class Data {
 ```java
 class Data {
 
-    int intVal;
-    String strVal;
+  int intVal;
+  String strVal;
 
-    public static void demo() {
-        String json = """
-                [
-                    {
-                        "intVal" : 555,
-                        "strVal" : "victory"
-                    },
-                    {
-                        "intVal" : 666,
-                        "strVal" : "omen"
-                    }
-                ]
-                """;
-        Reader reader = new StringReader(json);
-        AutoCloseableIterator<Map<String, Object>> it = Json.readListOfMapLazy(reader);
-    }
+  public static void demo() {
+    String json = """
+        [
+            {
+                "intVal" : 555,
+                "strVal" : "victory"
+            },
+            {
+                "intVal" : 666,
+                "strVal" : "omen"
+            }
+        ]
+        """;
+    Reader reader = new StringReader(json);
+    AutoCloseableIterator<Map<String, Object>> it = Json.readListOfMapLazy(reader);
+  }
 
 }
 ```
@@ -1560,13 +1562,13 @@ class Data {
 ```java
 class Data {
 
-    int intVal;
-    String strVal;
+  int intVal;
+  String strVal;
 
-    public static void demo() {
-        Data data = new Data(666, "omen");
-        String json = Json.writeValue(data);
-    }
+  public static void demo() {
+    Data data = new Data(666, "omen");
+    String json = Json.writeValue(data);
+  }
 
 }
 ```
@@ -1578,16 +1580,16 @@ class Data {
 ```java
 class Data {
 
-    int intVal;
-    String strVal;
+  int intVal;
+  String strVal;
 
-    public static void demo() {
-        Data data = new Data(666, "omen");
+  public static void demo() {
+    Data data = new Data(666, "omen");
 
-        try (OutputStream out = new ByteArrayOutputStream()) {
-            Json.writeValue(data, out);
-        }
+    try (OutputStream out = new ByteArrayOutputStream()) {
+      Json.writeValue(data, out);
     }
+  }
 
 }
 ```
@@ -1599,16 +1601,16 @@ class Data {
 ```java
 class Data {
 
-    int intVal;
-    String strVal;
+  int intVal;
+  String strVal;
 
-    public static void demo() {
-        Data data = new Data(666, "omen");
+  public static void demo() {
+    Data data = new Data(666, "omen");
 
-        try (Writer out = new StringWriter()) {
-            Json.writeValue(data, out);
-        }
+    try (Writer out = new StringWriter()) {
+      Json.writeValue(data, out);
     }
+  }
 
 }
 ```
@@ -1622,21 +1624,21 @@ class Data {
 ```java
 class Data {
 
-    public static void demo() {
-        String json = """
-                 {
-                    "intVal" : 666,
-                    "strVal" : "omen"
-                 }
-                """;
+  public static void demo() {
+    String json = """
+         {
+            "intVal" : 666,
+            "strVal" : "omen"
+         }
+        """;
 
-        // using static method
-        Data data1 = Json.readValue(json, Data.class);
+    // using static method
+    Data data1 = Json.readValue(json, Data.class);
 
-        // alternative: using JsonReader instance
-        JsonReader reader = Json.reader();
-        Data data2 = reader.readValue(json, Data.class);
-    }
+    // alternative: using JsonReader instance
+    JsonReader reader = Json.reader();
+    Data data2 = reader.readValue(json, Data.class);
+  }
 
 }
 ```
@@ -1648,16 +1650,16 @@ class Data {
 ```java
 class Data {
 
-    public static void demo() {
-        Data data = new Data(666, "omen");
+  public static void demo() {
+    Data data = new Data(666, "omen");
 
-        // using static method
-        String json1 = Json.writeValue(data);
+    // using static method
+    String json1 = Json.writeValue(data);
 
-        // alternative: using JsonWriter instance
-        JsonWriter writer = Json.writer();
-        String json2 = writer.writeValue(data);
-    }
+    // alternative: using JsonWriter instance
+    JsonWriter writer = Json.writer();
+    String json2 = writer.writeValue(data);
+  }
 
 }
 ```
@@ -1669,15 +1671,15 @@ class Data {
 ```java
 class Data {
 
-    public static void demo() {
-        Data data = new Data(666, "omen");
+  public static void demo() {
+    Data data = new Data(666, "omen");
 
-        // there is no way for pretty-print using static method
+    // there is no way for pretty-print using static method
 
-        // using JsonWriter instance with pretty-print option
-        JsonWriter writer = Json.prettyPrint();
-        String json = writer.writeValue(data);
-    }
+    // using JsonWriter instance with pretty-print option
+    JsonWriter writer = Json.prettyPrint();
+    String json = writer.writeValue(data);
+  }
 
 }
 ```
@@ -1691,21 +1693,21 @@ class Data {
 ```java
 class Data {
 
-    public static void demo() {
-        String json = """
-                 {
-                    "intVal" : 666,
-                    "strVal" : "omen"
-                 }
-                """;
+  public static void demo() {
+    String json = """
+         {
+            "intVal" : 666,
+            "strVal" : "omen"
+         }
+        """;
 
-        // using static method
-        Data data1 = Json.readValue(json, Data.class);
+    // using static method
+    Data data1 = Json.readValue(json, Data.class);
 
-        // alternative: using new JsonReader instance
-        JsonReader reader = Json.createReader();
-        Data data2 = reader.readValue(json, Data.class);
-    }
+    // alternative: using new JsonReader instance
+    JsonReader reader = Json.createReader();
+    Data data2 = reader.readValue(json, Data.class);
+  }
 
 }
 ```
@@ -1717,16 +1719,16 @@ class Data {
 ```java
 class Data {
 
-    public static void demo() {
-        Data data = new Data(666, "omen");
+  public static void demo() {
+    Data data = new Data(666, "omen");
 
-        // using static method
-        String json1 = Json.writeValue(data);
+    // using static method
+    String json1 = Json.writeValue(data);
 
-        // alternative: using new JsonWriter instance
-        JsonWriter writer = Json.createWriter();
-        String json2 = writer.writeValue(data);
-    }
+    // alternative: using new JsonWriter instance
+    JsonWriter writer = Json.createWriter();
+    String json2 = writer.writeValue(data);
+  }
 
 }
 ```
@@ -1739,15 +1741,15 @@ class Data {
 ```java
 class Data {
 
-    public static void demo() {
-        Data data = new Data(666, "omen");
+  public static void demo() {
+    Data data = new Data(666, "omen");
 
-        // there is no way for pretty-print using static method
+    // there is no way for pretty-print using static method
 
-        // using new JsonWriter instance with pretty-print option
-        JsonWriter writer = Json.createPrettyPrint();
-        String json = writer.writeValue(data);
-    }
+    // using new JsonWriter instance with pretty-print option
+    JsonWriter writer = Json.createPrettyPrint();
+    String json = writer.writeValue(data);
+  }
 
 }
 ```
@@ -1761,21 +1763,21 @@ class Data {
 ```java
 class Data {
 
-    public static void demo() {
-        String json = """
-                 {
-                    "intVal" : 666,
-                    "strVal" : "omen"
-                 }
-                """;
+  public static void demo() {
+    String json = """
+         {
+            "intVal" : 666,
+            "strVal" : "omen"
+         }
+        """;
 
-        // there is no way for pretty-print using static method
+    // there is no way for pretty-print using static method
 
-        // using new JsonReader instance with custom settings
-        JsonSettings settings = new JsonSettings();
-        JsonReader reader = Json.createReader(settings);
-        Data data = reader.readValue(json, Data.class);
-    }
+    // using new JsonReader instance with custom settings
+    JsonSettings settings = new JsonSettings();
+    JsonReader reader = Json.createReader(settings);
+    Data data = reader.readValue(json, Data.class);
+  }
 
 }
 ```
@@ -1787,16 +1789,16 @@ class Data {
 ```java
 class Data {
 
-    public static void demo() {
-        Data data = new Data(666, "omen");
+  public static void demo() {
+    Data data = new Data(666, "omen");
 
-        // there is no way for pretty-print using static method
+    // there is no way for pretty-print using static method
 
-        // using new JsonWriter instance with custom settings
-        JsonSettings settings = new JsonSettings();
-        JsonWriter writer = Json.createWriter(settings);
-        String json = writer.writeValue(data);
-    }
+    // using new JsonWriter instance with custom settings
+    JsonSettings settings = new JsonSettings();
+    JsonWriter writer = Json.createWriter(settings);
+    String json = writer.writeValue(data);
+  }
 
 }
 ```
@@ -1832,10 +1834,10 @@ class Data {
 ```java
 class Data {
 
-    public static void demo() {
-        Data data = new Data(666, "omen");
-        Map<String, Object> map = Json.convertToMap(data);
-    }
+  public static void demo() {
+    Data data = new Data(666, "omen");
+    Map<String, Object> map = Json.convertToMap(data);
+  }
 
 }
 ```
@@ -1864,25 +1866,25 @@ package ru.olegcherednik.json.impl;
  */
 final class JacksonFactory {
 
-    /**
-     * Retrieves a new instance of `JsonEngine` based on the give settings. The instance should be completely new
-     * (not cached).
-     *
-     * @param settings not `null` settings configuration
-     * @return not `null` instance of `JsonEngine` for current json framework
-     */
-    public static JacksonEngine createJsonEngine(JsonSettings settings) {
-    }
+  /**
+   * Retrieves a new instance of `JsonEngine` based on the give settings. The instance should be completely new
+   * (not cached).
+   *
+   * @param settings not `null` settings configuration
+   * @return not `null` instance of `JsonEngine` for current json framework
+   */
+  public static JacksonEngine createJsonEngine(JsonSettings settings) {
+  }
 
-    /**
-     * Retrieves a new instance of `JsonEngine` with pretty print option based on the given settings.
-     * The instance should be completely new (not cached).
-     *
-     * @param settings not `null` settings configuration
-     * @return not `null` instance of `JsonEngine` with pretty print for current json framework
-     */
-    public static JacksonEngine createPrettyPrintJsonEngine(JsonSettings settings) {
-    }
+  /**
+   * Retrieves a new instance of `JsonEngine` with pretty print option based on the given settings.
+   * The instance should be completely new (not cached).
+   *
+   * @param settings not `null` settings configuration
+   * @return not `null` instance of `JsonEngine` with pretty print for current json framework
+   */
+  public static JacksonEngine createPrettyPrintJsonEngine(JsonSettings settings) {
+  }
 }
 ```
 
@@ -1898,37 +1900,37 @@ package ru.olegcherednik.json.impl;
 
 public final class StaticJsonEngineFactory implements JsonEngineFactory {
 
-    private static final StaticJsonEngineFactory INSTANCE = new StaticJsonEngineFactory();
+  private static final StaticJsonEngineFactory INSTANCE = new StaticJsonEngineFactory();
 
-    /**
-     * Mandatory method.
-     * Retrieves a singleton instance of the factory. The method must have the signature like this. Do not change it!
-     * @return not `null` singleton instance of the factory
-     */
-    public static StaticJsonEngineFactory getInstance() {
-        return INSTANCE;
-    }
+  /**
+   * Mandatory method.
+   * Retrieves a singleton instance of the factory. The method must have the signature like this. Do not change it!
+   * @return not `null` singleton instance of the factory
+   */
+  public static StaticJsonEngineFactory getInstance() {
+    return INSTANCE;
+  }
 
-    /**
-     * Mandatory method.
-     * Retrieves a full name of the main class of the json framework. You should not use class' declaration like
-     * `ObjectMapper.class.getName()`. You should use only simple string instead. This is very important not to load
-     * the class instance at this step.
-     * @return not `null` string containing the full name of the main class of the json framework
-     */
-    public static String getMainClass() {
-        return "com.fasterxml.jackson.databind.ObjectMapper";
-    }
+  /**
+   * Mandatory method.
+   * Retrieves a full name of the main class of the json framework. You should not use class' declaration like
+   * `ObjectMapper.class.getName()`. You should use only simple string instead. This is very important not to load
+   * the class instance at this step.
+   * @return not `null` string containing the full name of the main class of the json framework
+   */
+  public static String getMainClass() {
+    return "com.fasterxml.jackson.databind.ObjectMapper";
+  }
 
-    @Override
-    public JsonEngine createJsonEngine(JsonSettings settings) {
-        return JacksonFactory.createJsonEngine(settings);
-    }
+  @Override
+  public JsonEngine createJsonEngine(JsonSettings settings) {
+    return JacksonFactory.createJsonEngine(settings);
+  }
 
-    @Override
-    public JsonEngine createPrettyPrintJsonEngine(JsonSettings settings) {
-        return JacksonFactory.createPrettyPrintJsonEngine(settings);
-    }
+  @Override
+  public JsonEngine createPrettyPrintJsonEngine(JsonSettings settings) {
+    return JacksonFactory.createPrettyPrintJsonEngine(settings);
+  }
 }
 ```
 
@@ -1941,5 +1943,5 @@ or [json-gson-impl](https://github.com/oleg-cherednik/json-gson-impl).
 * Home page: https://github.com/oleg-cherednik/json-api
 
 * Maven:
-    * __central:__ https://mvnrepository.com/artifact/ru.oleg-cherednik.json/json-api
-    * __download:__ https://repo1.maven.org/maven2/ru/oleg-cherednik/json/json-api
+  * __central:__ https://mvnrepository.com/artifact/ru.oleg-cherednik.json/json-api
+  * __download:__ https://repo1.maven.org/maven2/ru/oleg-cherednik/json/json-api
