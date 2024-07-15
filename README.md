@@ -51,13 +51,12 @@
 
 # Getting Started
 
-Imagine you would like to use [jackson 2.16.1](https://github.com/FasterXML/jackson) as a **json framework** in your application. In this case, you
-have
-several options:
+Imagine you would like to use [jackson 2.16.1](https://github.com/FasterXML/jackson) as a **json framework** in your
+application. In this case, you have several options:
 
-1.   Add [jackson](https://github.com/FasterXML/jackson) dependencies and use it directly;
-2.   Along with [jackson](https://github.com/FasterXML/jackson) dependencies add
-     [jackson-json-api](https://github.com/oleg-cherednik/json-jackson-impl) and use Jackson via **json-api**.
+1. Add [jackson](https://github.com/FasterXML/jackson) dependencies and use it directly;
+2. Along with [jackson](https://github.com/FasterXML/jackson) dependencies add
+   [jackson-json-api](https://github.com/oleg-cherednik/json-jackson-impl) and use Jackson via **json-api**.
 
 If you choose 2<sup>nd</sup> option, you should add **json-api implementation** for [jackson](https://github.com/FasterXML/jackson)
 (which is [json-jackson-impl](https://github.com/oleg-cherednik/json-jackson-impl)) along with existed Jackson dependencies, because **json-api
