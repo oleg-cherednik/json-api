@@ -1867,29 +1867,31 @@ This class is responsible
 package ru.olegcherednik.json.impl;
 
 /**
- * The class is responsible to create two instances of `JsonEngine`: normal and pretty print using given settings.
+ * The class is responsible to create two instances of `JsonEngine`:
+ * normal and pretty print using given settings.
  */
 final class JacksonFactory {
 
-  /**
-   * Retrieves a new instance of `JsonEngine` based on the give settings. The instance should be completely new
-   * (not cached).
-   *
-   * @param settings not `null` settings configuration
-   * @return not `null` instance of `JsonEngine` for current json framework
-   */
-  public static JacksonEngine createJsonEngine(JsonSettings settings) {
-  }
+    /**
+     * Retrieves a new instance of `JsonEngine` based on the give settings.
+     * The instance should be completely new (not cached).
+     *
+     * @param settings not `null` settings configuration
+     * @return not `null` instance of `JsonEngine` for current json framework
+     */
+    public static JacksonEngine createJsonEngine(JsonSettings settings) {
+    }
 
-  /**
-   * Retrieves a new instance of `JsonEngine` with pretty print option based on the given settings.
-   * The instance should be completely new (not cached).
-   *
-   * @param settings not `null` settings configuration
-   * @return not `null` instance of `JsonEngine` with pretty print for current json framework
-   */
-  public static JacksonEngine createPrettyPrintJsonEngine(JsonSettings settings) {
-  }
+    /**
+     * Retrieves a new instance of `JsonEngine` with pretty print option based
+     * on the given settings. The instance should be completely new (not cached).
+     *
+     * @param settings not `null` settings configuration
+     * @return not `null` instance of `JsonEngine` with pretty print for current
+     * json framework
+     */
+    public static JacksonEngine createPrettyPrintJsonEngine(JsonSettings settings) {
+    }
 }
 ```
 
@@ -1905,37 +1907,40 @@ package ru.olegcherednik.json.impl;
 
 public final class StaticJsonEngineFactory implements JsonEngineFactory {
 
-  private static final StaticJsonEngineFactory INSTANCE = new StaticJsonEngineFactory();
+    private static final StaticJsonEngineFactory INSTANCE = new StaticJsonEngineFactory();
 
-  /**
-   * Mandatory method.
-   * Retrieves a singleton instance of the factory. The method must have the signature like this. Do not change it!
-   * @return not `null` singleton instance of the factory
-   */
-  public static StaticJsonEngineFactory getInstance() {
-    return INSTANCE;
-  }
+    /**
+     * Mandatory method.
+     * Retrieves a singleton instance of the factory. The method must have the
+     * signature like this. Do not change it!
+     * @return not `null` singleton instance of the factory
+     */
+    public static StaticJsonEngineFactory getInstance() {
+        return INSTANCE;
+    }
 
-  /**
-   * Mandatory method.
-   * Retrieves a full name of the main class of the json framework. You should not use class' declaration like
-   * `ObjectMapper.class.getName()`. You should use only simple string instead. This is very important not to load
-   * the class instance at this step.
-   * @return not `null` string containing the full name of the main class of the json framework
-   */
-  public static String getMainClass() {
-    return "com.fasterxml.jackson.databind.ObjectMapper";
-  }
+    /**
+     * Mandatory method.
+     * Retrieves a full name of the main class of the json framework. You should
+     * not use class' declaration like ёObjectMapper.class.getName()`. You should
+     * use only simple string instead. This is very important not to load the
+     * class instance at this step.
+     * @return not `null` string containing the full name of the main class of
+     * the json framework
+     */
+    public static String getMainClass() {
+        return "com.fasterxml.jackson.databind.ObjectMapper";
+    }
 
-  @Override
-  public JsonEngine createJsonEngine(JsonSettings settings) {
-    return JacksonFactory.createJsonEngine(settings);
-  }
+    @Override
+    public JsonEngine createJsonEngine(JsonSettings settings) {
+        return JacksonFactory.createJsonEngine(settings);
+    }
 
-  @Override
-  public JsonEngine createPrettyPrintJsonEngine(JsonSettings settings) {
-    return JacksonFactory.createPrettyPrintJsonEngine(settings);
-  }
+    @Override
+    public JsonEngine createPrettyPrintJsonEngine(JsonSettings settings) {
+        return JacksonFactory.createPrettyPrintJsonEngine(settings);
+    }
 }
 ```
 
