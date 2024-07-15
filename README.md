@@ -21,7 +21,7 @@
 
 [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&pause=1000&random=false&width=435&lines=One+json-api+to+rule+them+all)](https://git.io/typing-svg)
 
-# Table of contest
+## Table of contest
 
 * [Getting Started](#getting-started)
 * [Features](#features)
@@ -40,18 +40,17 @@
     * [Get default decorators](#get-default-decorators) - get current instances of `JsonReader` and `JsonWriter`;
     * [Create copy of default decorators](#create-copy-of-default-decorators) - create a new
       instance of `JsonReader` and `JsonWriter` with default setting;
-    * [Create custom decorators](#create-custom-decorators) - create an instance of `JsonReader`
-      and `JsonWriter` with custom setting.
+    * [Create custom decorators](#create-custom-decorators) - create an instance of `JsonReader` and `JsonWriter` with
+      custom setting.
     * [Convert object](#convert-object) - convert given `Object` to another object.
-  * [JsonHelper](#jsonhelper-class) - utility class with set of methods to
-    update actual settings;
+  * [JsonHelper](#jsonhelper-class) - utility class with set of methods to update actual settings;
   * [EnumId](#work-with-enum) - advanced enum serialization support.
 * [Custom `json-api` implementation](#custom-json-api-implementation)
 * [Links](#links)
 
 ---
 
-# Getting Started
+## Getting Started
 
 Imagine you would like to use [jackson 2.16.1](https://github.com/FasterXML/jackson) as a **json framework** in your
 application. In this case, you have several options:
@@ -68,14 +67,14 @@ implementation** does not
 contain concrete version of the **json framework**. The version should be additionally specified. I.e. version of
 **json-api implementation** does not depend on the version of the **json framework**.
 
-## Gradle
+### Gradle
 
 ```groovy
 implementation 'ru.oleg-cherednik.json:json-jackson-impl:3.0'
 implementation 'com.fasterxml.jackson.core:jackson-databind:2.16.0'
 ```
 
-## Maven
+### Maven
 
 ```xml
 <dependencies>
@@ -92,14 +91,14 @@ implementation 'com.fasterxml.jackson.core:jackson-databind:2.16.0'
 </dependencies>
 ```
 
-# Features
+## Features
 
 * Single file API for all json actions;
 * Give an easy way to provide custom engine implementation;
 * It's free of any engine's specific code;
 * It's fully open-source and does not depend on any limited licenses.
 
-# Glossary
+## Glossary
 
 * `json framework` is a framework for working with json files like [jackson](https://github.com/FasterXML/jackson),
   [gson](https://github.com/google/gson), [json-simple](https://github.com/fangyidong/json-simple), etc. Usually, we
@@ -120,15 +119,15 @@ implementation 'com.fasterxml.jackson.core:jackson-databind:2.16.0'
   [json-jackson-impl](https://github.com/oleg-cherednik/json-jackson-impl) and contains instance of **json engine**
   called `JacksonEngine`.
 
-# Requirements
+## Requirements
 
-# Usage
+## Usage
 
 **json-api** provides set of classes to work with json. You should use only these classes for any json manipulations.
 
-## Json class
+### Json class
 
-### Read json from `String`
+#### Read json from `String`
 
 <details><summary><code>String</code> to a custom object type (except a collection)</summary>
 
@@ -409,7 +408,7 @@ public class Book {
 
 </details>
 
-### Read json from `ByteBuffer`
+#### Read json from `ByteBuffer`
 
 <details><summary><code>ByteBuffer</code> to a custom object type (except a collection)</summary>
 
@@ -700,7 +699,7 @@ public class Book {
 
 </details>
 
-#### Read json from `ByteBuffer` lazy
+##### Read json from `ByteBuffer` lazy
 
 <details><summary><code>ByteBuffer</code> to an <code>Iterator</code> of <code>Object</code> type with lazy reading</summary>
 
@@ -792,7 +791,7 @@ class Data {
 
 </details>
 
-### Read json from `InputStream`
+#### Read json from `InputStream`
 
 <details><summary><code>InputStream</code> to a custom object type (except a collection)</summary>
 
@@ -1083,7 +1082,7 @@ public class Book {
 
 </details>
 
-#### Read json from `InputStream` lazy
+##### Read json from `InputStream` lazy
 
 <details><summary><code>InputStream</code> to an <code>Iterator</code> of <code>Object</code> type with lazy reading</summary>
 
@@ -1175,7 +1174,7 @@ class Data {
 
 </details>
 
-### Read json from `Reader`
+#### Read json from `Reader`
 
 <details><summary><code>Reader</code> to a custom object type (except a collection)</summary>
 
@@ -1465,7 +1464,7 @@ public class Book {
 
 </details>
 
-#### Read json from `Reader` lazy
+##### Read json from `Reader` lazy
 
 <details><summary><code>Reader</code> to an <code>Iterator</code> of <code>Object</code> type with lazy reading</summary>
 
@@ -1557,7 +1556,7 @@ class Data {
 
 </details>
 
-### Write json
+#### Write json
 
 <details><summary>Write to <code>String</code></summary>
 
@@ -1619,7 +1618,7 @@ class Data {
 
 </details>
 
-### Get default decorators
+#### Get default decorators
 
 <details><summary>Get current default instance of <code>JsonReader</code></summary>
 
@@ -1688,7 +1687,7 @@ class Data {
 
 </details>
 
-### Create copy of default decorators
+#### Create copy of default decorators
 
 <details><summary>Create a new instance of <code>JsonReader</code> with default settings</summary>
 
@@ -1758,7 +1757,7 @@ class Data {
 
 </details>
 
-### Create custom decorators
+#### Create custom decorators
 
 <details><summary>Create a new instance of <code>JsonReader</code> with custom settings</summary>
 
@@ -1829,7 +1828,7 @@ class Data {
 
 </details>
 
-### Convert object
+#### Convert object
 
 <details><summary>Convert any <code>Object</code> instance to <code>Map</code></summary>
 
@@ -1846,13 +1845,17 @@ class Data {
 
 </details>
 
-# Custom `json-api` implementation
+### JsonHelper class
+
+### Work with enum
+
+## Custom `json-api` implementation
 
 For now there are two implementations: [json-jackson-impl](https://github.com/oleg-cherednik/json-jackson-impl)
 and [json-gson-impl](https://github.com/oleg-cherednik/json-gson-impl). To create another implementation, you
 have to a few steps. Let's make an example for Jackson framework.
 
-## `JacksonFactory`
+### `JacksonFactory`
 
 The name of the class is up to you, but it's better to call this class similar to existed implementations:
 `JacksonFactory` for Jackson or `GsonFactory` for Gson.
@@ -1890,7 +1893,7 @@ final class JacksonFactory {
 }
 ```
 
-## `StaticJsonEngineFactory`
+### `StaticJsonEngineFactory`
 
 This full name of this class is `ru.olegcherednik.json.impl.StaticJsonEngineFactory` and this is an implementation of
 the `JsonEngineFactory` interface. `json-api` does not scan the whole project for the factory class, it just tries to
@@ -1940,7 +1943,7 @@ There are two main classes. All other code of the implementation is under your c
 of existed implementations, e.g. [json-jackson-impl](https://github.com/oleg-cherednik/json-jackson-impl)
 or [json-gson-impl](https://github.com/oleg-cherednik/json-gson-impl).
 
-# Links
+## Links
 
 * Home page: <https://github.com/oleg-cherednik/json-api>
 * Maven:
