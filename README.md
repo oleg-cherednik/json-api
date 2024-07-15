@@ -1114,7 +1114,6 @@ class Data {
 
 </details>
 
-
 <details><summary><code>InputStream</code> to an <code>Iterator</code> of custom object type with lazy reading</summary>
 
 ```java
