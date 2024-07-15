@@ -78,7 +78,6 @@ implementation 'com.fasterxml.jackson.core:jackson-databind:2.16.0'
 ## Maven
 
 ```xml
-
 <dependencies>
   <dependency>
     <groupId>ru.oleg-cherednik.json</groupId>
