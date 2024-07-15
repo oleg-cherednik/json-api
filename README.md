@@ -50,7 +50,8 @@
 
 # Getting Started
 
-Imagine you would like to use [jackson 2.16.1](https://github.com/FasterXML/jackson) as a **json framework** in your application. In this case, you have
+Imagine you would like to use [jackson 2.16.1](https://github.com/FasterXML/jackson) as a **json framework** in your application. In this case, you
+have
 several options:
 
 1.   Add [jackson](https://github.com/FasterXML/jackson) dependencies and use it directly;
@@ -58,7 +59,8 @@ several options:
      [jackson-json-api](https://github.com/oleg-cherednik/json-jackson-impl) and use Jackson via **json-api**.
 
 If you choose 2<sup>nd</sup> option, you should add **json-api implementation** for [jackson](https://github.com/FasterXML/jackson)
-(which is [json-jackson-impl](https://github.com/oleg-cherednik/json-jackson-impl)) along with existed Jackson dependencies, because **json-api implementation** does not
+(which is [json-jackson-impl](https://github.com/oleg-cherednik/json-jackson-impl)) along with existed Jackson dependencies, because **json-api
+implementation** does not
 contain concrete version of the **json framework**. The version should be additionally specified. I.e. version of
 **json-api implementation** does not depend on the version of the **json framework**.
 
@@ -72,6 +74,7 @@ implementation 'com.fasterxml.jackson.core:jackson-databind:2.16.0'
 ### Maven
 
 ```xml
+
 <dependencies>
     <dependency>
         <groupId>ru.oleg-cherednik.json</groupId>
@@ -1826,7 +1829,7 @@ class Data {
 
 <details><summary>Convert any <code>Object</code> instance to <code>Map</code></summary>
 
-```java=
+```java
 class Data {
 
     public static void demo() {
@@ -1839,7 +1842,101 @@ class Data {
 
 </details>
 
-##### Links
+# Custom `json-api` implementation
+
+For now there are two implementations: [json-jackson-impl](https://github.com/oleg-cherednik/json-jackson-impl)
+and [json-gson-impl](https://github.com/oleg-cherednik/json-gson-impl). To create another implementation, you
+have to a few steps. Let's make an example for Jackson framework.
+
+### `JacksonFactory`
+
+The name of the class is up to you, but it's better to call this class similar to existed implementations:
+`JacksonFactory` for Jackson or `GsonFactory` for Gson.
+
+This class is responsible
+
+```java
+// TODO my recommendation to keep the package like this
+package ru.olegcherednik.json.impl;
+
+/**
+ * The class is responsible to create two instances of `JsonEngine`: normal and pretty print using given settings.
+ */
+final class JacksonFactory {
+
+    /**
+     * Retrieves a new instance of `JsonEngine` based on the give settings. The instance should be completely new
+     * (not cached).
+     *
+     * @param settings not `null` settings configuration
+     * @return not `null` instance of `JsonEngine` for current json framework
+     */
+    public static JacksonEngine createJsonEngine(JsonSettings settings) {
+    }
+
+    /**
+     * Retrieves a new instance of `JsonEngine` with pretty print option based on the given settings.
+     * The instance should be completely new (not cached).
+     *
+     * @param settings not `null` settings configuration
+     * @return not `null` instance of `JsonEngine` with pretty print for current json framework
+     */
+    public static JacksonEngine createPrettyPrintJsonEngine(JsonSettings settings) {
+    }
+}
+```
+
+### `StaticJsonEngineFactory`
+
+This full name of this class is `ru.olegcherednik.json.impl.StaticJsonEngineFactory` and this is an implementation of
+the `JsonEngineFactory` interface. `json-api` does not scan the whole project for the factory class, it just tries to
+find the one with predefined name. So this is an entry point to the implementation.
+
+```java
+// TODO the package name is predefined
+package ru.olegcherednik.json.impl;
+
+public final class StaticJsonEngineFactory implements JsonEngineFactory {
+
+    private static final StaticJsonEngineFactory INSTANCE = new StaticJsonEngineFactory();
+
+    /**
+     * Mandatory method.
+     * Retrieves a singleton instance of the factory. The method must have the signature like this. Do not change it!
+     * @return not `null` singleton instance of the factory
+     */
+    public static StaticJsonEngineFactory getInstance() {
+        return INSTANCE;
+    }
+
+    /**
+     * Mandatory method.
+     * Retrieves a full name of the main class of the json framework. You should not use class' declaration like
+     * `ObjectMapper.class.getName()`. You should use only simple string instead. This is very important not to load
+     * the class instance at this step.
+     * @return not `null` string containing the full name of the main class of the json framework
+     */
+    public static String getMainClass() {
+        return "com.fasterxml.jackson.databind.ObjectMapper";
+    }
+
+    @Override
+    public JsonEngine createJsonEngine(JsonSettings settings) {
+        return JacksonFactory.createJsonEngine(settings);
+    }
+
+    @Override
+    public JsonEngine createPrettyPrintJsonEngine(JsonSettings settings) {
+        return JacksonFactory.createPrettyPrintJsonEngine(settings);
+    }
+}
+```
+
+There are two main classes. All other code of the implementation is under your control. As an example you can use any
+of existed implementations, e.g. [json-jackson-impl](https://github.com/oleg-cherednik/json-jackson-impl)
+or [json-gson-impl](https://github.com/oleg-cherednik/json-gson-impl).
+
+# Links
 
 *   Home page: https://github.com/oleg-cherednik/json-api
 
