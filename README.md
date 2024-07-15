@@ -92,10 +92,10 @@ implementation 'com.fasterxml.jackson.core:jackson-databind:2.16.0'
 
 # Features
 
-*   Single file API for all json actions;
-*   Give an easy way to provide custom engine implementation;
-*   It's free of any engine's specific code;
-*   It's fully open-source and does not depend on any limited licenses.
+* Single file API for all json actions;
+* Give an easy way to provide custom engine implementation;
+* It's free of any engine's specific code;
+* It's fully open-source and does not depend on any limited licenses.
 
 # Glossary
 
@@ -1939,8 +1939,8 @@ or [json-gson-impl](https://github.com/oleg-cherednik/json-gson-impl).
 
 # Links
 
-*   Home page: https://github.com/oleg-cherednik/json-api
+* Home page: https://github.com/oleg-cherednik/json-api
 
-*   Maven:
-    *   __central:__ https://mvnrepository.com/artifact/ru.oleg-cherednik.json/json-api
-    *   __download:__ https://repo1.maven.org/maven2/ru/oleg-cherednik/json/json-api
+* Maven:
+    * __central:__ https://mvnrepository.com/artifact/ru.oleg-cherednik.json/json-api
+    * __download:__ https://repo1.maven.org/maven2/ru/oleg-cherednik/json/json-api
