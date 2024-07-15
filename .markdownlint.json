@@ -4,6 +4,7 @@
             "details",
             "summary",
             "code"
-        ]
+        ],
+        "line_length": 120
     }
 }

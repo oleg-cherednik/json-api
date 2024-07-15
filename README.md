@@ -42,7 +42,8 @@
         * [Create custom decorators](#create-custom-decorators) - create an instance of `JsonReader`
           and `JsonWriter` with custom setting.
         * [Convert object](#convert-object) - convert given `Object` to another object.
-    * [JsonHelper](#jsonhelper-class) - utility class with set of methods to update actual settings;
+    * [JsonHelper](#jsonhelper-class) - utility class with set of methods to
+      update actual settings;
     * [EnumId](#work-with-enum) - advanced enum serialization support.
 * [Custom `json-api` implementation](#custom-json-api-implementation)
 * [Links](#links)
