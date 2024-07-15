@@ -99,24 +99,24 @@ implementation 'com.fasterxml.jackson.core:jackson-databind:2.16.0'
 
 # Glossary
 
-*   `json framework` is a framework for working with json files like [jackson](https://github.com/FasterXML/jackson),
-    [gson](https://github.com/google/gson), [json-simple](https://github.com/fangyidong/json-simple), etc. Usually, we
-    use **json framework** in the application directly by adding required dependencies. In general, all these
-    **json frameworks** have its own API and style of coding.
-*   `json engine` is an abstraction above all **json framework**. The main idea is to provide a unified API over all
-    **json frameworks**. I.e., using this unified API (**json engine**), the client is not able to use some specific
-    logic of concrete **json framework**, but the most common use-cases are available.
-*   `json decorator` is a decorator over **json engine**. There are **read** and **write** decorators that contain the
-    complete set of not static methods for json manipulation. You can use default **decorators** or create custom once
-    with required settings. The decorator is used to work with **json engine** with given settings.
-*   `JSON-API` is an abstraction over various **json decorators**. It provides a simple way to do the most common
-    use-cases of json manipulations. Moreover, it provides the way of single point configuration and exception handling.
-    Using this **json-api** you are able to not depend on the specific **json framework** directly and use any of them
-    via given **json engine**.
-*   `json-api-impl` is a concreted implementation of **json-api** for given **json framework**. E.g., an implementation
-    of **json-api** for [jackson](https://github.com/FasterXML/jackson) called
-    [json-jackson-impl](https://github.com/oleg-cherednik/json-jackson-impl) and contains instance of **json engine**
-    called `JacksonEngine`.
+* `json framework` is a framework for working with json files like [jackson](https://github.com/FasterXML/jackson),
+  [gson](https://github.com/google/gson), [json-simple](https://github.com/fangyidong/json-simple), etc. Usually, we
+  use **json framework** in the application directly by adding required dependencies. In general, all these
+  **json frameworks** have its own API and style of coding.
+* `json engine` is an abstraction above all **json framework**. The main idea is to provide a unified API over all
+  **json frameworks**. I.e., using this unified API (**json engine**), the client is not able to use some specific
+  logic of concrete **json framework**, but the most common use-cases are available.
+* `json decorator` is a decorator over **json engine**. There are **read** and **write** decorators that contain the
+  complete set of not static methods for json manipulation. You can use default **decorators** or create custom once
+  with required settings. The decorator is used to work with **json engine** with given settings.
+* `JSON-API` is an abstraction over various **json decorators**. It provides a simple way to do the most common
+  use-cases of json manipulations. Moreover, it provides the way of single point configuration and exception handling.
+  Using this **json-api** you are able to not depend on the specific **json framework** directly and use any of them
+  via given **json engine**.
+* `json-api-impl` is a concreted implementation of **json-api** for given **json framework**. E.g., an implementation
+  of **json-api** for [jackson](https://github.com/FasterXML/jackson) called
+  [json-jackson-impl](https://github.com/oleg-cherednik/json-jackson-impl) and contains instance of **json engine**
+  called `JacksonEngine`.
 
 # Requirements
 
