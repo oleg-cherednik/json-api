@@ -1895,7 +1895,7 @@ final class JacksonFactory {
 
 ### `StaticJsonEngineFactory`
 
-This full name of this class is `ru.olegcherednik.json.impl.StaticJsonEngineFactory` and this is an implementation of
+The full name of this class is `ru.olegcherednik.json.impl.StaticJsonEngineFactory`. This is an implementation of
 the `JsonEngineFactory` interface. `json-api` does not scan the whole project for the factory class, it just tries to
 find the one with predefined name. So this is an entry point to the implementation.
 
