@@ -1892,53 +1892,7 @@ final class JacksonFactory {
      */
     public static JacksonEngine createPrettyPrintJsonEngine(JsonSettings settings) {
     }
-}
-```
-
-### `StaticJsonEngineFactory`
-
-The full name of this class is `ru.olegcherednik.json.impl.StaticJsonEngineFactory`. This is an implementation of
-the `JsonEngineFactory` interface. `json-api` does not scan the whole project for the factory class, it just tries to
-find the one with predefined name. So this is an entry point to the implementation.
-
-```java
-// TODO the package name is predefined
-package ru.olegcherednik.json.impl;
-
-public final class StaticJsonEngineFactory implements JsonEngineFactory {
-
-    private static final StaticJsonEngineFactory INSTANCE = new StaticJsonEngineFactory();
-
-    /*
-     * Mandatory method.
-     *
-     * Retrieves a singleton instance of the factory. The method must have the
-     * signature like this. Do not change it!
-     *
-     * @return not `null` singleton instance of the factory
-     */
-    public static StaticJsonEngineFactory getInstance() {
-        return INSTANCE;
-    }
-
-    /*
-     * Mandatory method.
-     *
-     * Retrieves a full name of the main class of the json framework. You should
-     * not use class' declaration like ёObjectMapper.class.getName()`. You should
-     * use only simple string instead. This is very important not to load the
-     * class instance at this step.
-     *
-     * @return not `null` string containing the full name of the main class of
-     * the json framework
-     */
-    public static String getMainClass() {
-        return "com.fasterxml.jackson.databind.ObjectMapper";
-    }
-
-    @Override
-    public JsonEngine createJsonEngine(JsonSettings settings) {
-        return JacksonFactory.createJsonEngine(settings);
+}tory.createJsonEngine(settings);
     }
 
     @Override
