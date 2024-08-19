@@ -1948,6 +1948,8 @@ public final class StaticJsonEngineFactory implements JsonEngineFactory {
 }
 ```
 
+This is a new section
+
 There are two main classes. All other code of the implementation is under your control. As an example you can use any
 of existed implementations, e.g. [json-jackson-impl](https://github.com/oleg-cherednik/json-jackson-impl)
 or [json-gson-impl](https://github.com/oleg-cherednik/json-gson-impl).
