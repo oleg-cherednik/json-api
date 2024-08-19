@@ -1891,30 +1891,7 @@ final class JacksonFactory {
      * json framework
      */
     public static JacksonEngine createPrettyPrintJsonEngine(JsonSettings settings) {
-    }
-}
-```
 
-### `StaticJsonEngineFactory`
-
-The full name of this class is `ru.olegcherednik.json.impl.StaticJsonEngineFactory`. This is an implementation of
-the `JsonEngineFactory` interface. `json-api` does not scan the whole project for the factory class, it just tries to
-find the one with predefined name. So this is an entry point to the implementation.
-
-```java
-// TODO the package name is predefined
-package ru.olegcherednik.json.impl;
-
-public final class StaticJsonEngineFactory implements JsonEngineFactory {
-
-    private static final StaticJsonEngineFactory INSTANCE = new StaticJsonEngineFactory();
-
-    /*
-     * Mandatory method.
-     *
-     * Retrieves a singleton instance of the factory. The method must have the
-     * signature like this. Do not change it!
-     *
      * @return not `null` singleton instance of the factory
      */
     public static StaticJsonEngineFactory getInstance() {
@@ -1941,18 +1918,6 @@ public final class StaticJsonEngineFactory implements JsonEngineFactory {
         return JacksonFactory.createJsonEngine(settings);
     }
 
-    @Override
-    public JsonEngine createPrettyPrintJsonEngine(JsonSettings settings) {
-        return JacksonFactory.createPrettyPrintJsonEngine(settings);
-    }
-}
-```
-
-There are two main classes. All other code of the implementation is under your control. As an example you can use any
-of existed implementations, e.g. [json-jackson-impl](https://github.com/oleg-cherednik/json-jackson-impl)
-or [json-gson-impl](https://github.com/oleg-cherednik/json-gson-impl).
-
-## Links
 
 * Home page: <https://github.com/oleg-cherednik/json-api>
 * Maven:
